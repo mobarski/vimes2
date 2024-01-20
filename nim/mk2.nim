@@ -63,9 +63,28 @@ proc run(code : openArray[int]) =
                     of LE:  t-=1; s[t] = ord(s[t] <= s[t+1]).Cell
                     of GT:  t-=1; s[t] = ord(s[t] >  s[t+1]).Cell
                     of GE:  t-=1; s[t] = ord(s[t] >= s[t+1]).Cell
-                    else: assert false
-            else: assert false
+                    else: assert false, "unknown OPR opcode"
 
+            # TODO: move extensions to separate file
+            of EX1:
+                case a:
+                    of INC: s[t] += 1
+                    of DEC: s[t] -= 1
+                    of AND: t-=1; s[t] = ord(s[t] and s[t+1]).Cell
+                    of OR:  t-=1; s[t] = ord(s[t] or  s[t+1]).Cell
+                    of XOR: t-=1; s[t] = ord(s[t] xor s[t+1]).Cell
+                    of NOT: s[t] = ord(not s[t]).Cell
+                    of SHL: t-=1; s[t] = s[t] shl  s[t+1]
+                    of SHR: t-=1; s[t] = s[t] shr  s[t+1]
+                    of SAR: t-=1; s[t] = ashr(s[t],s[t+1]).Cell
+                    else: assert false, "unknown EX1 opcode"
+            of EX2:
+                case a:
+                    of PUTC: stdout.write chr(s[t]); t-=1
+                    of PUTI: stdout.write s[t]; t-=1
+                    else: assert false, "unknown EX2 opcode"
+
+            else: assert false, "unknown opcode"
         if p == 0: break
 
 proc reset(quick=false) =
@@ -93,4 +112,5 @@ const vm_code = @[
 run(vm_code)
 debug()
 reset()
+run(@[LIT, 64, EX2, PUTC, LIT, -777, EX2, PUTI, LIT, 32, EX2, PUTC, JMP, 0])
 debug()

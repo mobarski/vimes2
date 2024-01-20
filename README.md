@@ -1,31 +1,24 @@
-# p-code virtual machines experimentation sandbox
+# p-code virtual machines experimentation sandbox v2
 
 
 
 - **mk1** - as close to Wirth's machine as possible
 - **mk2** - variable number of arguments, swapped a and l
-- **mk3** - bytecode version of mk2
+- **mk3** - internal bytecode version of mk2
 
 
 
-Planned extensions:
+Extension 1:
 
-- io:
-  - command-line arguments
-  - getc / putc
-  - geti / puti
-  - file descriptors
-- arrays / heap / malloc / free
-- strings
-- screen / framebuffer
-- rom
-- tape
+- INC, DEC
+- AND, OR, XOR, NOT
+- SHL, SHR, SAR
 
-- carts - image based ala pico8 carts
+Extension 2:
 
-- threads / coroutines
+- PUTC, PUTI
 
-
+  
 
 Reference materials:
 
