@@ -77,9 +77,7 @@ def get_opcodes_from_text(text: str) -> dict[str,int]:
 
 def cli():
     # configure parser
-    parser = argparse.ArgumentParser(
-        prog='asm.py',
-        description='Compile p-code assembler')
+    parser = argparse.ArgumentParser(description='Vimes tiny p-code assembler')
     parser.add_argument('opcodes_path',        help='opcodes file path', type=str)
     parser.add_argument('asm_path',            help='input file path',   type=str)
     parser.add_argument('-v', dest='verbose',  help='verbose output',  action='store_true')
