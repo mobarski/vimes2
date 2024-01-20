@@ -65,9 +65,9 @@ import array
 def get_opcodes_from_text(text: str) -> dict[str,int]:
     opcodes = {}
     opcode_re = re.compile(r'(\w+)\s*[:=]*\s*(\d+)')
-    comment_re = re.compile(r'#.*')
+    #comment_re = re.compile(r'#.*')
     for line in text.split('\n'):
-        line = comment_re.sub('', line)
+        #line = comment_re.sub('', line)
         line = line.strip()
         if not line: continue
         match = opcode_re.findall(line)
