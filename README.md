@@ -8,13 +8,14 @@
 
 
 
-Extension 1:
+Extension 1 - ALU:
 
 - INC, DEC
 - AND, OR, XOR, NOT
 - SHL, SHR, SAR
+- EQZ, NEZ, LTZ, LEZ, GTZ, GEZ
 
-Extension 2:
+Extension 2 - stdio:
 
 - PUTC, PUTI
 
