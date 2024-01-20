@@ -34,16 +34,22 @@ const # OPR
     GE  = 13
 
 const # EX1 - ALU
-    INC = 1
-    DEC = 2
-    AND = 3
-    OR  = 4
-    XOR = 5
-    NOT = 6
-    SHL = 7
-    SHR = 8
-    SAR = 9 # ASR vs ASHR vs SAR
-    # DUP
+    NOT = 1
+    AND = 2
+    OR  = 3
+    XOR = 4
+    SHL = 5
+    SHR = 6
+    SAR = 7 # ASR vs ASHR vs SAR
+    INC = 8
+    DEC = 9
+    EQZ = 10
+    NEZ = 11
+    LTZ = 12
+    LEZ = 13
+    GTZ = 14
+    GEZ = 15
+    # DUP DROP SWAP OVER ROT ???
 
 const # EX2 - STDIO
     PUTC = 1
