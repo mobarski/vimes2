@@ -15,30 +15,16 @@ Planned extensions:
   - getc / putc
   - geti / puti
   - file descriptors
-<<<<<<< HEAD
 - arrays / heap / malloc / free
 - strings
 - screen / framebuffer
 - rom
-- tape
-
-=======
-  
-- arrays / heap / malloc / free
-
-- strings
-
-- screen / framebuffer
-
-- rom
-
 - tape
 
 - carts - image based ala pico8 carts
 
 - threads / coroutines
 
->>>>>>> 90a2b5d (asm core)
 
 
 Reference materials:
