@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# simple, universal assembler for p-code
+# simple, one-file, universal assembler for p-code
 
 # === CORE ====================================================================
 

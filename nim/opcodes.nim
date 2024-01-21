@@ -15,6 +15,8 @@ const
     # EXTENSIONS
     EX1 = 17 # ALU
     EX2 = 18 # STDIO
+    EX3 = 19 # FOR FUTURE USE
+    EX4 = 20 # FOR FUTURE USE
 
 const # OPR
     RET = 0
