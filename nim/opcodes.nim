@@ -35,7 +35,13 @@ const # OPR
     GT  = 12
     GE  = 13
 
-const # EX1 - ALU
+const # EX1 - STDIO
+    PUTC = 1
+    PUTI = 2
+    GETC = 3
+    GETI = 4
+
+const # EX2 - ALU EXTENSION
     NOT = 1
     AND = 2
     OR  = 3
@@ -52,7 +58,3 @@ const # EX1 - ALU
     GTZ = 14
     GEZ = 15
     # DUP DROP SWAP OVER ROT ???
-
-const # EX2 - STDIO
-    PUTC = 1
-    PUTI = 2

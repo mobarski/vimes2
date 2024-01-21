@@ -3,6 +3,7 @@
 type Cell = int16
 const STACK_SIZE = 1000
 
+import strutils
 include opcodes
 include ex1
 include ex2
@@ -96,5 +97,5 @@ const vm_code = @[
 run(vm_code)
 debug()
 reset()
-run(@[LIT, 64, EX2, PUTC, LIT, -777, EX2, PUTI, LIT, 32, EX2, PUTC, JMP, 0])
+run(@[LIT, 64, EX1, PUTC, LIT, -777, EX1, PUTI, LIT, 32, EX1, PUTC, JMP, 0])
 debug()

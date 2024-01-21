@@ -60,7 +60,8 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
 # === CLI =====================================================================
 
 import argparse
-import array
+import binascii
+import struct
 import sys
 
 def get_opcodes_from_text(text: str) -> dict[str,int]:
@@ -83,7 +84,7 @@ def cli():
     parser.add_argument('asm_path',            help='input file path',   type=str)
     parser.add_argument('-v', dest='verbose',  help='verbose output',  action='store_true')
     parser.add_argument('-o', dest='out_path', help='output file path (default: a.out)',         type=str, default='a.out')
-    parser.add_argument('-f', dest='format',   help='output format: bin|hex|dec (default: bin)', type=str, default='bin')
+    parser.add_argument('-f', dest='format',   help='output format: bin|hex|b10|b16 (default: bin)', type=str, default='bin')
     
     # parse args
     args = parser.parse_args()
@@ -114,13 +115,18 @@ def cli():
     else:
         out_file = open(args.out_path, 'w')
     #
+    BYTEORDER='!'
     TYPECODE='h'
     if args.format=='bin':
-        out_file.write(array.array(TYPECODE, pcode).tobytes())
+        a = struct.pack(f'{BYTEORDER}{len(pcode)}{TYPECODE}', *pcode)
+        out_file.write(a)
     elif args.format=='hex':
+        a = struct.pack(f'{BYTEORDER}{len(pcode)}{TYPECODE}', *pcode)
+        out_file.write(binascii.hexlify(a).decode())
+    elif args.format=='b16':
         output = ' '.join([f"{x:x}" for x in pcode])
         out_file.write(output)
-    elif args.format=='dec':
+    elif args.format=='b10':
         output = ' '.join([str(x) for x in pcode])
         out_file.write(output)
     else:

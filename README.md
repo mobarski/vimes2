@@ -8,21 +8,26 @@
 
 
 
-Extension 1 - ALU:
+Extension 1 - stdio:
+
+- PUTC, PUTI
+- GETC, GETI
+
+
+
+Extension 2 - ALU extension:
 
 - INC, DEC
 - AND, OR, XOR, NOT
 - SHL, SHR, SAR
 - EQZ, NEZ, LTZ, LEZ, GTZ, GEZ
 
-Extension 2 - stdio:
 
-- PUTC, PUTI
-
-  
 
 Reference materials:
 
 - https://en.wikipedia.org/wiki/P-code_machine
 - https://github.com/mobarski/vimes
 - https://github.com/mobarski/smol
+- https://rosettacode.org/wiki/Category:PL/0
+- https://rosettacode.org/wiki/Category:XPL0
