@@ -1,23 +1,9 @@
 # mk1: compatible with the original PL/0
 
-type Cell = int16
-const STACK_SIZE = 1000
-
+include base
 include opcodes
-
-var p : Cell # program counter
-var b : Cell # base pointer
-var t : Cell # top of stack pointer
-
-var s : array[STACK_SIZE, Cell] # stack
-
-proc base(level: Cell) : Cell =
-    var b1 = b
-    var l = level
-    while l > 0:
-        b1 = s[b1]
-        l = l - 1
-    return b1
+include ex1
+include ex2
 
 proc run(code : openArray[int]) =
     while true:
@@ -59,19 +45,11 @@ proc run(code : openArray[int]) =
                     of GT:  t-=1; s[t] = ord(s[t] >  s[t+1]).Cell
                     of GE:  t-=1; s[t] = ord(s[t] >= s[t+1]).Cell
                     else: assert false
+            of EX1: ex1(a,s,t)
+            of EX2: ex2(a,s,t)
             else: assert false
 
         if p == 0: break
-
-proc reset(quick=false) =
-    p=0; b=0; t=0
-    if quick: return
-    for j in low(s)..high(s):
-        s[j] = 0
-
-# TODO: rename (canditates: debug, trace, dump, show)
-proc debug() =
-    echo "p:", p, " b:", b, " t:", t, " s:", s[1..t]
 
 # ============================================================
 

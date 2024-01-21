@@ -1,26 +1,9 @@
 # mk2: variable number of arguments, a and l swapped
 
-type Cell = int16
-const STACK_SIZE = 1000
-
-import strutils
+include base
 include opcodes
 include ex1
 include ex2
-
-var p : Cell # program counter
-var b : Cell # base pointer
-var t : Cell # top of stack pointer
-
-var s : array[STACK_SIZE, Cell] # stack
-
-proc base(level: Cell) : Cell =
-    var b1 = b
-    var l = level
-    while l > 0:
-        b1 = s[b1]
-        l = l - 1
-    return b1
 
 proc run(code : openArray[int]) =
     while true:
@@ -71,16 +54,6 @@ proc run(code : openArray[int]) =
             of EX2: ex2(a,s,t)
             else: assert false, "unknown opcode"
         if p == 0: break
-
-proc reset(quick=false) =
-    p=0; b=0; t=0
-    if quick: return
-    for j in low(s)..high(s):
-        s[j] = 0
-
-# TODO: rename (canditates: debug, trace, dump, show)
-proc debug() =
-    echo "p:", p, " b:", b, " t:", t, " s:", s[1..t]
 
 # ============================================================
 
