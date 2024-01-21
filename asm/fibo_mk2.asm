@@ -17,6 +17,8 @@ INT 1 STO 0 ; store n in current stack frame [0]
 STO 1 1     ; store n in upper stack frame [1]
 OPR RET     ; return
 
+LIT -1      ; XXX just for testing
+LIT -42     ; XXX just for testing
 
 ;   	INT 1 STO 0 ; capture n from stack
 ;   	LOD 0 LIT 2 OPR LT JZ @else ; n < 2
