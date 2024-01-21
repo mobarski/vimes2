@@ -31,3 +31,5 @@ Reference materials:
 - https://github.com/mobarski/smol
 - https://rosettacode.org/wiki/Category:PL/0
 - https://rosettacode.org/wiki/Category:XPL0
+- http://pascal.hansotten.com/niklaus-wirth/pl0/
+
