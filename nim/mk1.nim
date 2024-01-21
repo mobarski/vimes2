@@ -5,11 +5,11 @@ include opcodes
 include ex1
 include ex2
 
-proc run(code : openArray[int]) =
+proc run(code : openArray[Cell]) =
     while true:
-        var i = code[p+0].Cell
-        var l = code[p+1].Cell
-        var a = code[p+2].Cell
+        var i = code[p+0]
+        var l = code[p+1]
+        var a = code[p+2]
         p += 3
 
         case i:
@@ -53,17 +53,5 @@ proc run(code : openArray[int]) =
 
 # ============================================================
 
-const vm_code = @[
-    INT, 0, 0, # nop
-    LIT, 0, 11,
-    LIT, 0, 22,
-    OPR, 0, ADD,
-    OPR, 0, NEG,
-    LIT, 0, -9,
-    OPR, 0, ADD,
-    JMP, 0, 0, # halt
-]
-run(vm_code)
-debug()
-reset()
-debug()
+include cli
+cli()

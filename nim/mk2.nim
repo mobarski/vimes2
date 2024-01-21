@@ -4,22 +4,21 @@ include base
 include opcodes
 include ex1
 include ex2
-include cli
 
-proc run(code : openArray[int]) =
+proc run(code : openArray[Cell]) =
     while true:
-        var i = code[p+0].Cell
-        var a = code[p+1].Cell
+        var i = code[p+0]
+        var a = code[p+1]
         var l : Cell # not always used
         p += 2
 
         case i:
             of LIT: t+=1; s[t]=a
             of LOD:
-                l = code[p].Cell; p+=1
+                l = code[p]; p+=1
                 t+=1; s[t]=s[base(l)+a]
             of STO:
-                l = code[p].Cell; p+=1
+                l = code[p]; p+=1
                 s[base(l)+a]=s[t]; t-=1
             of INT: t+=a
             of JMP: p=a
@@ -28,7 +27,7 @@ proc run(code : openArray[int]) =
                     p = a
                     t -= 1
             of CAL:
-                l = code[p].Cell; p+=1
+                l = code[p]; p+=1
                 s[t+1] = base(l)
                 s[t+2] = b
                 s[t+3] = p
@@ -58,20 +57,5 @@ proc run(code : openArray[int]) =
 
 # ============================================================
 
-const vm_code = @[
-    INT, 0, # nop
-    LIT, 11,
-    LIT, 22,
-    OPR, ADD,
-    OPR, NEG,
-    LIT, -9,
-    OPR, ADD,
-    JMP, 0, # halt
-]
-run(vm_code)
-debug()
-reset()
-run(@[LIT, 64, EX1, PUTC, LIT, -777, EX1, PUTI, LIT, 32, EX1, PUTC, JMP, 0])
-debug()
-
-#cli()
+include cli
+cli()

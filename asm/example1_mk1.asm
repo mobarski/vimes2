@@ -1,0 +1,8 @@
+INT 0 0 ; nop
+LIT 0 11
+LIT 0 22
+OPR 0 ADD
+OPR 0 NEG
+LIT 0 -9
+OPR 0 ADD
+JMP 0 0 ; halt

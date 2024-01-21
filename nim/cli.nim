@@ -9,10 +9,12 @@ type Cfg = object
     input_path: string
     format: string
     benchmark: int
+    debug: bool
 
 proc print_help() =
-    echo "Usage: " & get_app_filename() & " [options] [input_file]"
+    echo "Usage: " & get_app_filename() & " [options] input_file"
     echo "Options:"
+    echo "  -d        debug mode"
     echo "  -b <n>    benchmark mode, run <n> times"
     echo "  -f <fmt>  input format, one of: hex, bin, b10, b16"
     echo "  -h        print this help"
@@ -30,6 +32,8 @@ proc get_cli_config() : Cfg =
             of cmdEnd: break
             of cmdShortOption, cmdLongOption:
                 case p.key:
+                    of "d":
+                        result.debug = true
                     of "b":
                         var vi : int
                         if parse_int(p.val, vi) > 0:
@@ -56,4 +60,6 @@ proc cli() =
     if cfg.format=="hex":
         let text = read_file(cfg.input_path)
         let code = code_from_hex(text)
-        echo code # XXX
+        run(code)
+        if cfg.debug:
+            debug()

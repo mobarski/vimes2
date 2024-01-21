@@ -1,0 +1,3 @@
+cd $(dirname $0)
+python3 ../python/asm.py ../nim/opcodes.nim  $1 -f hex -o hex/$1.hex
+nim r ../nim/mk2 hex/$1.hex -d
