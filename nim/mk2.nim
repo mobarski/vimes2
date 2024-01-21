@@ -4,6 +4,7 @@ include base
 include opcodes
 include ex1
 include ex2
+include cli
 
 proc run(code : openArray[int]) =
     while true:
@@ -72,3 +73,5 @@ debug()
 reset()
 run(@[LIT, 64, EX1, PUTC, LIT, -777, EX1, PUTI, LIT, 32, EX1, PUTC, JMP, 0])
 debug()
+
+#cli()

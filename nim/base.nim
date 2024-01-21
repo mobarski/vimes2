@@ -28,11 +28,10 @@ proc reset(quick=false) =
 proc debug() =
     echo "p:", p, " b:", b, " t:", t, " s:", s[1..t]
 
-proc code_from_hex(text:string) = 
+proc code_from_hex(text:string) : seq[Cell] = 
+    # TODO: allow whitespace
     for i in countup(0, text.len-1, 4):
         var v : int
-        let n = parse_hex(text, v, i, 4)
+        let n : int = parse_hex(text, v, i, 4)
         assert n == 4
-        echo i,' ',n,' ',v#,' ',v.int16
-
-#code_from_hex("FF000011")
+        result.add cast[Cell](v)
