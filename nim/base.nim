@@ -30,9 +30,14 @@ proc debug() =
     echo "p:",p, " b:",b, " t:",t, " cc:",cc, " s:",s[1..t]
 
 proc code_from_hex(text:string) : seq[Cell] = 
-    # TODO: allow whitespace
-    for i in countup(0, text.len-1, 4):
-        var v : int
-        let n : int = parse_hex(text, v, i, 4)
+    var pos = 0
+    var val : int
+    var n : int
+    while pos < text.len:
+        pos += skip_whitespace(text, pos)
+        if pos >= text.len: break
+        #
+        n = parse_hex(text, val, pos, 4)
         assert n == 4
-        result.add cast[Cell](v)
+        result.add cast[Cell](val)
+        pos = pos + n
