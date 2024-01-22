@@ -7,8 +7,9 @@ const STACK_SIZE = 1000
 var p : Cell # program counter
 var b : Cell # base pointer
 var t : Cell # top of stack pointer
-
 var s : array[STACK_SIZE, Cell] # stack
+
+var cc : int64 # cycle counter
 
 proc base(level: Cell) : Cell =
     var b1 = b
@@ -19,14 +20,14 @@ proc base(level: Cell) : Cell =
     return b1
 
 proc reset(quick=false) =
-    p=0; b=0; t=0
+    p=0; b=0; t=0; cc=0
     if quick: return
     for j in low(s)..high(s):
         s[j] = 0
 
 # TODO: rename (canditates: debug, trace, dump, show)
 proc debug() =
-    echo "p:", p, " b:", b, " t:", t, " s:", s[1..t]
+    echo "p:",p, " b:",b, " t:",t, " cc:",cc, " s:",s[1..t]
 
 proc code_from_hex(text:string) : seq[Cell] = 
     # TODO: allow whitespace

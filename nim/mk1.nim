@@ -7,6 +7,7 @@ include ex2
 
 proc run(code : openArray[Cell]) =
     while true:
+        when defined(cc): cc+=1 # count cycles
         var i = code[p+0]
         var l = code[p+1]
         var a = code[p+2]

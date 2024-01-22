@@ -3,7 +3,9 @@ import parseutils
 import streams
 import os
 
-let VERSION = "0.1.0"
+import bench
+
+let VERSION = "0.2.0"
 
 type Cfg = object
     input_path: string
@@ -57,9 +59,17 @@ proc get_cli_config() : Cfg =
 
 proc cli() =
     let cfg = get_cli_config()
+    var bench = new_bench()
     if cfg.format=="hex":
         let text = read_file(cfg.input_path)
         let code = code_from_hex(text)
-        run(code)
+        if cfg.benchmark > 0:
+            for i in 1..cfg.benchmark:
+                reset(quick=true)
+                run(code)
+                bench.done(cc)
+            bench.report()
+        else:
+            run(code)
         if cfg.debug:
             debug()
