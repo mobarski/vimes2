@@ -15,4 +15,4 @@ proc ex2(a:Cell, s:var openArray[Cell], t:var Cell) =
         of LEZ:       s[t] = ord(s[t] <= 0).Cell
         of GTZ:       s[t] = ord(s[t] >  0).Cell
         of GEZ:       s[t] = ord(s[t] >= 0).Cell
-        else: assert false, "unknown EX1 opcode"
+        else: quit("unknown EX2 opcode",1)

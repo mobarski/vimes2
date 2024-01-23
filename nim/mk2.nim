@@ -50,10 +50,10 @@ proc run(code : openArray[Cell]) =
                     of LE:  t-=1; s[t] = ord(s[t] <= s[t+1]).Cell
                     of GT:  t-=1; s[t] = ord(s[t] >  s[t+1]).Cell
                     of GE:  t-=1; s[t] = ord(s[t] >= s[t+1]).Cell
-                    else: assert false, "unknown OPR opcode"
+                    else: quit("unknown OPR opcode",1)
             of EX1: ex1(a,s,t)
             of EX2: ex2(a,s,t)
-            else: assert false, "unknown opcode"
+            else: quit("unknown opcode",1)
         if p == 0: break
 
 # ============================================================

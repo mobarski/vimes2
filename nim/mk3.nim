@@ -63,7 +63,7 @@ proc run(code : openArray[int8]) =
                     of LE:  t-=1; s[t] = ord(s[t] <= s[t+1]).Cell
                     of GT:  t-=1; s[t] = ord(s[t] >  s[t+1]).Cell
                     of GE:  t-=1; s[t] = ord(s[t] >= s[t+1]).Cell
-                    else: assert false
+                    else: quit("unknown OPR opcode",1)
             #
             of LIT2:
                 a = a shl 8 or code[p].Cell; p+=1
@@ -84,7 +84,7 @@ proc run(code : openArray[int8]) =
                 s[t+3] = p
                 b = t + 1
                 p = a
-            else: assert false
+            else: quit("unknown opcode",1)
 
         if p == 0: break
 
