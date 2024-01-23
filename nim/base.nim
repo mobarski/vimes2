@@ -36,8 +36,11 @@ proc code_from_hex(text:string) : seq[Cell] =
     while pos < text.len:
         pos += skip_whitespace(text, pos)
         if pos >= text.len: break
+        if text[pos] == '#':
+            pos += skip_until(text, '\n', pos) + 1 # skip also the newline
+            continue
         #
         n = parse_hex(text, val, pos, 4)
-        assert n == 4
+        assert n == 4, "invalid hex code at position " & $pos
         result.add cast[Cell](val)
         pos = pos + n
