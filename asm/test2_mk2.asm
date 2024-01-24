@@ -1,0 +1,27 @@
+
+; function calling
+
+LIT 43 EX1 PUTC
+CAL f1 0
+LIT 43 EX1 PUTC
+JMP 0
+
+f1:
+    INT 3
+    LIT 42 EX1 PUTC
+    CAL f2 0
+    LIT 42 EX1 PUTC
+    OPR RET
+
+f2:
+    INT 3
+    LIT 45 EX1 PUTC
+    CAL f3 0
+    LIT 45 EX1 PUTC
+    OPR RET
+
+f3:
+    INT 3
+    LIT 46 EX1 PUTC
+    LIT 46 EX1 PUTC
+    OPR RET
