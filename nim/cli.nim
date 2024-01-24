@@ -16,7 +16,7 @@ type Cfg = object
 proc print_help() =
     echo "Usage: " & get_app_filename() & " [options] input_file"
     echo "Options:"
-    echo "  -d        debug mode"
+    echo "  -d        dump debug info"
     echo "  -b <n>    benchmark mode, run <n> times"
     echo "  -f <fmt>  input format, one of: hex, bin, b10, b16"
     echo "  -h        print this help"
