@@ -19,7 +19,7 @@ const
     EX4 = 20 #
     EX5 = 21 #
     EX6 = 22 #
-    
+
 const # OPR
     RET = 0
     NEG = 1

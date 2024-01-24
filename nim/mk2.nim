@@ -1,7 +1,9 @@
 # mk2: variable number of arguments, a and l swapped
 
-include base
 include opcodes
+include opnames
+
+include base
 include ex1
 include ex2
 include ex3
@@ -12,8 +14,8 @@ proc run(code : openArray[Cell]) =
         var a = code[p+1]
         var l : Cell # not always used
         
-        when defined(cc): cc+=1      # count cycles
-        when defined(trace): trace() # trace execution
+        when defined(cc): cc+=1 # count cycles
+        when defined(trace): trace(code) # trace execution
         
         p += 2
 

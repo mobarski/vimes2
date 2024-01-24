@@ -30,8 +30,9 @@ proc reset(quick=false) =
 proc debug() =
     stderr.write_line "cc:",cc, " p:",p, " b:",b, " t:",t, " s:[ ",s[1..t].join(" ")," ]"
 
-proc trace() =
-    stderr.write_line """| {cc:2} | {p:2} | {b:2} | {t:2} | {s[1..t].join(" ")}""".fmt
+proc trace(code:openArray[Cell]) =
+    let op = opnames.get_or_default(code[p], "???")
+    stderr.write_line """| {cc:2} | {p:2} | {op:4} |{b:2} | {t:2} | {s[1..t].join(" ")}""".fmt
 
 proc code_from_hex(text:string) : seq[Cell] = 
     var pos = 0
