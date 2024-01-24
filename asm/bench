@@ -2,6 +2,6 @@
 cd $(dirname $0)
 python3 ../python/asm.py ../nim/opcodes.nim $2 -f hex -o hex/$2.hex
 #nim r -d:cc -d:release ../nim/$1 hex/$2.hex ${@:3} >/dev/null
-nim r -d:cc -d:danger ../nim/$1 hex/$2.hex ${@:3} >/dev/null
+nim r -d:cc -d:danger --gc:none ../nim/$1 hex/$2.hex ${@:3} >/dev/null
 # --gc:none -> 225/180 = 25% faster
 # -d:danger -> 425/180 = 135% faster

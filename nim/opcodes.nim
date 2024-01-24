@@ -7,18 +7,18 @@ const
     INT = 6
     JMP = 7
     JPC = 8
-    # mk3
-    LIT2 = 9
-    CAL2 = 10
-    JMP2 = 11
-    JPC2 = 12
     # EXTENSIONS
-    EX1 = 17 #
-    EX2 = 18 #
-    EX3 = 19 #
-    EX4 = 20 #
-    EX5 = 21 #
-    EX6 = 22 #
+    EX1 = 9 #
+    EX2 = 10 #
+    EX3 = 11 #
+    EX4 = 12 #
+    EX5 = 13 #
+    EX6 = 14 #
+    # mk3
+    LIT2 = 17
+    CAL2 = 21
+    JMP2 = 23
+    JPC2 = 24
 
 const # OPR
     RET = 0
