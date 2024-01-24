@@ -68,7 +68,7 @@ proc cli() =
                 reset(quick=true)
                 run(code)
                 bench.done(cc)
-            bench.report(item="cycle")
+            bench.show(item="cycle")
         else:
             reset(quick=true)
             run(code)
