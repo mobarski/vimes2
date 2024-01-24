@@ -4,6 +4,7 @@ include base
 include opcodes
 include ex1
 include ex2
+include ex3
 
 proc run(code : openArray[Cell]) =
     while true:
@@ -48,6 +49,7 @@ proc run(code : openArray[Cell]) =
                     else: quit("unknown OPR opcode",1)
             of EX1: ex1(a,s,t)
             of EX2: ex2(a,s,t)
+            of EX3: ex3(a,s,t)
             else: quit("unknown opcode",1)
 
         if p == 0: break

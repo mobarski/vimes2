@@ -4,13 +4,17 @@ include base
 include opcodes
 include ex1
 include ex2
+include ex3
 
 proc run(code : openArray[Cell]) =
     while true:
-        when defined(cc): cc+=1 # count cycles
         var i = code[p+0]
         var a = code[p+1]
         var l : Cell # not always used
+        
+        when defined(cc): cc+=1      # count cycles
+        when defined(trace): trace() # trace execution
+        
         p += 2
 
         case i:
@@ -53,7 +57,8 @@ proc run(code : openArray[Cell]) =
                     else: quit("unknown OPR opcode",1)
             of EX1: ex1(a,s,t)
             of EX2: ex2(a,s,t)
-            else: quit("unknown opcode",1)
+            of EX3: ex3(a,s,t)
+            else: quit("unknown opcode " & $i & " at p=" & $(p-2),1)
         if p == 0: break
 
 # ============================================================

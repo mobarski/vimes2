@@ -11,9 +11,10 @@
 Extension 1 - stdio:
 
 - PUTC, PUTI
+
 - GETC, GETI
 
-
+  
 
 Extension 2 - ALU extension:
 

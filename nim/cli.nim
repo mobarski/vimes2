@@ -68,7 +68,7 @@ proc cli() =
                 reset(quick=true)
                 run(code)
                 bench.done(cc)
-            bench.report()
+            bench.report(item="cycle")
         else:
             run(code)
         if cfg.debug:

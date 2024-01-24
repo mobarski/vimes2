@@ -13,11 +13,13 @@ const
     JMP2 = 11
     JPC2 = 12
     # EXTENSIONS
-    EX1 = 17 # ALU
-    EX2 = 18 # STDIO
-    EX3 = 19 # FOR FUTURE USE
-    EX4 = 20 # FOR FUTURE USE
-
+    EX1 = 17 #
+    EX2 = 18 #
+    EX3 = 19 #
+    EX4 = 20 #
+    EX5 = 21 #
+    EX6 = 22 #
+    
 const # OPR
     RET = 0
     NEG = 1
@@ -35,13 +37,13 @@ const # OPR
     GT  = 12
     GE  = 13
 
-const # EX1 - STDIO
-    PUTC = 1
-    PUTI = 2
-    GETC = 3
-    GETI = 4
+const # EX1 - SIO / STDIO
+    PUTI = 1
+    GETI = 2
+    PUTC = 3
+    GETC = 4
 
-const # EX2 - ALU EXTENSION
+const # EX2 - BIT / ALU EXTENSION
     NOT = 1
     AND = 2
     OR  = 3
@@ -49,12 +51,13 @@ const # EX2 - ALU EXTENSION
     SHL = 5
     SHR = 6
     SAR = 7 # ASR vs ASHR vs SAR
-    INC = 8
-    DEC = 9
-    EQZ = 10
-    NEZ = 11
-    LTZ = 12
-    LEZ = 13
-    GTZ = 14
-    GEZ = 15
-    # DUP DROP SWAP OVER ROT ???
+
+const # EX3 - ALU EXTENSION
+    INC = 1
+    DEC = 2
+    EQZ = 3
+    NEZ = 4
+    LTZ = 5
+    LEZ = 6
+    GTZ = 7
+    GEZ = 8
