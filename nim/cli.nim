@@ -5,7 +5,7 @@ import os
 
 import bench
 
-let VERSION = "0.2.0"
+let VERSION = "0.2.1"
 
 type Cfg = object
     input_path: string
