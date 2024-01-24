@@ -1,4 +1,4 @@
-# mk2: bytecode, variable number of arguments, a and l swapped
+# mk3: bytecode, variable number of arguments, a and l swapped
 
 type Cell = int16
 const STACK_SIZE = 1000
