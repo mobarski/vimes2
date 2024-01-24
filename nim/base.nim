@@ -28,7 +28,7 @@ proc reset(quick=false) =
 
 # TODO: rename (canditates: debug, trace, dump, show)
 proc debug() =
-    stderr.write_line "cc:",cc, " p:",p, " b:",b, " t:",t, " s:[ ",s[1..t].join(" ")," ]"
+    stderr.write_line "cc:",cc, " p:",p, " b:",b, " t:",t, " s:[ ",s[0..t].join(" ")," ]"
 
 proc trace(code:openArray[Cell]) =
     let op = opnames.get_or_default(code[p], "???")
