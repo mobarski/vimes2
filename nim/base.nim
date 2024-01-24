@@ -28,10 +28,10 @@ proc reset(quick=false) =
 
 # TODO: rename (canditates: debug, trace, dump, show)
 proc debug() =
-    echo "p:",p, " b:",b, " t:",t, " cc:",cc, " s:",s[1..t]
+    stderr.write_line "cc:",cc, " p:",p, " b:",b, " t:",t, " s:[ ",s[1..t].join(" ")," ]"
 
 proc trace() =
-    echo "| {cc:2} | {p:2} | {b:2} | {t:2} | {s[1..t]} |".fmt
+    stderr.write_line """| {cc:2} | {p:2} | {b:2} | {t:2} | {s[1..t].join(" ")}""".fmt
 
 proc code_from_hex(text:string) : seq[Cell] = 
     var pos = 0
