@@ -42,6 +42,7 @@ const # EX1 - SIO / STDIO
     GETI = 2
     PUTC = 3
     GETC = 4
+    EOF  = 5
 
 const # EX2 - BIT / ALU EXTENSION
     NOT = 1
