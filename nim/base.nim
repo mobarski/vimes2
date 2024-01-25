@@ -34,6 +34,11 @@ proc trace(a:Cell, code:openArray[Cell]) =
     let op = opnames.get_or_default(code[p], "???")
     stderr.write_line """| {cc:2} | {p:2} | {op:>4} {a:<4} | {b:2} | {t:2} | {s[1..t].join(" ")}""".fmt
 
+proc trace_header() =
+    stderr.write_line """+----+----+-----------+----+----+-------"""
+    stderr.write_line """| CC |  P |    I A    |  B |  T | S --> """
+    stderr.write_line """+----+----+-----------+----+----+-------"""
+
 proc code_from_hex(text:string) : seq[Cell] = 
     var pos = 0
     var val : int

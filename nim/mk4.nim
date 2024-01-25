@@ -48,6 +48,7 @@ proc do_opr(a: Cell, code: openArray[Cell]) =
         else: quit("unknown OPR opcode",1)
 
 proc run(code: openArray[Cell]) =
+    when defined(trace): trace_header()
     while true:
         var i = code[p+0]
         var a = code[p+1]

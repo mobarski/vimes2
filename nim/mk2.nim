@@ -9,6 +9,7 @@ include ex2
 include ex3
 
 proc run(code : openArray[Cell]) =
+    when defined(trace): trace_header()
     while true:
         var i = code[p+0]
         var a = code[p+1]
