@@ -25,7 +25,8 @@ proc run(code : openArray[Cell]) =
             of INT: t+=a
             of JMP: p=a
             of JPC:
-                if s[t]==0: p=a; t-=1
+                if s[t]==0:
+                    p=a; t-=1
             of LOD:
                 l = code[p]; p+=1
                 t+=1; s[t]=s[base(l)+a]
