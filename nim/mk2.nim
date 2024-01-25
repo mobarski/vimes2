@@ -58,8 +58,8 @@ proc run(code : openArray[Cell]) =
                     of GT:  t-=1; s[t] = ord(s[t] >  s[t+1]).Cell
                     of GE:  t-=1; s[t] = ord(s[t] >= s[t+1]).Cell
                     else: quit("unknown OPR opcode",1)
-            of EX1: ex1(a,t)
-            #of EX1: ex1(a,s,t)
+            #of EX1: ex1(a,s,t) # 2.5% faster than ex1(a,t)
+            of EX1: ex1(a,t) # 10% faster than ex1(a)
             #of EX2: ex2(a)
             #of EX3: ex3(a)
             else: quit("unknown opcode " & $i & " at p=" & $(p-2),1)
