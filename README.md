@@ -30,8 +30,8 @@ Base instructions:
 Extension 1 - stdio:
 
 - `PUTC`, `PUTI`
-
 - `GETC`, `GETI`
+- `EOF`
 
   
 
