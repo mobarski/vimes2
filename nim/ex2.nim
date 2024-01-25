@@ -1,4 +1,4 @@
-proc ex2(a:Cell, s:var openArray[Cell], t:var Cell) =
+proc ex2(a:Cell) = #, s:var openArray[Cell], t:var Cell) =
     case a:
         of NOT:       s[t] = ord(not s[t]).Cell
         of AND: t-=1; s[t] = ord(s[t] and s[t+1]).Cell

@@ -1,4 +1,4 @@
-proc ex3(a:Cell, s:var openArray[Cell], t:var Cell) =
+proc ex3(a:Cell) = #, s:var openArray[Cell], t:var Cell) =
     case a:
         of INC: s[t] += 1
         of DEC: s[t] -= 1

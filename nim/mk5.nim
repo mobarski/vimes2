@@ -47,7 +47,7 @@ proc do_opr(a: Cell, code: openArray[Cell]) =
         of GE:  t-=1; s[t] = ord(s[t] >= s[t+1]).Cell
         else: quit("unknown OPR opcode",1)
 
-let op_func = [do_lit, do_lit, do_opr, do_lod, do_sto, do_cal, do_int, do_jmp, do_jpc, ex1b]
+let op_func = [do_lit, do_lit, do_opr, do_lod, do_sto, do_cal, do_int, do_jmp, do_jpc, ex1c]
 
 proc run(code: openArray[Cell]) =
     while true:

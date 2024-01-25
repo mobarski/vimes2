@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# $1 -> vm command to run
+# $2 -> path to the asm file
+# $3 -> test version
+
+# print help if no args
+if [ $# -lt 2 ]; then
+    echo "Usage: ./test <vm-version> <asm-file> [test-version]"
+    exit 1
+fi
+
+cmd="./run $1 $2"
+input_path=${2%.asm}_input$3.txt
+expected_path=${2%.asm}_expected$3.txt
+
+# fail if expected file doesn't exist
+if [ ! -f $expected_path ]; then
+    echo "Test failed: $1 $2 $3"
+    echo "  Input path: $input_path"
+    echo "  Expected output path: $expected_path"
+    echo "  Expected output file does not exist"
+    exit 1
+fi
+
+expected=`cat $expected_path`
+actual=`cat $input_path | $cmd`
+
+if [ "$expected" == "$actual" ]; then
+    echo "Test passed: $1 $2 $3"
+else
+    echo "Test failed: $1 $2 $3"
+    echo "  Input path: $input_path"
+    echo "  Expected output path: $expected_path"
+    echo "     Actual input: \"`cat $input_path`\""
+    echo "    Actual output: \"$actual\""
+    echo "  Expected output: \"$expected\""
+fi

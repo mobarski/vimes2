@@ -67,9 +67,9 @@ proc run(code: openArray[Cell]) =
             of JPC: do_jpc(a, code)
             of CAL: do_cal(a, code)
             of OPR: do_opr(a, code)
-            of EX1: ex1(a,s,t)
-            of EX2: ex2(a,s,t)
-            of EX3: ex3(a,s,t)
+            of EX1: ex1(a)
+            of EX2: ex2(a)
+            of EX3: ex3(a)
             else: quit("unknown opcode " & $i & " at p=" & $(p-2),1)
         if p == 0: break
 
