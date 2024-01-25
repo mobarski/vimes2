@@ -32,19 +32,19 @@ proc do_jpc(a: Cell, code: openArray[Cell]) =
 proc do_opr(a: Cell, code: openArray[Cell]) =
     case a:
         of RET: t=b-1; p=s[t+3]; b=s[t+2]
-        of NEG: s[t] = -s[t]
-        of ODD: s[t] = s[t] mod 2
         of ADD: t-=1; s[t] += s[t+1]
         of SUB: t-=1; s[t] -= s[t+1]
         of MUL: t-=1; s[t] *= s[t+1]
-        of DIV: t-=1; s[t] = s[t] div s[t+1]
-        of MOD: t-=1; s[t] = s[t] mod s[t+1]
-        of EQ:  t-=1; s[t] = ord(s[t] == s[t+1]).Cell
-        of NE:  t-=1; s[t] = ord(s[t] != s[t+1]).Cell
-        of LT:  t-=1; s[t] = ord(s[t] <  s[t+1]).Cell
-        of LE:  t-=1; s[t] = ord(s[t] <= s[t+1]).Cell
-        of GT:  t-=1; s[t] = ord(s[t] >  s[t+1]).Cell
-        of GE:  t-=1; s[t] = ord(s[t] >= s[t+1]).Cell
+        of DIV: t-=1; s[t] =  s[t] div s[t+1]
+        of MOD: t-=1; s[t] =  s[t] mod s[t+1]
+        of ODD:       s[t] =  s[t] mod 2
+        of NEG:       s[t] = -s[t]
+        of EQ:  t-=1; s[t] = (s[t] == s[t+1]).ord.Cell
+        of NE:  t-=1; s[t] = (s[t] != s[t+1]).ord.Cell
+        of LT:  t-=1; s[t] = (s[t] <  s[t+1]).ord.Cell
+        of LE:  t-=1; s[t] = (s[t] <= s[t+1]).ord.Cell
+        of GT:  t-=1; s[t] = (s[t] >  s[t+1]).ord.Cell
+        of GE:  t-=1; s[t] = (s[t] >= s[t+1]).ord.Cell
         else: quit("unknown OPR opcode",1)
 
 let op_func = [do_lit, do_lit, do_opr, do_lod, do_sto, do_cal, do_int, do_jmp, do_jpc, ex1c]

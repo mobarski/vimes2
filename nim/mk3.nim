@@ -50,19 +50,19 @@ proc run(code : openArray[int8]) =
             of OPR:
                 case a:
                     of RET: t=b-1; p=s[t+3]; b=s[t+2]
-                    of NEG: s[t] = -s[t]
                     of ADD: t-=1; s[t] += s[t+1]
                     of SUB: t-=1; s[t] -= s[t+1]
                     of MUL: t-=1; s[t] *= s[t+1]
-                    of DIV: t-=1; s[t] = s[t] div s[t+1]
-                    of ODD: s[t] = s[t] mod 2
-                    of MOD: t-=1; s[t] = s[t] mod s[t+1]
-                    of EQ:  t-=1; s[t] = ord(s[t] == s[t+1]).Cell
-                    of NE:  t-=1; s[t] = ord(s[t] != s[t+1]).Cell
-                    of LT:  t-=1; s[t] = ord(s[t] <  s[t+1]).Cell
-                    of LE:  t-=1; s[t] = ord(s[t] <= s[t+1]).Cell
-                    of GT:  t-=1; s[t] = ord(s[t] >  s[t+1]).Cell
-                    of GE:  t-=1; s[t] = ord(s[t] >= s[t+1]).Cell
+                    of DIV: t-=1; s[t] =  s[t] div s[t+1]
+                    of MOD: t-=1; s[t] =  s[t] mod s[t+1]
+                    of ODD:       s[t] =  s[t] mod 2
+                    of NEG:       s[t] = -s[t]
+                    of EQ:  t-=1; s[t] = (s[t] == s[t+1]).ord.Cell
+                    of NE:  t-=1; s[t] = (s[t] != s[t+1]).ord.Cell
+                    of LT:  t-=1; s[t] = (s[t] <  s[t+1]).ord.Cell
+                    of LE:  t-=1; s[t] = (s[t] <= s[t+1]).ord.Cell
+                    of GT:  t-=1; s[t] = (s[t] >  s[t+1]).ord.Cell
+                    of GE:  t-=1; s[t] = (s[t] >= s[t+1]).ord.Cell
                     else: quit("unknown OPR opcode",1)
             #
             of LIT2:
