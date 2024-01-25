@@ -22,18 +22,16 @@ proc run(code : openArray[Cell]) =
 
         case i:
             of LIT: t+=1; s[t]=a
+            of INT: t+=a
+            of JMP: p=a
+            of JPC:
+                if s[t]==0: p=a; t-=1
             of LOD:
                 l = code[p]; p+=1
                 t+=1; s[t]=s[base(l)+a]
             of STO:
                 l = code[p]; p+=1
                 s[base(l)+a]=s[t]; t-=1
-            of INT: t+=a
-            of JMP: p=a
-            of JPC:
-                if s[t]==0:
-                    p = a
-                    t -= 1
             of CAL:
                 l = code[p]; p+=1
                 s[t+1] = base(l)
