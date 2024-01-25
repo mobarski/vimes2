@@ -45,11 +45,11 @@ proc run(code : openArray[Cell]) =
                 case a:
                     of RET: t=b-1; p=s[t+3]; b=s[t+2]
                     of NEG: s[t] = -s[t]
+                    of ODD: s[t] = s[t] mod 2
                     of ADD: t-=1; s[t] += s[t+1]
                     of SUB: t-=1; s[t] -= s[t+1]
                     of MUL: t-=1; s[t] *= s[t+1]
                     of DIV: t-=1; s[t] = s[t] div s[t+1]
-                    of ODD: s[t] = s[t] mod 2
                     of MOD: t-=1; s[t] = s[t] mod s[t+1]
                     of EQ:  t-=1; s[t] = ord(s[t] == s[t+1]).Cell
                     of NE:  t-=1; s[t] = ord(s[t] != s[t+1]).Cell
