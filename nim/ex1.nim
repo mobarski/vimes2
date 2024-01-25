@@ -1,6 +1,7 @@
 import sio
 
-proc ex1(a:Cell) =
+# passing t as arg makes this code 10% faster !?
+proc ex1(a:Cell, t:var Cell) = #, s:var openArray[Cell], t:var Cell) =
     case a:
         of PUTI: stdout.write s[t]; t-=1
         of GETI: t+=1; s[t] = sio.read_int().Cell

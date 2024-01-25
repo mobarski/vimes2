@@ -54,7 +54,7 @@ proc run(code: openArray[Cell]) =
         var l : Cell # not always used
         
         when defined(cc): cc+=1 # count cycles
-        when defined(trace): trace(code) # trace execution
+        when defined(trace): trace(a, code) # trace execution
         
         p += 2
 
@@ -67,9 +67,9 @@ proc run(code: openArray[Cell]) =
             of JPC: do_jpc(a, code)
             of CAL: do_cal(a, code)
             of OPR: do_opr(a, code)
-            of EX1: ex1(a)
-            of EX2: ex2(a)
-            of EX3: ex3(a)
+            of EX1: ex1(a,t)
+            #of EX2: ex2(a,t)
+            #of EX3: ex3(a,t)
             else: quit("unknown opcode " & $i & " at p=" & $(p-2),1)
         if p == 0: break
 

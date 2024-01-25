@@ -15,7 +15,7 @@ proc run(code : openArray[Cell]) =
         var l : Cell # not always used
         
         when defined(cc): cc+=1 # count cycles
-        when defined(trace): trace(code) # trace execution
+        when defined(trace): trace(a,code) # trace execution
         
         p += 2
 
@@ -57,9 +57,10 @@ proc run(code : openArray[Cell]) =
                     of GT:  t-=1; s[t] = ord(s[t] >  s[t+1]).Cell
                     of GE:  t-=1; s[t] = ord(s[t] >= s[t+1]).Cell
                     else: quit("unknown OPR opcode",1)
-            of EX1: ex1(a)
-            of EX2: ex2(a)
-            of EX3: ex3(a)
+            of EX1: ex1(a,t)
+            #of EX1: ex1(a,s,t)
+            #of EX2: ex2(a)
+            #of EX3: ex3(a)
             else: quit("unknown opcode " & $i & " at p=" & $(p-2),1)
         if p == 0: break
 

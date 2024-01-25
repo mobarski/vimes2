@@ -55,7 +55,7 @@ proc run(code: openArray[Cell]) =
         var a = code[p+1]
         
         when defined(cc): cc+=1 # count cycles
-        when defined(trace): trace(code) # trace execution
+        when defined(trace): trace(a, code) # trace execution
         
         p += 2
         op_func[i](a, code)
