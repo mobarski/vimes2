@@ -1,4 +1,10 @@
-# p-code virtual machines experimentation sandbox v2
+# Vimes2 - Virtual Machines Experimentation Sandbox 2
+
+Another take on my [Vimes project](https://github.com/mobarski/vimes).
+
+**Vimes** is a collection of virtual machines (VMs) and related resources for studying their performance, ease of  implementation, and ease of use. This sandbox includes a variety of VMs  with different architectures, dispatch techniques and implementations as well as benchmarks and utilities to help measure and  compare their characteristics.
+
+**Warning**: this is experimental / pre-alpha code.
 
 
 
@@ -84,4 +90,5 @@ Extension 3 - ALU extension (common ops)
 - https://rosettacode.org/wiki/Category:PL/0
 - https://rosettacode.org/wiki/Category:XPL0
 - http://pascal.hansotten.com/niklaus-wirth/pl0/
+- https://github.com/mobarski/vimes/blob/main/references.md
 
