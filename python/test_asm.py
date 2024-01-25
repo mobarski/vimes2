@@ -14,3 +14,11 @@ def test_labels():
     """
     pcode = asm.compile(text, {})
     assert pcode == [99, 11, 22, 33, 44, 2, 4, 55, 4, 2, 66]
+
+def test_comments():
+    text = """
+        11 (22 33) 44 55 ; 66 77
+        88 (xxx 99 zzz) 22 (;) 33 44
+    """
+    pcode = asm.compile(text, {})
+    assert pcode == [11, 44, 55, 88, 22, 33, 44]

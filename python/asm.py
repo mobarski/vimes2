@@ -10,6 +10,7 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
     converts opcode names to numbers
     converts python integer literals  (ie. `1_234`) to plain numbers
     treats `;` as line comment start
+    treats `(` and `)` as inline comment start and end (single line only)
     converts labels to addresses
     - `name:` to define label
     - `name`  to insert label's absolute address
@@ -20,7 +21,11 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
     label = {}
     tokens = []
     for line in lines:
+        # remove inline comments
+        line = re.sub(r'\(.*?\)', '', line)
+        # split into tokens
         line_tokens = re.split('\\s+',line)
+        # process tokens
         for token in line_tokens:
             if not token: continue
             # comments
