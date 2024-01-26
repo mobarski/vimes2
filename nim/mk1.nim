@@ -1,17 +1,23 @@
 # mk1: compatible with the original PL/0
 
-include base
 include opcodes
+include opnames
+
+include base
 include ex1
 include ex2
 include ex3
 
 proc run(code : openArray[Cell]) =
+    when defined(trace): trace_header()
     while true:
-        when defined(cc): cc+=1 # count cycles
         var i = code[p+0]
         var l = code[p+1]
         var a = code[p+2]
+
+        when defined(cc): cc+=1 # count cycles
+        when defined(trace): trace(a,code) # trace execution
+        
         p += 3
 
         case i:
