@@ -17,9 +17,7 @@ proc run(code : openArray[Cell]) =
         
         when defined(cc): cc+=1 # count cycles
         when defined(trace): trace(a,code) # trace execution
-        when defined(ic): # count instructions
-            if i notin ic: ic[i]=0
-            ic[i]+=1
+        when defined(ic): ic[i]=ic.get_or_default(i) + 1 # count instructions
         
         p += 2
 
