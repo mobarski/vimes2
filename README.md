@@ -18,6 +18,28 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
 
 
+## VM registers / variable names
+
+Vimes uses the same variable names as Wirth's example p-code machine from 1976 (available [here](https://en.wikipedia.org/wiki/P-code_machine#Example_machine)).
+
+- **p** - program register
+
+- **b** - base register
+
+- **t** - topstack register
+
+- **s** - stack
+
+- **i** - instruction register
+
+- **a** - argument register
+
+- **l** - level register
+
+- **code** - program memory
+
+  
+
 ## VM instructions
 
 
@@ -29,6 +51,7 @@ Base instructions:
 - `OPR`:
   - `ADD`, `SUB`, `MUL`, `DIV`
   - `RET`, `NEG`, `ODD`, `MOD`
+  - `EQ`, `NE`, `LT`, `LE`, `GT`, `GE`
 - `EX1`, `EX2`, `EX3`, `EX4`, `EX5`, `EX6`
 
 
