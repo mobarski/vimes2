@@ -17,6 +17,9 @@ proc run(code : openArray[Cell]) =
         
         when defined(cc): cc+=1 # count cycles
         when defined(trace): trace(a,code) # trace execution
+        when defined(ic): # count instructions
+            if i notin ic: ic[i]=0
+            ic[i]+=1
         
         p += 2
 
@@ -63,6 +66,7 @@ proc run(code : openArray[Cell]) =
             #of EX3: ex3(a)
             else: quit("unknown opcode " & $i & " at p=" & $(p-2),1)
         if p == 0: break
+    when defined(ic): show_ic()
 
 # ============================================================
 

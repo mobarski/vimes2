@@ -12,6 +12,28 @@ var s : array[STACK_SIZE, Cell] # stack
 
 var cc : int64 # cycle counter
 
+# instruction counter
+when defined(ic):
+    import tables
+    import sequtils
+    import algorithm
+
+    var ic : Table[Cell, int64]
+    proc show_ic() =
+        stderr.write_line ""
+        stderr.write_line "+------+------+-----"
+        stderr.write_line "| INST | PCT  | CNT  "
+        stderr.write_line "+------+------+-----"
+        var total = 0
+        for k in ic.keys:
+            total += ic[k]
+        var keys = ic.keys.to_seq()
+        keys.sort(proc(a,b:Cell):int = cmp(ic[b],ic[a]))
+        for k in keys:
+            let pct = 100.0 * ic[k].float / total.float
+            stderr.write_line "| {opnames[k]:>4} | {pct:>4.1f} | {ic[k]}".fmt
+
+
 proc base(level: Cell) : Cell =
     var b1 = b
     var l = level
