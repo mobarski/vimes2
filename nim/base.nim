@@ -28,7 +28,7 @@ when defined(ic):
         for k in ic.keys:
             total += ic[k]
         var keys = ic.keys.to_seq()
-        keys.sort(proc(a,b:Cell):int = cmp(ic[b],ic[a]))
+        keys.sort(proc(a,b:auto):int = cmp(ic[b],ic[a]))
         for k in keys:
             let pct = 100.0 * ic[k].float / total.float
             stderr.write_line "| {opnames[k]:>4} | {pct:>4.1f} | {ic[k]}".fmt
