@@ -1,39 +1,39 @@
 import parseutils
 
-var line_buffer: string
-var line_buffer_pos: int = 1
+var buffer: string
+var pos: int = 1
 var eof*: bool
 
 proc read_int*(): int =
     while true:
-        if line_buffer_pos >= line_buffer.len:
-            if not stdin.read_line(line_buffer):
+        if pos >= buffer.len:
+            if not stdin.read_line(buffer):
                 eof = true
                 return -1
-            line_buffer_pos = 0
-        if line_buffer.len == 0: continue
-        line_buffer_pos += skip_whitespace(line_buffer, line_buffer_pos)
-        if line_buffer_pos >= line_buffer.len: continue
-        let n = parse_int(line_buffer, result, line_buffer_pos)
+            pos = 0
+        if buffer.len == 0: continue
+        pos += skip_whitespace(buffer, pos)
+        if pos >= buffer.len: continue
+        let n = parse_int(buffer, result, pos)
         if n > 0:
-            line_buffer_pos += n
+            pos += n
             break
 
 proc read_chr*(): int =
     while true:
-        if line_buffer_pos > line_buffer.len:
-            if not stdin.read_line(line_buffer):
+        if pos > buffer.len:
+            if not stdin.read_line(buffer):
                 eof = true
                 return -1
-            line_buffer_pos = 0
-        if line_buffer_pos == line_buffer.len:
-            line_buffer_pos += 1
+            pos = 0
+        if pos == buffer.len:
+            pos += 1
             return 10
-        if line_buffer.len == 0:
-            line_buffer_pos += 1
+        if buffer.len == 0:
+            pos += 1
             return 10
-        result = line_buffer[line_buffer_pos].int
-        line_buffer_pos += 1
+        result = buffer[pos].int
+        pos += 1
         return
 
 # TODO
