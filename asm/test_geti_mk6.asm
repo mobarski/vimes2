@@ -1,0 +1,9 @@
+LIT 0 0
+LIT 1 1
+
+GETI 4 0
+GETI 5 0
+ADD  4 5
+PUTI 4 0
+
+JMP 0 0
