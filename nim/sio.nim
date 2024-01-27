@@ -1,9 +1,10 @@
 import parseutils
 
 var line_buffer: string
-var line_buffer_pos: int
+var line_buffer_pos: int = 1
 var eof*: bool
-proc read_int*() : int =
+
+proc read_int*(): int =
     while true:
         if line_buffer_pos >= line_buffer.len:
             if not stdin.read_line(line_buffer):
@@ -17,6 +18,26 @@ proc read_int*() : int =
         if n > 0:
             line_buffer_pos += n
             break
+
+proc read_chr*(): int =
+    while true:
+        if line_buffer_pos > line_buffer.len:
+            if not stdin.read_line(line_buffer):
+                eof = true
+                return -1
+            line_buffer_pos = 0
+        if line_buffer_pos == line_buffer.len:
+            line_buffer_pos += 1
+            return 10
+        if line_buffer.len == 0:
+            line_buffer_pos += 1
+            return 10
+        result = line_buffer[line_buffer_pos].int
+        line_buffer_pos += 1
+        return
+
+# TODO
+#proc read_char*(): char =
 
 # import sequtils
 # import strutils
@@ -44,3 +65,7 @@ proc read_int*() : int =
 #             break
 #         pos += n
 #         result.add(val * sign)
+
+if is_main_module:
+    for i in 1..5:
+        echo read_chr()
