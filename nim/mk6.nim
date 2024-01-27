@@ -3,6 +3,7 @@
 import strformat
 import vimes/sio
 import vimes/load
+import bench
 
 include mk6_opcodes
 include mk6_opnames
@@ -12,7 +13,7 @@ type Cell = int16
 var pc: Cell # program counter
 var sp: Cell # stack pointer
 var mem: seq[Cell] = @[] # memory
-var st: seq[Cell] = @[] # stack
+var stack: seq[Cell] = @[] # return stack
 var cc: int64 # used only when -d:cc is passed
 var code: seq[Cell] = @[] # program
 
@@ -39,9 +40,9 @@ proc run() =
                 if mem[a]==0: pc=b
             of JNZ:
                 if mem[a]!=0: pc=b
-            of CAL:  st[sp]=pc; sp+=1; pc=a   # b is ignored
-            of RET:  sp-=1; pc=st[sp]         # a and b are ignored
-            of JMP:  pc=a                     # b is ignored
+            of CAL:  stack[sp]=pc; sp+=1; pc=a # b is ignored
+            of RET:  sp-=1; pc=stack[sp]       # a and b are ignored
+            of JMP:  pc=a                      # b is ignored
             # memory
             of LIT:  mem[a] = b # rename to LOAD?
             of MOV:  mem[a] = mem[b]
@@ -72,10 +73,12 @@ proc run() =
         if pc==0: break
 
 if is_main_module:
-    # python3 asm.py ../nim/mk6_opcodes.nim ../asm/test_geti_mk6.asm -fb10 -o ../asm/b10/test_geti_mk6.txt
-    let input_path = "../asm/b10/test_geti_mk6.txt"
+    # python3 asm.py ../nim/mk6_opcodes.nim ../asm/loops3_mk6.asm -fb10 -o ../asm/b10/loops3_mk6.txt
+    let input_path = "../asm/b10/loops3_mk6.txt"
     let text = read_file(input_path)
     code = code_from_num[Cell](text)
-    echo code
     mem = new_seq[Cell](1024)
+    var b = new_bench()
     run()
+    b.done(cc)
+    b.show()
