@@ -33,14 +33,13 @@ when defined(ic):
             let pct = 100.0 * ic[k].float / total.float
             stderr.write_line "| {opnames[k]:>4} | {pct:>4.1f} | {ic[k]}".fmt
 
-
-proc base(level: Cell) : Cell =
+template base(level: Cell) : Cell =
     var b1 = b
     var l = level
     while l > 0:
         b1 = s[b1]
         l = l - 1
-    return b1
+    b1 # "return" this
 
 proc reset(quick=false) =
     p=0; b=0; t=0; cc=0

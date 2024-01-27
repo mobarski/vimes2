@@ -12,7 +12,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
 - **mk1** - as close to Wirth's machine as possible
 - **mk2** - variable number of arguments, swapped a and l
-- **mk3** - internal bytecode version of mk2
+- **mk3** - internal bytecode version of mk2 (**not maintained**)
 - **mk4** - switch call threading version of mk2
 - **mk5** - indirect call threading version of mk2
 
@@ -52,7 +52,7 @@ Base instructions:
   - `ADD`, `SUB`, `MUL`, `DIV`
   - `RET`, `NEG`, `ODD`, `MOD`
   - `EQ`, `NE`, `LT`, `LE`, `GT`, `GE`
-- `EX1`, `EX2`, `EX3`, `EX4`, `EX5`, `EX6`
+- `EX1`, `EX2`, `EX3`, `EX4`, `EX5`, `EX6`, `EX7`
 
 
 

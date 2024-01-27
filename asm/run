@@ -1,4 +1,6 @@
 # USAGE: ./run <vmversion> <asmfile> <args>
 cd $(dirname $0)
 python3 ../python/asm.py ../nim/opcodes.nim $2 -f hex -o hex/$2.hex
+python3 ../python/asm.py ../nim/opcodes.nim $2 -f b10 -o b10/$2.b10
+python3 ../python/asm.py ../nim/opcodes.nim $2 -f b16 -o b16/$2.b16
 nim r -d:cc -d:ic -d:release -d:trace ../nim/$1 hex/$2.hex ${@:3}

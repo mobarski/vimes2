@@ -1,4 +1,4 @@
-import sio
+import vimes/sio
 
 # (a,s,t) is 2.5% faster than (a,t) which is 10% faster than (a)
 #proc ex1(a:Cell, s:var openArray[Cell], t:var Cell) =

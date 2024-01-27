@@ -14,6 +14,7 @@ const
     EX4 = 12 #
     EX5 = 13 #
     EX6 = 14 #
+    EX7 = 15 #
     # mk3
     LIT2 = 17
     CAL2 = 21

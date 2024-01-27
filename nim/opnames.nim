@@ -15,6 +15,7 @@ let opnames = {
     EX4: "EX4",
     EX5: "EX5",
     EX6: "EX6",
+    EX7: "EX7",
     LIT2: "LIT2",
     CAL2: "CAL2",
     JMP2: "JMP2",
