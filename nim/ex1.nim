@@ -8,7 +8,7 @@ proc ex1(a:Cell, t:var Cell) =
         of PUTC: stdout.write chr(s[t]); t-=1
         of GETI: t+=1; s[t] = sio.read_int().Cell
         of GETC: t+=1; s[t] = sio.read_chr().Cell
-        of EOF:  t+=1; s[t] = if sio.eof: 1 else: 0
+        of EOF:  t+=1; s[t] = sio.eof.ord.Cell()
         else: quit("unknown EX1 opcode",1)
 
 # variant for mk5
@@ -18,5 +18,5 @@ proc ex1c(a:Cell, code:openArray[Cell]) =
         of PUTC: stdout.write chr(s[t]); t-=1
         of GETI: t+=1; s[t] = sio.read_int().Cell
         of GETC: t+=1; s[t] = sio.read_chr().Cell
-        of EOF:  t+=1; s[t] = if sio.eof: 1 else: 0
+        of EOF:  t+=1; s[t] = sio.eof.ord.Cell()
         else: quit("unknown EX1 opcode",1)
