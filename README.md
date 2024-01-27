@@ -12,15 +12,19 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
 - **mk1** - as close to Wirth's machine as possible
 - **mk2** - variable number of arguments, swapped a and l
-- **mk3** - internal bytecode version of mk2 (**not maintained**)
-- **mk4** - switch call threading version of mk2
-- **mk5** - indirect call threading version of mk2
+  - **mk3** - internal bytecode version of mk2 (abandoned, as bytecode requires much more work than fixed-width cells)
+  - **mk4** - switch call threading version of mk2
+  - **mk5** - indirect call threading version of mk2
+
+- **mk6** - register based vm inspired by [smol](https://github.com/mobarski/smol)
 
 
 
 ## VM registers / variable names
 
-Vimes uses the same variable names as Wirth's example p-code machine from 1976 (available [here](https://en.wikipedia.org/wiki/P-code_machine#Example_machine)).
+### mk1 - mk5
+
+These machines use the same variable names as Wirth's example p-code machine from 1976 (available [here](https://en.wikipedia.org/wiki/P-code_machine#Example_machine)).
 
 - **p** - program register
 
@@ -42,9 +46,9 @@ Vimes uses the same variable names as Wirth's example p-code machine from 1976 (
 
 ## VM instructions
 
+### mk1 - mk5
 
-
-Base instructions:
+Basic instructions:
 
 - `LIT`, `INT`, `LOD`, `STO`
 - `CAL`, `JMP`, `JPC`
@@ -54,31 +58,35 @@ Base instructions:
   - `EQ`, `NE`, `LT`, `LE`, `GT`, `GE`
 - `EX1`, `EX2`, `EX3`, `EX4`, `EX5`, `EX6`, `EX7`
 
-
-
 Extension 1 - stdio:
 
 - `PUTC`, `PUTI`
 - `GETC`, `GETI`
 - `EOF`
 
-  
-
 Extension 2 - ALU extension (bit ops):
 
 - `AND`, `OR`, `XOR`, `NOT`
 - `SHL`, `SHR`, `SAR`
-
-
 
 Extension 3 - ALU extension (common ops)
 
 - `INC`, `DEC`
 - `EQZ`, `NEZ`, `LTZ`, `LEZ`, `GTZ`, `GEZ`
 
+### mk6
+
+- `JZ`, `JNZ`, `CAL`, `RET`, `JMP`
+- `LIT`, `MOV`, `PEEK`, `POKE`
+- `ADD`, `SUB`, `MUL`, `DIV`, `MOD`, `NEG`
+- `EQ`, `NE`, `LT`, `LE`, `GT`, `GE`
+- `PUTC`, `PUTI`, `GETC`, `GETI`, `EOF`
+
 
 
 # Trace example
+
+### mk1 - mk5
 
 ```
 +----+----+-----------+----+----+-------
