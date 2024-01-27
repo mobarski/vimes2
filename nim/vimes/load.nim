@@ -17,7 +17,7 @@ proc code_from_hex*[T](text:string, width=4): seq[T] =
         pos = pos + n
 
 proc code_from_num*[T](text:string, base=10): seq[T] =
-    assert base == 10, "only base 10 is supported"
+    assert base in {10,16}, "base not in {10,16}"
     var pos = 0
     var val: int
     var sign: int
@@ -35,7 +35,10 @@ proc code_from_num*[T](text:string, base=10): seq[T] =
         else:
             sign = 1
         #
-        n = parse_int(text, val, pos)
+        case base:
+            of 10: n = parse_int(text, val, pos)
+            of 16: n = parse_hex(text, val, pos)
+            else: assert false
         assert n > 0, "invalid number at position " & $pos
         result.add cast[T](val * sign)
         pos = pos + n
@@ -43,3 +46,4 @@ proc code_from_num*[T](text:string, base=10): seq[T] =
 if is_main_module:
     echo code_from_hex[int16](" 00040005 00ff 1234 # 4321")
     echo code_from_num[int16](" 1 22 -33 444 # 555")
+    echo code_from_num[int16](" 1 22 -33 444 # 555", base=16)

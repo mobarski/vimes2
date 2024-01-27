@@ -12,13 +12,15 @@ type Cfg = object
     format: string
     benchmark: int
     debug: bool
+    trace: bool
 
 proc print_help() =
     echo "Usage: " & get_app_filename() & " [options] input_file"
     echo "Options:"
     echo "  -d        dump debug info"
+    echo "  -t        trace execution"
     echo "  -b <n>    benchmark mode, run <n> times"
-    #echo "  -f <fmt>  input format, one of: hex, bin, b10, b16"
+    echo "  -f <fmt>  input format: hex | b10 | b16"
     echo "  -h        print this help"
     echo "  -help     print this help"
     echo "  -v        print version"
@@ -40,10 +42,10 @@ proc get_cli_config() : Cfg =
                         var vi : int
                         if parse_int(p.val, vi) > 0:
                             result.benchmark = vi
-                    # of "f":
-                    #     if p.val notin @["hex", "bin", "b10", "b16"]:
-                    #         quit("ERROR: unknown format '" & p.val & "'", 1)
-                    #     result.format = p.val
+                    of "f":
+                        if p.val notin @["hex", "b10", "b16"]:
+                            quit("ERROR: unknown format '" & p.val & "'", 1)
+                        result.format = p.val
                     of "v":
                         echo VERSION
                         quit("", 0)
