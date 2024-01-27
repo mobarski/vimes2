@@ -12,9 +12,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
 - **mk1** - as close to Wirth's machine as possible
 - **mk2** - variable number of arguments, swapped a and l
-  - **mk3** - internal bytecode version of mk2
-    - **abandoned** - bytecode requires much more work than fixed-width cells
-
+  - **mk3** - internal bytecode version of mk2; **abandoned** as bytecode requires more work than fixed-width cells (more instructions and assembler changes)
   - **mk4** - switch call threading version of mk2
   - **mk5** - indirect call threading version of mk2
 
