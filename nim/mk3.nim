@@ -19,7 +19,8 @@ proc base(level: Cell) : Cell =
         l = l - 1
     return b1
 
-proc run() =
+# THIS WON'T WORK NOW AS WE CHANGED run(code) to run() and code is from base.nim
+proc run(code : openArray[int8]) =
     while true:
         var i = code[p+0].Cell
         var a = code[p+1].Cell
