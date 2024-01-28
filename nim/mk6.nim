@@ -84,15 +84,6 @@ proc run() =
 
 include cli
 if is_main_module:
-    mem = new_seq[Cell](1024)
-    stack = new_seq[Cell](1024)
+    mem   = new_seq[Cell](1024) # TODO: option
+    stack = new_seq[Cell](1024) # TODO: option
     cli()
-    # python3 asm.py ../nim/mk6_opcodes.nim ../asm/loops3_mk6.asm -fb10 -o ../asm/b10/loops3_mk6.txt
-    # let input_path = "../asm/b10/loops3_mk6.txt"
-    # let text = read_file(input_path)
-    # code = code_from_num[Cell](text)
-    # mem = new_seq[Cell](1024)
-    # var b = new_bench()
-    # run()
-    # b.done(cc)
-    # b.show()
