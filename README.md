@@ -93,8 +93,8 @@ Extension 3 - ALU extension (common ops)
  2. OUT 0 : send ACC to output
  3. LDA m : load memory cell (m) to ACC
  4. STA m : store ACC in memory cell (m)
- 5. ADD x : add (x) to ACC
- 6. SUB x : subtract (x) from ACC
+ 5. ADD i : add (i) to ACC
+ 6. SUB i : subtract (i) from ACC
  7. INC m : increase memory cell (m) by 1
  8. DEC m : decrease memory cell (m) by 1
  9. JMP a : jump to address (a)
