@@ -3,6 +3,7 @@ import parseutils
 import streams
 import os
 
+import vimes/load
 import bench
 
 let VERSION = "0.2.1"
@@ -62,17 +63,22 @@ proc get_cli_config() : Cfg =
 proc cli() =
     let cfg = get_cli_config()
     var bench = new_bench()
-    if cfg.format=="hex":
-        let text = read_file(cfg.input_path)
-        code = code_from_hex(text)
-        if cfg.benchmark > 0:
-            for i in 1..cfg.benchmark:
-                reset(quick=true)
-                run()
-                bench.done(cc)
-            bench.show(item="cycle")
-        else:
+    let text = read_file(cfg.input_path)
+    case cfg.format:
+        of "hex":
+            code = code_from_hex[Cell](text)
+        of "b10":
+            code = code_from_num[Cell](text, base=10)
+        of "b16":
+            code = code_from_num[Cell](text, base=16)
+    if cfg.benchmark > 0:
+        for i in 1..cfg.benchmark:
             reset(quick=true)
             run()
-        if cfg.debug:
-            debug()
+            bench.done(cc)
+        bench.show(item="cycle")
+    else:
+        reset(quick=true)
+        run()
+    if cfg.debug:
+        debug()

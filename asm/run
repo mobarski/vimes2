@@ -1,13 +1,21 @@
 # USAGE: ./run <vmversion> <asmfile> <args>
 cd $(dirname $0)
 
+# basic configuration
+fmt="b10"
+#aux="-d:trace -d:ic"
+aux=""
+
+# configure opcodes for the assembler
 opcodes=../nim/${1}_opcodes.nim
 if [ ! -f $opcodes ]; then
     opcodes=../nim/opcodes.nim
 fi
 
+# create all versions for easy comparison
 python3 ../python/asm.py $opcodes $2 -f hex -o hex/$2.hex
 python3 ../python/asm.py $opcodes $2 -f b10 -o b10/$2.b10
 python3 ../python/asm.py $opcodes $2 -f b16 -o b16/$2.b16
-#nim r -d:cc -d:release -d:trace -d:ic ../nim/$1 hex/$2.hex ${@:3}
-nim r -d:cc -d:release                ../nim/$1 hex/$2.hex ${@:3}
+
+# run the selected version
+nim r -d:cc -d:release $aux ../nim/$1 -f:$fmt $fmt/$2.$fmt ${@:3}
