@@ -70,3 +70,4 @@ proc run() =
 
 include cli
 cli()
+

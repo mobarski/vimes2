@@ -87,3 +87,4 @@ if is_main_module:
     mem   = new_seq[Cell](1024) # TODO: option
     stack = new_seq[Cell](1024) # TODO: option
     cli()
+
