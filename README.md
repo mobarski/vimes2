@@ -89,17 +89,17 @@ Extension 3 - ALU extension (common ops)
 ### mk7
 
 ```
- 1. in  0 : send input to ACC
- 2. out 0 : send ACC to output
- 3. lda M : load memory cell M to ACC
- 4. sta M : store ACC in memory cell M
- 5. add X : add X to ACC
- 6. sub X : subtract X from ACC
- 7. inc M : increase memory cell M by 1
- 8. dec M : decrease memory cell M by 1
- 9. jmp A : jump to address A
-10. jz  A : jump to address A if ACC is zero
-11. jn  A : jump to address A if ACC is negative
+ 1. IN  0 : send input to ACC
+ 2. OUT 0 : send ACC to output
+ 3. LDA m : load memory cell (m) to ACC
+ 4. STA m : store ACC in memory cell (m)
+ 5. ADD x : add (x) to ACC
+ 6. SUB x : subtract (x) from ACC
+ 7. INC m : increase memory cell (m) by 1
+ 8. DEC m : decrease memory cell (m) by 1
+ 9. JMP a : jump to address (a)
+10. JZ  a : jump to address (a) if ACC is zero
+11. JN  a : jump to address (a) if ACC is negative
 
 ```
 
