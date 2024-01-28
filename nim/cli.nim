@@ -64,15 +64,15 @@ proc cli() =
     var bench = new_bench()
     if cfg.format=="hex":
         let text = read_file(cfg.input_path)
-        let code = code_from_hex(text)
+        code = code_from_hex(text)
         if cfg.benchmark > 0:
             for i in 1..cfg.benchmark:
                 reset(quick=true)
-                run(code)
+                run()
                 bench.done(cc)
             bench.show(item="cycle")
         else:
             reset(quick=true)
-            run(code)
+            run()
         if cfg.debug:
             debug()

@@ -8,7 +8,7 @@ include ex1
 include ex2
 include ex3
 
-proc run(code : openArray[Cell]) =
+proc run() =
     when defined(trace): trace_header()
     while true:
         var i = code[p+0]

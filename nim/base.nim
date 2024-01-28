@@ -9,6 +9,7 @@ var p : Cell # program counter
 var b : Cell # base pointer
 var t : Cell # top of stack pointer
 var s : array[STACK_SIZE, Cell] # stack
+var code: seq[Cell] # code
 
 var cc : int64 # cycle counter
 

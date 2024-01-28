@@ -49,7 +49,7 @@ proc do_opr(a: Cell, code: openArray[Cell]) =
 
 let op_func = [do_lit, do_lit, do_opr, do_lod, do_sto, do_cal, do_int, do_jmp, do_jpc, ex1c]
 
-proc run(code: openArray[Cell]) =
+proc run() =
     when defined(trace): trace_header()
     while true:
         var i = code[p+0]

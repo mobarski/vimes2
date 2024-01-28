@@ -47,7 +47,7 @@ proc do_opr(a: Cell, code: openArray[Cell]) =
         of GE:  t-=1; s[t] = (s[t] >= s[t+1]).ord.Cell
         else: quit("unknown OPR opcode",1)
 
-proc run(code: openArray[Cell]) =
+proc run() =
     when defined(trace): trace_header()
     while true:
         var i = code[p+0]
