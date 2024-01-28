@@ -10,7 +10,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
 ## VM versions
 
-- **mk1** - as close to Wirth's machine as possible
+- **mk1** - machine from [Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth)'s 1976 book [Algorithms + Data Structures = Programs](https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs)
 - **mk2** - variable number of arguments, swapped a and l
   - **mk3** - internal bytecode version of mk2
     - **abandoned** as bytecode requires more work than fixed-width cells - instructions variants and assembler changes
@@ -19,6 +19,8 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
   - **mk5** - indirect call threading version of mk2
 
 - **mk6** - register based vm inspired by [smol](https://github.com/mobarski/smol)
+
+- **mk7** - register based vm inspired by [Human Resource Machine](https://store.steampowered.com/app/375820/Human_Resource_Machine/) (TODO)
 
 
 
@@ -83,6 +85,10 @@ Extension 3 - ALU extension (common ops)
 - `ADD`, `SUB`, `MUL`, `DIV`, `MOD`, `NEG`
 - `EQ`, `NE`, `LT`, `LE`, `GT`, `GE`
 - `PUTC`, `PUTI`, `GETC`, `GETI`, `EOF`
+
+### mk7
+
+TODO
 
 
 
