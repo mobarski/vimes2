@@ -16,6 +16,7 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
     - `name`  to insert label's absolute address
     - `@name` to insert label's relative address
     """
+    text = text.lower()
     lines = text.split('\n')
     # first pass - collect labels
     label = {}
@@ -73,6 +74,7 @@ def get_opcodes_from_text(text: str) -> dict[str,int]:
     opcodes = {}
     opcode_re = re.compile(r'(\w+)\s*[:=]*\s*(\d+)')
     #comment_re = re.compile(r'#.*')
+    text = text.lower()
     for line in text.split('\n'):
         #line = comment_re.sub('', line)
         line = line.strip()
