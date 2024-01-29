@@ -80,27 +80,55 @@ Extension 3 - ALU extension (common ops)
 
 ### mk6
 
-- `JZ`, `JNZ`, `CAL`, `RET`, `JMP`
-- `LIT`, `MOV`, `PEEK`, `POKE`
-- `ADD`, `SUB`, `MUL`, `DIV`, `MOD`, `NEG`
-- `EQ`, `NE`, `LT`, `LE`, `GT`, `GE`
-- `PUTC`, `PUTI`, `GETC`, `GETI`, `EOF`
+```
+DATA TRANSFER:
+- LIT  a b  ; set memory cell (a) to literal value (b)
+- MOV  a b  ; set memory cell (a) to value from memory cell (b)
+- PEEK a b  ; set memory cell (a) with value from memory cell indicated by (b)
+- POKE a b  ; set memory cell indicated by (a) to value from memory cell (b)
+CONTROL FLOW:
+- JMP  a 0  ; jump to program location (a)
+- JZ   a b  ; if memory cell (a) is zero then jump to program location (b)
+- JNZ  a b  ; if memory cell (a) is not zero then jump to program location (b)
+- CAL  a 0  ; call subroutine at program location (a)
+- RET  0 0  ; return from subroutine call
+ALU:
+- ADD  a b  ; mem[a] = mem[a] + mem[b]
+- SUB  a b  ; mem[a] = mem[a] - mem[b]
+- MUL  a b  ; mem[a] = mem[a] * mem[b]
+- DIV  a b  ; mem[a] = mem[a] / mem[b]
+- MOD  a b  ; mem[a] = mem[a] % mem[b]
+- NEG  a 0  ; mem[a] = -mem[a]
+- EQ   a b  ; mem[a] = 1 if mem[a] == mem[b] else 0
+- NE   a b  ; mem[a] = 1 if mem[a] != mem[b] else 0
+- LT   a b  ; mem[a] = 1 if mem[a] <  mem[b] else 0
+- LE   a b  ; mem[a] = 1 if mem[a] <= mem[b] else 0
+- GT   a b  ; mem[a] = 1 if mem[a] >  mem[b] else 0
+- GE   a b  ; mem[a] = 1 if mem[a] >= mem[b] else 0
+IO:
+- PUTC a 0  ; write mem[a] to stdout as character
+- PUTI a 0  ; write mem[a] to stdout as integer
+- GETC a 0  ; read a character from stdin and store it in mem[a]
+- GETI a 0  ; read a integer from stdin and store it in mem[a] (skips whitespaces)
+- EOF  a 0  ; set mem[a] to 1 if stdin indicates end-of-file or to 0 otherwise
+
+```
 
 ### mk7
 
 ```
- 1.  IN  0  ; send input to ACC
- 2.  OUT 0  ; send ACC to output
- 3.  LDA a  ; load memory cell (a) to ACC
- 4.  STA a  ; store ACC in memory cell (a)
- 5.  ADD a  ; add memory cell (a) to ACC
- 6.  SUB a  ; subtract memory cell (a) from ACC
- 7.  INC a  ; increase memory cell (a) by 1
- 8.  DEC a  ; decrease memory cell (a) by 1
- 9.  JMP a  ; jump to address (a)
-10.  JZ  a  ; jump to address (a) if ACC is zero
-11.  JN  a  ; jump to address (a) if ACC is negative
-12.  LIT a  ; load (a) to ACC
+- IN  0  ; send input to ACC
+- OUT 0  ; send ACC to output
+- LDA a  ; load memory cell (a) to ACC
+- STA a  ; store ACC in memory cell (a)
+- ADD a  ; add memory cell (a) to ACC
+- SUB a  ; subtract memory cell (a) from ACC
+- INC a  ; increase memory cell (a) by 1
+- DEC a  ; decrease memory cell (a) by 1
+- JMP a  ; jump to address (a)
+- JZ  a  ; jump to address (a) if ACC is zero
+- JN  a  ; jump to address (a) if ACC is negative
+- LIT a  ; load (a) to ACC
 
 ```
 
