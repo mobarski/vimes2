@@ -11,16 +11,16 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 ## VM versions
 
 - **mk1** - machine from [Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth)'s 1976 book [Algorithms + Data Structures = Programs](https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs)
-- **mk2** - variable number of arguments, swapped a and l
-  - **mk3** - internal bytecode version of mk2
-    - **abandoned** as bytecode requires more work than fixed-width cells - instructions variants and assembler changes
+  - **mk2** - variable number of arguments, swapped a and l
+    - **mk3** - internal bytecode version of mk2
+      - **abandoned** as bytecode requires more work than fixed-width cells - instructions variants and assembler changes
 
-  - **mk4** - switch call threading version of mk2
-  - **mk5** - indirect call threading version of mk2
+    - **mk4** - switch call threading version of mk2
+    - **mk5** - indirect call threading version of mk2
 
 - **mk6** - register based vm inspired by [smol](https://github.com/mobarski/smol)
 
-- **mk7** - register based vm inspired by [Human Resource Machine](https://store.steampowered.com/app/375820/Human_Resource_Machine/) (TODO)
+- **mk7** - register based vm inspired by [Human Resource Machine](https://store.steampowered.com/app/375820/Human_Resource_Machine/)
 
 
 
@@ -89,18 +89,18 @@ Extension 3 - ALU extension (common ops)
 ### mk7
 
 ```
- 1. IN  0  ; send input to ACC
- 2. OUT 0  ; send ACC to output
- 3. LDA a  ; load memory cell (a) to ACC
- 4. STA a  ; store ACC in memory cell (a)
- 5. ADD a  ; add memory cell (a) to ACC
- 6. SUB a  ; subtract memory cell (a) from ACC
- 7. INC a  ; increase memory cell (a) by 1
- 8. DEC a  ; decrease memory cell (a) by 1
- 9. JMP a  ; jump to address (a)
-10. JZ  a  ; jump to address (a) if ACC is zero
-11. JN  a  ; jump to address (a) if ACC is negative
-12. LIT a  ; load (a) to ACC
+ 1.  IN  0  ; send input to ACC
+ 2.  OUT 0  ; send ACC to output
+ 3.  LDA a  ; load memory cell (a) to ACC
+ 4.  STA a  ; store ACC in memory cell (a)
+ 5.  ADD a  ; add memory cell (a) to ACC
+ 6.  SUB a  ; subtract memory cell (a) from ACC
+ 7.  INC a  ; increase memory cell (a) by 1
+ 8.  DEC a  ; decrease memory cell (a) by 1
+ 9.  JMP a  ; jump to address (a)
+10.  JZ  a  ; jump to address (a) if ACC is zero
+11.  JN  a  ; jump to address (a) if ACC is negative
+12.  LIT a  ; load (a) to ACC
 
 ```
 
