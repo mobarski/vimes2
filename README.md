@@ -34,7 +34,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 | loops3 | 30   | mk6  | [src](asm/loops3_mk6.asm) | 204                         | 112K 🏆    | 244µs 🏆    | 460M          | p1       |
 | loops3 | 30   | mk7  | [src](asm/loops3_mk7.asm) | 184 🏆                       | 142K      | 283µs      | 502M          | p1       |
 
-**p1** - i7-970K @ 3.6GHz, gcc 11.4.0, Nim 2.0.0, -d:cc -d:release -d:danger --gc:none
+**p1** - i7-9700K @ 3.6GHz, gcc 11.4.0, Nim 2.0.0, -d:cc -d:release -d:danger --gc:none
 
 
 
