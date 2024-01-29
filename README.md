@@ -121,11 +121,11 @@ Extension 3 - ALU extension (common ops)
 **IO**
 
 ```
-- PUTC a 0  ; write the value from mem[a] to stdout (as character)
-- PUTI a 0  ; write the value from mem[a] to stdout (as integer)
-- GETC a 0  ; read a character from stdin and store it in mem[a]
-- GETI a 0  ; read a integer from stdin and store it in mem[a] (skips initial whitespaces)
-- EOF  a 0  ; set mem[a] to 1 if stdin indicates end-of-file or to 0 otherwise
+- PUTC a 0  ; write the value from memory cell (a) to stdout (as character)
+- PUTI a 0  ; write the value from memory cell (a) to stdout (as integer)
+- GETC a 0  ; read a character from stdin and store it in memory cell (a)
+- GETI a 0  ; read an integer from stdin and store it in memory cell (a), skip initial whitespaces
+- EOF  a 0  ; set memory cell (a) to 1 if stdin indicates end-of-file or to 0 otherwise
 ```
 
 
