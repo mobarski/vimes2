@@ -78,21 +78,32 @@ Extension 3 - ALU extension (common ops)
 - `INC`, `DEC`
 - `EQZ`, `NEZ`, `LTZ`, `LEZ`, `GTZ`, `GEZ`
 
-### mk6
+
+
+### mk6 instruction set
+
+**DATA TRANSFER**
 
 ```
-DATA TRANSFER:
 - LIT  a b  ; set memory cell (a) to literal value (b)
 - MOV  a b  ; set memory cell (a) to value from memory cell (b)
 - PEEK a b  ; set memory cell (a) with value from memory cell indicated by (b)
 - POKE a b  ; set memory cell indicated by (a) to value from memory cell (b)
-CONTROL FLOW:
+```
+
+**CONTROL FLOW**
+
+```
 - JMP  a 0  ; jump to program location (a)
 - JZ   a b  ; if memory cell (a) is zero then jump to program location (b)
 - JNZ  a b  ; if memory cell (a) is not zero then jump to program location (b)
 - CAL  a 0  ; call subroutine at program location (a)
 - RET  0 0  ; return from subroutine call
-ALU:
+```
+
+**ALU**
+
+```
 - ADD  a b  ; mem[a] = mem[a] + mem[b]
 - SUB  a b  ; mem[a] = mem[a] - mem[b]
 - MUL  a b  ; mem[a] = mem[a] * mem[b]
@@ -105,16 +116,21 @@ ALU:
 - LE   a b  ; mem[a] = 1 if mem[a] <= mem[b] else 0
 - GT   a b  ; mem[a] = 1 if mem[a] >  mem[b] else 0
 - GE   a b  ; mem[a] = 1 if mem[a] >= mem[b] else 0
-IO:
-- PUTC a 0  ; write mem[a] to stdout as character
-- PUTI a 0  ; write mem[a] to stdout as integer
-- GETC a 0  ; read a character from stdin and store it in mem[a]
-- GETI a 0  ; read a integer from stdin and store it in mem[a] (skips whitespaces)
-- EOF  a 0  ; set mem[a] to 1 if stdin indicates end-of-file or to 0 otherwise
-
 ```
 
-### mk7
+**IO**
+
+```
+- PUTC a 0  ; write the value from mem[a] to stdout (as character)
+- PUTI a 0  ; write the value from mem[a] to stdout (as integer)
+- GETC a 0  ; read a character from stdin and store it in mem[a]
+- GETI a 0  ; read a integer from stdin and store it in mem[a] (skips initial whitespaces)
+- EOF  a 0  ; set mem[a] to 1 if stdin indicates end-of-file or to 0 otherwise
+```
+
+
+
+### mk7 instruction set
 
 ```
 - IN  0  ; send input to ACC
