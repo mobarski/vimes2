@@ -1,4 +1,4 @@
-# mk6: register-based vm inspired by Smol
+# mk7: register-based vm inspired by Human Resource Machine
 
 import strformat
 import vimes/sio
