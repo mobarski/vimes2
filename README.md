@@ -26,13 +26,13 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
 ## Quick benchmarking results
 
-| task   | arg  | vm    | src                       | .hex file size<br />[bytes] | vm cycles | avg* time | avg* vm cycles / s | setup |
-| ------ | ---- | ----- | ------------------------- | --------------------------- | --------- | --------- | ------------------ | ----- |
-| loops3 | 30   | mk2   | [src](asm/loops3_mk2.asm) | 344                         | 279K      | 495µs 🥉   | 563M               | A     |
-| loops3 | 30   | mk4   | [src](asm/loops3_mk2.asm) | 344                         | 279K      | 619µs     | 451M               | A     |
-| loops3 | 30   | mk5   | [src](asm/loops3_mk2.asm) | 344                         | 279K      | 621µs     | 449M               | A     |
-| loops3 | 30   | mk6 🏆 | [src](asm/loops3_mk6.asm) | 204 🥈                       | 112K 🥇    | 166µs 🥇   | 677M               | A     |
-| loops3 | 30   | mk7   | [src](asm/loops3_mk7.asm) | 184 🥇                       | 142K 🥈    | 243µs 🥈   | 584M               | A     |
+| task   | arg  | vm    | src                       | program size [cells] | vm cycles | avg* time | avg* vm cycles / s | setup |
+| ------ | ---- | ----- | ------------------------- | -------------------- | --------- | --------- | ------------------ | ----- |
+| loops3 | 30   | mk2   | [src](asm/loops3_mk2.asm) | 86                   | 279K      | 495µs 🥉   | 563M               | A     |
+| loops3 | 30   | mk4   | [src](asm/loops3_mk2.asm) | 86                   | 279K      | 619µs     | 451M               | A     |
+| loops3 | 30   | mk5   | [src](asm/loops3_mk2.asm) | 86                   | 279K      | 621µs     | 449M               | A     |
+| loops3 | 30   | mk6 🏆 | [src](asm/loops3_mk6.asm) | 51 🥈                 | 112K 🥇    | 166µs 🥇   | 677M               | A     |
+| loops3 | 30   | mk7   | [src](asm/loops3_mk7.asm) | 46 🥇                 | 142K 🥈    | 243µs 🥈   | 584M               | A     |
 
 ***avg**: 1000 runs
 
