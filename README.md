@@ -26,15 +26,17 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
 ## Quick benchmarking results
 
-| task   | arg  | vm    | src                       | .hex file size<br />[bytes] | vm cycles | total time | vm cycles / s | platform |
-| ------ | ---- | ----- | ------------------------- | --------------------------- | --------- | ---------- | ------------- | -------- |
-| loops3 | 30   | mk2   | [src](asm/loops3_mk2.asm) | 344                         | 279K      | 580µs 🥉    | 480M          | p1       |
-| loops3 | 30   | mk4   | [src](asm/loops3_mk2.asm) | 344                         | 279K      | 670µs      | 416M          | p1       |
-| loops3 | 30   | mk5   | [src](asm/loops3_mk2.asm) | 344                         | 279K      | 714µs      | 390M          | p1       |
-| loops3 | 30   | mk6 🏆 | [src](asm/loops3_mk6.asm) | 204 🥈                       | 112K 🥇    | 244µs 🥇    | 460M          | p1       |
-| loops3 | 30   | mk7   | [src](asm/loops3_mk7.asm) | 184 🥇                       | 142K 🥈    | 283µs 🥈    | 502M          | p1       |
+| task   | arg  | vm    | src                       | .hex file size<br />[bytes] | vm cycles | avg* time | avg* vm cycles / s | setup |
+| ------ | ---- | ----- | ------------------------- | --------------------------- | --------- | --------- | ------------------ | ----- |
+| loops3 | 30   | mk2   | [src](asm/loops3_mk2.asm) | 344                         | 279K      | 495µs 🥉   | 563M               | A     |
+| loops3 | 30   | mk4   | [src](asm/loops3_mk2.asm) | 344                         | 279K      | 619µs     | 451M               | A     |
+| loops3 | 30   | mk5   | [src](asm/loops3_mk2.asm) | 344                         | 279K      | 621µs     | 449M               | A     |
+| loops3 | 30   | mk6 🏆 | [src](asm/loops3_mk6.asm) | 204 🥈                       | 112K 🥇    | 166µs 🥇   | 677M               | A     |
+| loops3 | 30   | mk7   | [src](asm/loops3_mk7.asm) | 184 🥇                       | 142K 🥈    | 243µs 🥈   | 584M               | A     |
 
-**p1** - i7-9700K @ 3.6GHz, gcc 11.4.0, Nim 2.0.0, -d:cc -d:release -d:danger --gc:none
+***avg**: 1000 runs
+
+**setup A**: i7-9700K @ 3.6GHz, gcc 11.4.0, Nim 2.0.0, -d:cc -d:release -d:danger --gc:arc
 
 
 

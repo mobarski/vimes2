@@ -5,7 +5,8 @@ cd $(dirname $0)
 fmt="b10"
 #aux="-d:trace -d:ic"
 #aux=""
-aux="-d:danger --gc:none"
+#aux="-d:danger --gc:none"
+aux="-d:danger --gc:arc"
 
 # configure opcodes for the assembler
 opcodes=../nim/${1}_opcodes.nim
