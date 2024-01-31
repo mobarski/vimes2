@@ -41,7 +41,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 | loops3 | 300  | mk7c  | [src](asm/loops3_mk7.asm) |        48         |   270M    | 30   |  207ms   |       1304M       |   A   |
 | loops3 | 300  | mk7ci | [src](asm/loops3_mk7.asm) |        48         |   270M    | 30   |  110ms   |       2454M       |   A   |
 
-**setup A**: i7-9700K @ 3.6GHz, gcc 11.4.0, Nim 2.0.0, -d:cc -d:release -d:danger --gc:arc
+**setup A**: i7-9700K @ 4.8GHz, gcc 11.4.0, Nim 2.0.0, -d:cc -d:release -d:danger --gc:arc
 
 
 
