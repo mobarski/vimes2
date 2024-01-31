@@ -25,4 +25,4 @@ JMP loop1
 loop1_end:
 
 PUTI 3 0
-JMP 0 0
+HLT 0 0

@@ -4,6 +4,7 @@
 #include <time.h> // Added for measuring execution time
 
 typedef enum {
+    HLT = 0,
     IN = 1,
     OUT = 2,
     LDA = 3,
@@ -23,15 +24,6 @@ typedef int16_t Cell;
 
 Cell mem[100]; // memory, fixed size for simplicity
 Cell code[256] = {1,0,4,0,3,0,4,2,3,2,10,42,8,2,3,0,4,3,3,3,10,40,8,3,3,0,4,4,3,4,10,38,8,4,7,1,9,28,9,18,9,8,3,1,2,0,  0,0,0,0};
-
-// void reset(int quick) {
-//     pc = 0; acc = 0; cc = 0;
-//     if (quick) return;
-//     for (int j = 0; j < sizeof(mem) / sizeof(mem[0]); j++) {
-//         mem[j] = 0;
-//     }
-// }
-
 
 // // Assuming trace function is similar to Nim
 // void trace(Cell op, Cell a) {
@@ -75,15 +67,18 @@ void run() {
 }
 
 int main() {
-    // Initialize memory
-    for (int i = 0; i < 100; i++) {
-        mem[i] = 0;
-    }
-
     clock_t start, end;
     double cpu_time_used;
     start = clock();
-    run();
+    // Initialize memory
+    // for (int i = 0; i < 100; i++) {
+    //     mem[i] = 0;
+    // }
+
+    for (int i = 0; i < 30; i++) {
+        run();
+    }
+
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("run() took %f seconds to execute \n", cpu_time_used);

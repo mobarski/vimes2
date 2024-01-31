@@ -21,3 +21,4 @@ loop1:
     JMP loop1          ; jump to loop1
 loop1_end:
 LDA 1 OUT 0 ; print y
+HLT 0

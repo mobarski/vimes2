@@ -14,5 +14,5 @@ let opnames = {
     JN:"JN",
     # EXTENSION
     LIT:"LIT",
+    HLT:"HLT",
 }.to_table
-

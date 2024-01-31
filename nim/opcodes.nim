@@ -1,4 +1,7 @@
 const
+    HLT = 0
+
+const
     LIT = 1
     OPR = 2
     LOD = 3

@@ -1,4 +1,5 @@
 type Instr = enum
+    HLT=0
     JMP=1
     CAL=2
     RET=3

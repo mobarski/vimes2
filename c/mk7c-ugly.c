@@ -4,7 +4,8 @@
 #include <time.h> // Added for measuring execution time
 
 typedef enum {
-    IN = 1,
+	HLT = 0,
+    IN  = 1,
     OUT = 2,
     LDA = 3,
     STA = 4,
@@ -13,8 +14,8 @@ typedef enum {
     INC = 7,
     DEC = 8,
     JMP = 9,
-    JZ = 10,
-    JN = 11,
+    JZ  = 10,
+    JN  = 11,
     // EXTENSION
     LIT = 12
 } Instr;
@@ -38,11 +39,11 @@ void reset(int quick) {
 // Assuming trace function is similar to Nim
 void trace(Cell op, Cell a) {
     // This is a simplification; the original Nim code uses string formatting
-    fprintf(stderr, "| %3lld | %2d | %4s %2d | %3d | \n", cc, pc, "todo", a, mem[a]);
+    fprintf(stderr, "| %3ld | %2d | %4s %2d | %3d | \n", cc, pc, "todo", a, mem[a]);
 }
 
 void debug() {
-    printf("pc: %d acc: %d cc: %lld\n", pc, acc, cc);
+    printf("pc: %d acc: %d cc: %ld\n", pc, acc, cc);
 }
 
 void run() {
@@ -99,23 +100,29 @@ void run() {
                 // Assume sio.read_int() is replaced with fscanf or similar
                 fscanf(stdin, "%hd", &acc);
                 break;
+            case HLT:
+                return;
             default:
                 return;
         }
-        if (code[pc]==0) break;
+        //if (code[pc]==0) break;
     }
 }
 
 int main() {
-    // Initialize memory
-    for (int i = 0; i < 100; i++) {
-        mem[i] = 0;
-    }
-
     clock_t start, end;
     double cpu_time_used;
     start = clock();
-    run();
+    // Initialize memory
+    // for (int i = 0; i < 100; i++) {
+    //     mem[i] = 0;
+    // }
+
+    for (int i = 0; i < 30; i++) {
+        reset(1);
+        run();
+    }
+
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("run() took %f seconds to execute \n", cpu_time_used);

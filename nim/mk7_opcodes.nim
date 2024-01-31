@@ -1,4 +1,6 @@
 type Instr = enum
+    HLT=0
+    #
     IN=1
     OUT=2
     LDA=3
@@ -12,4 +14,3 @@ type Instr = enum
     JN=11
     # EXTENSION
     LIT=12
-

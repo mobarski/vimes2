@@ -1,6 +1,7 @@
 import tables
 
 let opnames = {
+    HLT: "HLT",
     JMP: "JMP",
     CAL: "CAL",
     RET: "RET",

@@ -31,4 +31,4 @@ loop1:
 loop1_end:
 
 LOD 2 0 EX1 PUTI
-JMP 0
+HLT 0

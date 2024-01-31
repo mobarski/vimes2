@@ -58,9 +58,10 @@ proc run() =
             # stdio - TODO: as extension
             of OUT: echo acc; echo " "
             of IN:  acc = sio.read_int().Cell
+            # misc
+            of HLT: return
             else:
                 quit("unknown opcode op:" & $op, 1)
-        if pc>=code.len: break
 
 include cli
 if is_main_module:

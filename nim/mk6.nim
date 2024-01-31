@@ -78,6 +78,8 @@ proc run() =
             of GETC: mem[a] = sio.read_chr().Cell
             of GETI: mem[a] = sio.read_int().Cell
             of EOF:  mem[a] = sio.eof.ord.Cell
+            # misc
+            of HLT:  pc=0
             else:
                 quit("unknown opcode op:" & $op, 1)
         if pc==0: break
