@@ -160,8 +160,8 @@ Extension 3 - ALU extension (common ops)
 ### mk7 instruction set
 
 ```
-- IN  0  ; send input to ACC
-- OUT 0  ; send ACC to output
+- IN  0  ; read input to ACC
+- OUT 0  ; write ACC to output
 - LDA a  ; load memory cell (a) to ACC
 - STA a  ; store ACC in memory cell (a)
 - ADD a  ; add memory cell (a) to ACC
