@@ -31,8 +31,7 @@ proc debug() =
 
 proc run() =
     while true:
-        let opc = code[pc]
-        let op = cast[Instr]( opc )
+        let op = cast[Instr]( code[pc] )
         let a = code[pc+1]
         
         when defined(cc):    cc+=1
@@ -56,7 +55,7 @@ proc run() =
             of INC:  mem[a] += 1
             of DEC:  mem[a] -= 1
             # stdio - TODO: as extension
-            of OUT: echo acc; echo " "
+            of OUT: echo $acc
             of IN:  acc = sio.read_int().Cell
             # misc
             of HLT: return
