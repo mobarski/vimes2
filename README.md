@@ -27,19 +27,21 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
 
 
+
+
 ## Quick benchmarking results
 
-|  task  | arg  |  vm   |            src            | code size [cells] | vm cycles | runs | avg time | avg vm cycles / s | setup |
-| :----: | :--: | :---: | :-----------------------: | :---------------: | :-------: | ---- | :------: | :---------------: | :---: |
-| loops3 |  30  |  mk2  | [src](asm/loops3_mk2.asm) |        86         |   279K    | 1000 | 495µs 🥉  |       563M        |   A   |
-| loops3 |  30  |  mk4  | [src](asm/loops3_mk2.asm) |        86         |   279K    | 1000 |  619µs   |       451M        |   A   |
-| loops3 |  30  |  mk5  | [src](asm/loops3_mk2.asm) |        86         |   279K    | 1000 |  621µs   |       449M        |   A   |
-| loops3 |  30  | mk6 🏆 | [src](asm/loops3_mk6.asm) |       51 🥈        |  112K 🥇   | 1000 | 166µs 🥇  |       677M        |   A   |
-| loops3 |  30  |  mk7  | [src](asm/loops3_mk7.asm) |       48 🥇        |  142K 🥈   | 1000 | 191µs 🥈  |       742M        |   A   |
-|        |      |       |                           |                   |           |      |          |                   |       |
-| loops3 | 300  |  mk7  | [src](asm/loops3_mk7.asm) |        48         |   270M    | 30   |  464ms   |       583M        |   A   |
-| loops3 | 300  | mk7c  | [src](asm/loops3_mk7.asm) |        48         |   270M    | 30   |  207ms   |       1304M       |   A   |
-| loops3 | 300  | mk7ci | [src](asm/loops3_mk7.asm) |        48         |   270M    | 30   |  110ms   |       2454M       |   A   |
+|  task  | arg  |  vm   |            src            | code size [cells] | vm cycles | runs | avg time | avg vm cycles / s | cpu cycles / vm cycle | setup |
+| :----: | :--: | :---: | :-----------------------: | :---------------: | :-------: | ---- | :------: | :---------------: | :-------------------: | :---: |
+| loops3 |  30  |  mk2  | [src](asm/loops3_mk2.asm) |        86         |   279K    | 1000 | 495µs 🥉  |       563M        |         8.53          |   A   |
+| loops3 |  30  |  mk4  | [src](asm/loops3_mk2.asm) |        86         |   279K    | 1000 |  619µs   |       451M        |         10.64         |   A   |
+| loops3 |  30  |  mk5  | [src](asm/loops3_mk2.asm) |        86         |   279K    | 1000 |  621µs   |       449M        |         10.69         |   A   |
+| loops3 |  30  | mk6 🏆 | [src](asm/loops3_mk6.asm) |       51 🥈        |  112K 🥇   | 1000 | 166µs 🥇  |       677M        |         7.09          |   A   |
+| loops3 |  30  |  mk7  | [src](asm/loops3_mk7.asm) |       48 🥇        |  142K 🥈   | 1000 | 191µs 🥈  |       742M        |         6.47          |   A   |
+|        |      |       |                           |                   |           |      |          |                   |                       |       |
+| loops3 | 300  |  mk7  | [src](asm/loops3_mk7.asm) |        48         |   270M    | 30   |  464ms   |       583M        |         8.23          |   A   |
+| loops3 | 300  | mk7c  | [src](asm/loops3_mk7.asm) |        48         |   270M    | 30   |  207ms   |       1304M       |         3.68          |   A   |
+| loops3 | 300  | mk7ci | [src](asm/loops3_mk7.asm) |        48         |   270M    | 30   |  110ms   |       2454M       |         1.95          |   A   |
 
 **setup A**: i7-9700K @ 4.8GHz, gcc 11.4.0, Nim 2.0.0, -d:cc -d:release -d:danger --gc:arc
 
