@@ -14,17 +14,19 @@ void put_int(Cell x) {
     printf("%d\n",x);
 }
 
-#define in(x)  cc++; acc=get_int()
-#define sta(x) cc++; mem[x]=acc
+#define jz(x)  cc++; if (acc==0) goto x
+#define jn(x)  cc++; if (acc<0)  goto x
+#define jmp(x) cc++; goto x
 #define lda(x) cc++; acc=mem[x]
-#define inc(x) cc++; mem[x]+=1
-#define dec(x) cc++; mem[x]-=1
+#define lit(x) cc++; acc=x
+#define sta(x) cc++; mem[x]=acc
 #define add(x) cc++; acc+=mem[x]
 #define sub(x) cc++; acc-=mem[x]
+#define inc(x) cc++; mem[x]+=1
+#define dec(x) cc++; mem[x]-=1
 #define out(x) cc++; put_int(acc)
+#define in(x)  cc++; acc=get_int()
 #define hlt(x) cc++; return cc
-#define jz(x)  cc++; if (acc==0) goto x
-#define jmp(x) cc++; goto x
 
 Cell mem[100] = {};
 int64_t run() {
