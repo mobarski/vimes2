@@ -24,8 +24,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
   - **mk7c** - mk7 implemented in C (🚧)
   - **mk7ci** - mk7 implementation in C, indirect threading (🚧)
     - **mk7ci2** - mk7ci with acc as register variable (🚧)
-
-
+  - **mk7cc** - mk7 asm compiled to C code (🚧)
 
 
 
@@ -40,10 +39,11 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 | loops3 |  30  | mk6 🏆  | [src](asm/loops3_mk6.asm) |       51 🥈        |  112K 🥇   | 1000 | 166µs 🥇  |       677M        |         7.09          |   A   |
 | loops3 |  30  |  mk7   | [src](asm/loops3_mk7.asm) |       48 🥇        |  142K 🥈   | 1000 | 191µs 🥈  |       742M        |         6.47          |   A   |
 |        |      |        |                           |                   |           |      |          |                   |                       |       |
-| loops3 | 300  |  mk7   | [src](asm/loops3_mk7.asm) |        48         |   270M    | 30   |  464ms   |       583M        |         8.23          |   A   |
-| loops3 | 300  |  mk7c  | [src](asm/loops3_mk7.asm) |        48         |   270M    | 30   |  207ms   |       1304M       |         3.68          |   A   |
-| loops3 | 300  | mk7ci  | [src](asm/loops3_mk7.asm) |        48         |   270M    | 30   |  110ms   |       2454M       |         1.95          |   A   |
-| loops3 | 300  | mk7ci2 | [src](asm/loops3_mk7.asm) |        48         |   270M    | 30   |   96ms   |       2812M       |         1.70          |   A   |
+| loops3 | 300  |  mk7   | [src](asm/loops3_mk7.asm) |        48         |   135M    | 30   |  464ms   |       291M        |         16.5          |   A   |
+| loops3 | 300  |  mk7c  | [src](asm/loops3_mk7.asm) |        48         |   135M    | 30   |  207ms   |       652M        |          7.4          |   A   |
+| loops3 | 300  | mk7ci  | [src](asm/loops3_mk7.asm) |        48         |   135M    | 30   |  110ms   |       1227M       |          3.9          |   A   |
+| loops3 | 300  | mk7ci2 | [src](asm/loops3_mk7.asm) |        48         |   135M    | 30   |   96ms   |       1406M       |          3.4          |   A   |
+| loops3 | 300  | mk7cc  |                           |        --         |   135M    | 30   |  10,3µs  |      13106G       |        1/2730         |   A   |
 
 **setup A**: i7-9700K @ 4.8GHz, gcc 11.4.0, Nim 2.0.0, -d:cc -d:release -d:danger --gc:arc
 

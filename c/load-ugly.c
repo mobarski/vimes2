@@ -4,7 +4,7 @@
 typedef int16_t Cell;
 
 // load machine code from text file (space separated list of integers)
-// into an array of Cells
+// into an array of Cells; returns number of cells loaded or negative value on error 
 int code_from_num(char *filename, Cell *code, Cell max_code_size) {
     if (max_code_size < 1) {
         fprintf(stderr, "Error: max_code_size must be at least 1\n");
