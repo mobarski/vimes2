@@ -55,7 +55,7 @@ proc run() =
             of INC:  mem[a] += 1
             of DEC:  mem[a] -= 1
             # stdio - TODO: as extension
-            of OUT: echo $acc
+            of OUT: echo acc # stdout.write $acc & " "
             of IN:  acc = sio.read_int().Cell
             # misc
             of HLT: return

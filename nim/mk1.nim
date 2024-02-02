@@ -1,7 +1,7 @@
 # mk1: compatible with the original PL/0
 
-include opcodes
-include opnames
+include mk1_opcodes
+include mk1_opnames
 
 include base
 include ex1

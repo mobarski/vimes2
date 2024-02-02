@@ -1,7 +1,7 @@
 # mk2: variable number of arguments, a and l swapped
 
-include opcodes
-include opnames
+include mk1_opcodes
+include mk1_opnames
 
 include base
 include ex1

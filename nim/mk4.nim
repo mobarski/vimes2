@@ -1,7 +1,7 @@
 # mk4: call threading version of mk2
 
-include opcodes
-include opnames
+include mk1_opcodes
+include mk1_opnames
 
 include base
 include ex1

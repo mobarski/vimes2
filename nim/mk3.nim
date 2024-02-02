@@ -3,7 +3,7 @@
 type Cell = int16
 const STACK_SIZE = 1000
 
-include opcodes
+include mk1_opcodes
 
 var p : Cell # program counter
 var b : Cell # base pointer
