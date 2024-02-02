@@ -40,12 +40,17 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 | loops3 |  30  |  mk7   | [src](asm/loops3_mk7.asm) |       48 🥇        |  142K 🥈   | 1000 | 191µs 🥈  |       742M        |         6.47          |   A   |
 |        |      |        |                           |                   |           |      |          |                   |                       |       |
 | loops3 | 300  |  mk7   | [src](asm/loops3_mk7.asm) |        48         |   135M    | 30   |  464ms   |       291M        |         16.5          |   A   |
-| loops3 | 300  |  mk7c  | [src](asm/loops3_mk7.asm) |        48         |   135M    | 30   |  207ms   |       652M        |          7.4          |   A   |
-| loops3 | 300  | mk7ci  | [src](asm/loops3_mk7.asm) |        48         |   135M    | 30   |  110ms   |       1227M       |          3.9          |   A   |
-| loops3 | 300  | mk7ci2 | [src](asm/loops3_mk7.asm) |        48         |   135M    | 30   |   96ms   |       1406M       |          3.4          |   A   |
-| loops3 | 300  | mk7cc  |                           |        --         |   135M    | 30   |  10,3µs  |      13106G       |        1/2730         |   A   |
+| loops3 | 300  |  mk7c  | [src](asm/loops3_mk7.asm) |        48         |   135M    | 30   |  207ms   |       652M        |          7.4          |   B   |
+| loops3 | 300  | mk7ci  | [src](asm/loops3_mk7.asm) |        48         |   135M    | 30   |  110ms   |       1227M       |          3.9          |   B   |
+| loops3 | 300  | mk7ci2 | [src](asm/loops3_mk7.asm) |        48         |   135M    | 30   |   96ms   |       1406M       |          3.4          |   B   |
+| loops3 | 300  | mk7cc  |                           |        --         |   135M    | 30   |  10,3µs  |      13106G       |        1/2730         |   B   |
+| loops3 | 300  | mk7cc  |                           |        --         |   135M    | 30   |  160ms   |       843M        |          5.7          |   C   |
 
 **setup A**: i7-9700K @ 4.8GHz, gcc 11.4.0, Nim 2.0.0, -d:cc -d:release -d:danger --gc:arc
+
+**setup B**: i7-9700K @ 4.8GHz, gcc 11.4.0, -O3
+
+**setup C**: i7-9700K @ 4.8GHz, tcc 0.9.27
 
 
 
