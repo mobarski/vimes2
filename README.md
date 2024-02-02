@@ -178,6 +178,21 @@ Extension 3 - ALU extension (common ops)
 - JN  a  ; jump to address (a) if ACC is negative
 - LIT a  ; load (a) to ACC
 - HLT 0  ; halt the program
+```
+
+
+
+### mk8 instruction set
+
+mk7 instructions extended with
+
+```
+- CAL a ; call procedure at address (a)
+- RET 0 ; return from procedure
+- LPA a ; load memory cell pointed by (a) to ACC
+- SPA a ; store ACC in memory cell pointed by (a)
+- ASR a ; arithmetic shift right ACC by (a)
+- NOP a ; do nothing, (a) can be used to mark labels
 
 ```
 
