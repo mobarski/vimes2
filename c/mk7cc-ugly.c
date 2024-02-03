@@ -3,14 +3,14 @@
 #include <stdlib.h>
 #include <time.h> // Added for measuring execution time
 
-typedef int16_t Cell;
+typedef int16_t Word;
 
-Cell get_int() {
+Word get_int() {
     int tmp;
     fscanf(stdin, "%hd", &tmp);
     return tmp;
 }
-void put_int(Cell x) {
+void put_int(Word x) {
     printf("%d\n",x);
 }
 
@@ -28,9 +28,9 @@ void put_int(Cell x) {
 #define in(x)  cc++; acc=get_int()
 #define hlt(x) cc++; return cc
 
-Cell mem[100] = {};
+Word mem[100] = {};
 int64_t run() {
-    register Cell   acc = 0; // accumulator
+    register Word   acc = 0; // accumulator
     register int64_t cc = 0; // used only when -d:cc is passed 
 
     in(0); sta(0);

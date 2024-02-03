@@ -13,7 +13,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 - **mk1** - machine from [Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth)'s 1976 book [Algorithms + Data Structures = Programs](https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs)
   - **mk2** - variable number of arguments, swapped a and l
     - **mk3** - internal bytecode version of mk2
-      - **abandoned** as bytecode requires more work than fixed-width cells - instructions variants and assembler changes
+      - **abandoned** as bytecode requires more work than fixed-width words - instructions variants and assembler changes
 
     - **mk4** - switch call threading version of mk2
     - **mk5** - indirect call threading version of mk2
@@ -31,7 +31,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
 ## Quick benchmarking results
 
-|  task  | arg  |   vm   |            src            | code size [cells] | vm cycles | runs | avg time | avg vm cycles / s | cpu cycles / vm cycle | setup |
+|  task  | arg  |   vm   |            src            | code size [words] | vm cycles | runs | avg time | avg vm cycles / s | cpu cycles / vm cycle | setup |
 | :----: | :--: | :----: | :-----------------------: | :---------------: | :-------: | ---- | :------: | :---------------: | :-------------------: | :---: |
 | loops3 |  30  |  mk2   | [src](asm/loops3_mk2.asm) |        86         |   279K    | 1000 | 495µs 🥉  |       563M        |         8.53          |   A   |
 | loops3 |  30  |  mk4   | [src](asm/loops3_mk2.asm) |        86         |   279K    | 1000 |  619µs   |       451M        |         10.64         |   A   |
@@ -116,18 +116,18 @@ Extension 3 - ALU extension (common ops)
 **DATA TRANSFER**
 
 ```
-- LIT  a b  ; set memory cell (a) to literal value (b)
-- MOV  a b  ; set memory cell (a) to value from memory cell (b)
-- PEEK a b  ; set memory cell (a) with value from memory cell indicated by (b)
-- POKE a b  ; set memory cell indicated by (a) to value from memory cell (b)
+- LIT  a b  ; set memory location (a) to literal value (b)
+- MOV  a b  ; set memory location (a) to value from memory location (b)
+- PEEK a b  ; set memory location (a) with value from memory location indicated by (b)
+- POKE a b  ; set memory location indicated by (a) to value from memory location (b)
 ```
 
 **CONTROL FLOW**
 
 ```
 - JMP  a 0  ; jump to program location (a)
-- JZ   a b  ; if memory cell (a) is zero then jump to program location (b)
-- JNZ  a b  ; if memory cell (a) is not zero then jump to program location (b)
+- JZ   a b  ; if memory location (a) is zero then jump to program location (b)
+- JNZ  a b  ; if memory location (a) is not zero then jump to program location (b)
 - CAL  a 0  ; call subroutine at program location (a)
 - RET  0 0  ; return from subroutine call
 - HLT  0 0  ; halt the program
@@ -153,11 +153,11 @@ Extension 3 - ALU extension (common ops)
 **IO**
 
 ```
-- PUTC a 0  ; write the value from memory cell (a) to stdout (as character)
-- PUTI a 0  ; write the value from memory cell (a) to stdout (as integer)
-- GETC a 0  ; read a character from stdin and store it in memory cell (a)
-- GETI a 0  ; read an integer from stdin and store it in memory cell (a), skip initial whitespaces
-- EOF  a 0  ; set memory cell (a) to 1 if stdin indicates end-of-file or to 0 otherwise
+- PUTC a 0  ; write the value from memory location (a) to stdout (as character)
+- PUTI a 0  ; write the value from memory location (a) to stdout (as integer)
+- GETC a 0  ; read a character from stdin and store it in memory location (a)
+- GETI a 0  ; read an integer from stdin and store it in memory location (a), skip initial whitespaces
+- EOF  a 0  ; set memory location (a) to 1 if stdin indicates end-of-file or to 0 otherwise
 ```
 
 
@@ -167,12 +167,12 @@ Extension 3 - ALU extension (common ops)
 ```
 - IN  0  ; read input to ACC
 - OUT 0  ; write ACC to output
-- LDA a  ; load memory cell (a) to ACC
-- STA a  ; store ACC in memory cell (a)
-- ADD a  ; add memory cell (a) to ACC
-- SUB a  ; subtract memory cell (a) from ACC
-- INC a  ; increase memory cell (a) by 1
-- DEC a  ; decrease memory cell (a) by 1
+- LDA a  ; load memory location (a) to ACC
+- STA a  ; store ACC in memory location (a)
+- ADD a  ; add memory location (a) to ACC
+- SUB a  ; subtract memory location (a) from ACC
+- INC a  ; increase memory location (a) by 1
+- DEC a  ; decrease memory location (a) by 1
 - JMP a  ; jump to address (a)
 - JZ  a  ; jump to address (a) if ACC is zero
 - JN  a  ; jump to address (a) if ACC is negative
@@ -189,8 +189,8 @@ mk7 instructions extended with
 ```
 - CAL a ; call procedure at address (a)
 - RET 0 ; return from procedure
-- LPA a ; load memory cell pointed by (a) to ACC
-- SPA a ; store ACC in memory cell pointed by (a)
+- LPA a ; load memory location pointed by (a) to ACC
+- SPA a ; store ACC in memory location pointed by (a)
 - ASR a ; arithmetic shift right ACC by (a)
 - NOP a ; do nothing, (a) can be used to mark labels
 

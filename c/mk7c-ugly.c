@@ -20,13 +20,13 @@ typedef enum {
     LIT = 12
 } Instr;
 
-typedef int16_t Cell;
+typedef int16_t Word;
 
-Cell pc = 0; // program counter
-Cell acc = 0; // accumulator
+Word pc = 0; // program counter
+Word acc = 0; // accumulator
 int64_t cc = 0; // used only when -d:cc is passed
-Cell mem[100]; // memory, fixed size for simplicity
-Cell code[256] = {1,0,4,0,3,0,4,2,3,2,10,42,8,2,3,0,4,3,3,3,10,40,8,3,3,0,4,4,3,4,10,38,8,4,7,1,9,28,9,18,9,8,3,1,2,0,  0,0,0,0};
+Word mem[100]; // memory, fixed size for simplicity
+Word code[256] = {1,0,4,0,3,0,4,2,3,2,10,42,8,2,3,0,4,3,3,3,10,40,8,3,3,0,4,4,3,4,10,38,8,4,7,1,9,28,9,18,9,8,3,1,2,0,  0,0,0,0};
 
 void reset(int quick) {
     pc = 0; acc = 0; cc = 0;
@@ -37,7 +37,7 @@ void reset(int quick) {
 }
 
 // Assuming trace function is similar to Nim
-void trace(Cell op, Cell a) {
+void trace(Word op, Word a) {
     // This is a simplification; the original Nim code uses string formatting
     fprintf(stderr, "| %3ld | %2d | %4s %2d | %3d | \n", cc, pc, "todo", a, mem[a]);
 }
@@ -48,9 +48,9 @@ void debug() {
 
 void run() {
     while (1) {
-        Cell opc = code[pc];
-        Cell op = (Cell)opc;
-        Cell a = code[pc + 1];
+        Word opc = code[pc];
+        Word op = (Word)opc;
+        Word a = code[pc + 1];
 
         // Assuming cc increment is defined similarly in C
         cc += 1;

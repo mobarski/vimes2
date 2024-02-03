@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 
-typedef short int Cell;
+typedef short int Word;
 #define STACK_SIZE 1000
 
 enum {
@@ -12,13 +12,13 @@ enum {
     RET = 0, NEG, ADD, SUB, MUL, DIV, ODD, MOD, EQ, NE, LT, LE, GT, GE
 };
 
-Cell p = 0; // program counter
-Cell b = 0; // base pointer
-Cell t = 0; // top of stack pointer
-Cell s[STACK_SIZE]; // stack
+Word p = 0; // program counter
+Word b = 0; // base pointer
+Word t = 0; // top of stack pointer
+Word s[STACK_SIZE]; // stack
 
-Cell base(Cell level) {
-    Cell b1 = b;
+Word base(Word level) {
+    Word b1 = b;
     while (level > 0) {
         b1 = s[b1];
         level--;
@@ -28,9 +28,9 @@ Cell base(Cell level) {
 
 void run(const int *code) {
     while (1) {
-        Cell i = (Cell)code[p];
-        Cell l = (Cell)code[p + 1];
-        Cell a = (Cell)code[p + 2];
+        Word i = (Word)code[p];
+        Word l = (Word)code[p + 1];
+        Word a = (Word)code[p + 2];
         p += 3;
 
         switch (i) {
