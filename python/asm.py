@@ -8,7 +8,7 @@ import re
 CFG = {
     'label_suffix': ':',
     'line_comment': [';','#','--'],
-    'inline_comment_re': r'\(.*?\)',
+    'inline_comment_re': r'\(.*?\)', # TODO: multiple
     'label_offset': 0,
     'case_insensitive': True,
 }
@@ -17,7 +17,7 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
     """compile text into p-code
     converts opcode names to numbers
     converts python integer literals  (ie. `1_234`) to plain numbers
-    treats `;` as line comment start
+    treats `;`,`#` and `--` as line comment start
     treats `(` and `)` as inline comment start and end (single line only)
     converts labels to addresses
     - `name:` to define label
