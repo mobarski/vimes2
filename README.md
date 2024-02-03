@@ -102,25 +102,28 @@ Basic instructions:
 - HLT     ; halt the program
 ```
 
-operations:
+**operations:**
 
 ```
-- ADD ; (a b -- c)  c = a + b
-- SUB ; (a b -- c)  c = a - b
-- MUL ; (a b -- c)  c = a * b
-- DIV ; (a b -- c)  c = 
-- RET ; (a b -- c)  c = 
-- NEG ; (a -- b)    b = -a
-- ODD ; (a -- b)    b = a % 2
-- MOD ; (a b -- c)  c = a % b
-- EQ  ; (a b -- c)  c = 1 if a==b else 0
-- NE  ; (a b -- c)  c = 1 if a!=b else 0
-- LT  ; (a b -- c)  c = 1 if a<b  else 0
-- LE  ; (a b -- c)  c = 1 if a<=b else 0
-- GT  ; (a b -- c)  c = 1 if a>b  else 0
-- GE  ; (a b -- c)  c = 1 if a>=b else 0
-
+- ADD ; (ab--c)  c = a + b
+- SUB ; (ab--c)  c = a - b
+- MUL ; (ab--c)  c = a * b
+- DIV ; (ab--c)  c = 
+- RET ; (ab--c)  c = 
+- NEG ; (a--b)   b = -a
+- ODD ; (a--b)   b = a % 2
+- MOD ; (ab--c)  c = a % b
+- EQ  ; (ab--c)  c = 1 if a==b else 0
+- NE  ; (ab--c)  c = 1 if a!=b else 0
+- LT  ; (ab--c)  c = 1 if a<b  else 0
+- LE  ; (ab--c)  c = 1 if a<=b else 0
+- GT  ; (ab--c)  c = 1 if a>b  else 0
+- GE  ; (ab--c)  c = 1 if a>=b else 0
 ```
+
+The notation `(ab--c)` describes the stack effect of an operation. It indicates that the  operation expects two items to be on the stack before execution,  referred to as `a` and `b`, and after the operation is executed, these items are replaced by a single item `c` on the stack. The items before `--` are consumed (popped) from the stack, and the items after `--` are produced (pushed) onto the stack.
+
+
 
 Extension 1 - stdio:
 
