@@ -5,6 +5,13 @@
 
 import re
 
+CFG = {
+    'label_suffix': ':',
+    'line_comment': ';',
+    'inline_comment_re': r'\(.*?\)',
+    'label_offset': 0,
+}
+
 def compile(text, opcodes: dict[str,int]) -> list[int]:
     """compile text into p-code
     converts opcode names to numbers
@@ -13,8 +20,7 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
     treats `(` and `)` as inline comment start and end (single line only)
     converts labels to addresses
     - `name:` to define label
-    - `name`  to insert label's absolute address
-    - `@name` to insert label's relative address
+    - `name`  to insert label's address
     """
     text = text.lower()
     lines = text.split('\n')
@@ -23,16 +29,16 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
     tokens = []
     for line in lines:
         # remove inline comments
-        line = re.sub(r'\(.*?\)', '', line)
+        line = re.sub(CFG['inline_comment_re'], '', line)
         # split into tokens
         line_tokens = re.split('\\s+',line)
         # process tokens
         for token in line_tokens:
             if not token: continue
             # comments
-            if token[0]==';': break
+            if token.startswith(CFG['line_comment']): break
             # labels
-            elif token[-1]==':':
+            elif token[-1]==CFG['label_suffix']:
                 name = token[:-1]
                 label[name] = len(tokens)
             else:
@@ -41,16 +47,9 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
     out = []
     for token in tokens:
         # label use
-        if token[0]=='@':
-            # relative
-            name = token[1:]
-            pos = label[name]
-            offset = pos - len(out) + 1
-            out += [offset]
-        elif token in label:
-            # absolute
+        if token in label:
             pos = label[token]
-            out += [pos]
+            out += [pos + CFG['label_offset']]
         # opcodes
         elif token in opcodes:
             out += [opcodes[token]]
