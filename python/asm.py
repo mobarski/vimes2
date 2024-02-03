@@ -6,7 +6,6 @@
 import re
 
 CFG = {
-    'label_suffix': ':',
     'line_comment': [';','#','--'],
     'inline_comment_re': r'\(.*?\)', # TODO: multiple
     'ignored_tokens': [',','|'],
@@ -18,11 +17,12 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
     """compile text into p-code
     converts opcode names to numbers
     converts python integer literals  (ie. `1_234`) to plain numbers
-    treats `;`,`#` and `--` as line comment start
-    treats `(` and `)` as inline comment start and end (single line only)
     converts labels to addresses
     - `name:` to define label
     - `name`  to insert label's address
+    converts keys to values
+    - `key:value` to define key-value pair
+    - `key`       to insert numeric value
     """
     if CFG['force_opcodes_case']==-1:
         opcodes = {k.lower():v for k,v in opcodes.items()}
@@ -35,6 +35,8 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
     # first pass - collect labels
     label = {} # label_name -> label_pos
     tokens = []
+    n_ignored = 0
+    kv = {}
     for line in lines:
         # remove inline comments
         line = re.sub(CFG['inline_comment_re'], '', line)
@@ -51,9 +53,13 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
                     break
             if break_outer: break
             # labels
-            if token[-1]==CFG['label_suffix']:
+            if token[-1]==':':
                 name = token[:-1]
                 label[name] = len(tokens)
+            # kv
+            elif ':' in token:
+                k,_,v = token.partition(':')
+                kv[k] = int(v)
             else:
                 tokens += [token]
     # second pass - all labels are known
@@ -66,6 +72,9 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
         # opcodes
         elif token in opcodes:
             out += [opcodes[token]]
+        # kv use
+        elif token in kv:
+            out += [kv[token]]
         # ignored
         elif token in CFG['ignored_tokens']:
             pass

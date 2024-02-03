@@ -31,3 +31,11 @@ def test_comments2():
     """
     pcode = asm.compile(text, {})
     assert pcode == [11, 44, 55, 88, 22, 33, 44, 321]
+
+def test_kv():
+    text = """
+        aa:11 22 bb:33 44 cc:55
+        bb aa cc
+    """
+    pcode = asm.compile(text, {})
+    assert pcode == [22, 44, 33, 11, 55]
