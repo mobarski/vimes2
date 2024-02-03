@@ -11,6 +11,7 @@ CFG = {
     'inline_comment_re': r'\(.*?\)', # TODO: multiple
     'label_offset': 0,
     'case_insensitive': True,
+    'ignored_tokens': [',','|'],
 }
 
 def compile(text, opcodes: dict[str,int]) -> list[int]:
@@ -61,6 +62,9 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
         # opcodes
         elif token in opcodes:
             out += [opcodes[token]]
+        # ignored
+        elif token in CFG['ignored_tokens']:
+            pass
         # numbers
         else:
             try:
