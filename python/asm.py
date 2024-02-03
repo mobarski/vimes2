@@ -9,9 +9,9 @@ CFG = {
     'label_suffix': ':',
     'line_comment': [';','#','--'],
     'inline_comment_re': r'\(.*?\)', # TODO: multiple
-    'label_offset': 0,
-    'case_insensitive': True,
     'ignored_tokens': [',','|'],
+    'case_insensitive': True,
+    'force_opcodes_case':0, # -1:lower 1:upper
 }
 
 def compile(text, opcodes: dict[str,int]) -> list[int]:
@@ -24,6 +24,10 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
     - `name:` to define label
     - `name`  to insert label's address
     """
+    if CFG['force_opcodes_case']==-1:
+        opcodes = {k.lower():v for k,v in opcodes.items()}
+    if CFG['force_opcodes_case']==1:
+        opcodes = {k.upper():v for k,v in opcodes.items()}
     if CFG['case_insensitive']:
         text = text.lower()
         opcodes = {k.lower():v for k,v in opcodes.items()}
@@ -58,7 +62,7 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
         # label use
         if token in label:
             pos = label[token]
-            out += [pos + CFG['label_offset']]
+            out += [pos]
         # opcodes
         elif token in opcodes:
             out += [opcodes[token]]
