@@ -39,3 +39,11 @@ def test_kv():
     """
     pcode = asm.compile(text, {})
     assert pcode == [22, 44, 33, 11, 55]
+
+def test_kv2():
+    text = """
+        store:sta load:lda
+        store 9 load 8 load 7 store 6
+    """
+    pcode = asm.compile(text, {'lda':11, 'sta':22})
+    assert pcode == [22,9, 11,8, 11,7, 22,6]

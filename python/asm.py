@@ -22,7 +22,7 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
     - `name`  to insert label's address
     converts keys to values
     - `key:value` to define key-value pair
-    - `key`       to insert numeric value
+    - `key`       to insert value (number or instruction)
     """
     if CFG['force_opcodes_case']==-1:
         opcodes = {k.lower():v for k,v in opcodes.items()}
@@ -59,7 +59,10 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
             # kv
             elif ':' in token:
                 k,_,v = token.partition(':')
-                kv[k] = int(v)
+                if v in opcodes:
+                    kv[k] = opcodes[v]
+                else:
+                    kv[k] = int(v)
             else:
                 tokens += [token]
     # second pass - all labels are known
