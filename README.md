@@ -84,14 +84,41 @@ These machines use the same variable names as Wirth's example p-code machine fro
 
 Basic instructions:
 
-- `LIT`, `INT`, `LOD`, `STO`
-- `CAL`, `JMP`, `JPC`
-- `OPR`:
-  - `ADD`, `SUB`, `MUL`, `DIV`
-  - `RET`, `NEG`, `ODD`, `MOD`
-  - `EQ`, `NE`, `LT`, `LE`, `GT`, `GE`
-- `EX1`, `EX2`, `EX3`, `EX4`, `EX5`, `EX6`, `EX7`
-- `HLT`
+```
+- LIT a   ; load constant (a)
+- INT a   ; increment t-register by (a)
+- LOD a b ; load variable (a) from level (b)
+- STO a b ; store variable (a) at level (b)
+- CAL a b ; call procedute (a) at level (b)
+- JMP a   ;
+- JPC a   ;
+- OPR a   ; execute operation (a) ie OPR ADD
+- EX1 a   ; execute operation (a) from VM extension 1
+- EX2 a   ; execute operation (a) from VM extension 2
+- EX3 a   ; execute operation (a) from VM extension 3
+  ...
+- HLT     ; halt the program
+```
+
+operations:
+
+```
+- ADD ; (a b -- c)  c = a + b
+- SUB ; (a b -- c)  c = a - b
+- MUL ; (a b -- c)  c = a * b
+- DIV ; (a b -- c)  c = 
+- RET ; (a b -- c)  c = 
+- NEG ; (a -- b)    b = -a
+- ODD ; (a -- b)    b = a % 2
+- MOD ; (a b -- c)  c = a % b
+- EQ  ; (a b -- c)  c = 1 if a==b else 0
+- NE  ; (a b -- c)  c = 1 if a!=b else 0
+- LT  ; (a b -- c)  c = 1 if a<b  else 0
+- LE  ; (a b -- c)  c = 1 if a<=b else 0
+- GT  ; (a b -- c)  c = 1 if a>b  else 0
+- GE  ; (a b -- c)  c = 1 if a>=b else 0
+
+```
 
 Extension 1 - stdio:
 
