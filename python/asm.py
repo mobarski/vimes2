@@ -25,7 +25,7 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
     text = text.lower()
     lines = text.split('\n')
     # first pass - collect labels
-    label = {}
+    label = {} # label_name -> label_pos
     tokens = []
     for line in lines:
         # remove inline comments

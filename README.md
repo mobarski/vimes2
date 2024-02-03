@@ -11,23 +11,23 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 ## VM versions
 
 - **mk1** - machine from [Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth)'s 1976 book [Algorithms + Data Structures = Programs](https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs)
-  - **mk2** - variable number of arguments, swapped a and l
-    - **mk3** - internal bytecode version of mk2
+  - **mk2** - `mk1` with variable number of arguments, swapped a and l
+    - **mk3** - internal bytecode version of `mk2`
       - **abandoned** as bytecode requires more work than fixed-width words - instructions variants and assembler changes
 
-    - **mk4** - switch call threading version of mk2
-    - **mk5** - indirect call threading version of mk2
-
+    - **mk4** - switch call threading version of `mk2`
+    - **mk5** - indirect call threading version of `mk2`
 - **mk6** - register based vm inspired by [smol](https://github.com/mobarski/smol)
-
 - **mk7** - register based vm inspired by [Human Resource Machine](https://store.steampowered.com/app/375820/Human_Resource_Machine/)
-  - **mk7c** - mk7 implemented in C (🚧)
-  - **mk7ci** - mk7 implementation in C, indirect threading (🚧)
-    - **mk7ci2** - mk7ci with acc as register variable (🚧)
-  - **mk7cc** - mk7 asm compiled to C code (🚧)
-  - **mk8** - mk7 extended with pointer operations, call/return and some ALU ops (TODO)
+  - **mk7c** - `mk7` implemented in C (🚧)
+  - **mk7ci** - `mk7` implementation in C, indirect threading (🚧)
+    - **mk7ci2** - `mk7ci` with acc as register variable (🚧)
+  - **mk7cc** - `mk7` asm compiled to C code (🚧)
+  - **mk8** - `mk7` extended with pointer operations, call/return and some ALU ops (TODO)
 
+- **mk9** - two operands version of `mk7`  (TODO)
 
+  
 
 
 ## Quick benchmarking results
@@ -221,7 +221,21 @@ mk7 instructions extended with
 - SPA a ; store ACC in memory location pointed by (a)
 - ASR a ; arithmetic shift right ACC by (a)
 - NOP a ; do nothing, (a) can be used to mark labels
+```
 
+### mk9 instruction set
+
+```
+- IN  a 0 ; read input to mem[a]
+- OUT a 0 ; write mem[a] to output
+- LIT a b ; mem[a] = b
+- MOV a b ; mem[a] = mem[b]
+- ADD a b ; mem[a] = mem[a] + mem[b]
+- SUB a b ; mem[a] = mem[a] - mem[b]
+- JMP a 0 ; jump to address (a)
+- JZ  a b ; jump to address (a) if mem[b] is zero
+- JN  a b ; jump to address (a) if mem[b] is negative
+- HLT 0 0 ; halt the program
 ```
 
 # Trace example
