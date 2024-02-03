@@ -45,6 +45,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 | loops3 |  30  |  mk9   | [src](asm/loops3_mk9.asm) |        54         |   112K🥇   | 1000 | 175µs 🥈  |       640M        |          7.5          |   A   |
 |        |      |        |                           |                   |           |      |          |                   |                       |       |
 |  fibo  |  20  |  mk1   |  [src](asm/fibo_mk1.asm)  |        99         |   372K    | 1000 |  878µs   |       878M        |          5.5          |   A   |
+|  fibo  |  20  |  mk6   |  [src](asm/fibo_mk6.asm)  |        99         |   284K    | 1000 |  490µs   |       580M        |          8.3          |   A   |
 |  fibo  |  20  |  mk8   |  [src](asm/fibo_mk8.asm)  |        84         |   352K    | 1000 |  467µs   |       752M        |          6.4          |   A   |
 |  fibo  |  20  |  mk10  | [src](asm/fibo_mk10.asm)  |        96         |   278K    | 1000 |  484µs   |       573M        |          8.4          |   A   |
 |        |      |        |                           |                   |           |      |          |                   |                       |       |
