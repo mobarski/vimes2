@@ -25,6 +25,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
   - **mk7ci** - mk7 implementation in C, indirect threading (🚧)
     - **mk7ci2** - mk7ci with acc as register variable (🚧)
   - **mk7cc** - mk7 asm compiled to C code (🚧)
+  - **mk8** - mk7 extended with pointer operations, call/return and some ALU ops (TODO)
 
 
 
@@ -90,8 +91,8 @@ Basic instructions:
 - LOD a b ; load variable (a) from level (b)
 - STO a b ; store variable (a) at level (b)
 - CAL a b ; call procedute (a) at level (b)
-- JMP a   ;
-- JPC a   ;
+- JMP a   ; jump to (a)
+- JPC a   ; jump conditional to (a)
 - OPR a   ; execute operation (a) ie OPR ADD
 - EX1 a   ; execute operation (a) from VM extension 1
 - EX2 a   ; execute operation (a) from VM extension 2
