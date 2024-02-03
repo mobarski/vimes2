@@ -10,6 +10,7 @@ CFG = {
     'line_comment': [';','#','--'],
     'inline_comment_re': r'\(.*?\)',
     'label_offset': 0,
+    'case_insensitive': True,
 }
 
 def compile(text, opcodes: dict[str,int]) -> list[int]:
@@ -22,7 +23,9 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
     - `name:` to define label
     - `name`  to insert label's address
     """
-    text = text.lower()
+    if CFG['case_insensitive']:
+        text = text.lower()
+        opcodes = {k.lower():v for k,v in opcodes.items()}
     lines = text.split('\n')
     # first pass - collect labels
     label = {} # label_name -> label_pos
@@ -35,13 +38,13 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
         # process tokens
         break_outer = False
         for token in line_tokens:
-            if break_outer: break
             if not token: continue
             # comments
             for line_comment in CFG['line_comment']:
                 if token.startswith(line_comment):
                     break_outer = True
                     break
+            if break_outer: break
             # labels
             if token[-1]==CFG['label_suffix']:
                 name = token[:-1]
