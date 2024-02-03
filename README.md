@@ -23,10 +23,13 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
   - **mk7ci** - `mk7` implementation in C, indirect threading (🚧)
     - **mk7ci2** - `mk7ci` with acc as register variable (🚧)
   - **mk7cc** - `mk7` asm compiled to C code (🚧)
-  - **mk8** - `mk7` extended with pointer operations, call/return and ashr
+  - **mk8** - `mk7` extended with pointer operations, call/return, ashr and nop
 
 - **mk9** - two operands version of `mk7`
 
+  - **mk10** - `mk9` extended with pointer operations, call/return, ashr and nop
+  
+  
   
 
 
@@ -41,6 +44,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 | loops3 |  30  |  mk7   | [src](asm/loops3_mk7.asm) |       48 🥇        |  142K 🥈   | 1000 | 191µs 🥉  |       742M        |         6.47          |   A   |
 | loops3 |  30  |  mk9   | [src](asm/loops3_mk9.asm) |        54         |   112K🥇   | 1000 | 175µs 🥈  |       640M        |          7.5          |   A   |
 |        |      |        |                           |                   |           |      |          |                   |                       |       |
+|  fibo  |  20  |  mk1   |  [src](asm/fibo_mk1.asm)  |        99         |   372K    | 1000 |  878µs   |       878M        |          5.5          |   A   |
 |  fibo  |  20  |  mk8   |  [src](asm/fibo_mk8.asm)  |        84         |   352K    | 1000 |  467µs   |       752M        |          6.4          |   A   |
 |        |      |        |                           |                   |           |      |          |                   |                       |       |
 | loops3 | 300  |  mk7   | [src](asm/loops3_mk7.asm) |        48         |   135M    | 30   |  464ms   |       291M        |         16.5          |   A   |

@@ -11,7 +11,7 @@ aux="-d:danger --gc:arc"
 # configure opcodes for the assembler
 opcodes=../nim/${1}_opcodes.nim
 if [ ! -f $opcodes ]; then
-    opcodes=../nim/opcodes.nim
+    opcodes=../nim/mk1_opcodes.nim
 fi
 
 # create all versions for easy comparison
