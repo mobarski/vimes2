@@ -46,12 +46,12 @@ proc run() =
                     of DIV: t-=1; s[t] = s[t] div s[t+1]
                     of ODD: s[t] = s[t] mod 2
                     of MOD: t-=1; s[t] = s[t] mod s[t+1]
-                    of EQ:  t-=1; s[t] = ord(s[t] == s[t+1]).Cell
-                    of NE:  t-=1; s[t] = ord(s[t] != s[t+1]).Cell
-                    of LT:  t-=1; s[t] = ord(s[t] <  s[t+1]).Cell
-                    of LE:  t-=1; s[t] = ord(s[t] <= s[t+1]).Cell
-                    of GT:  t-=1; s[t] = ord(s[t] >  s[t+1]).Cell
-                    of GE:  t-=1; s[t] = ord(s[t] >= s[t+1]).Cell
+                    of EQ:  t-=1; s[t] = ord(s[t] == s[t+1]).Word
+                    of NE:  t-=1; s[t] = ord(s[t] != s[t+1]).Word
+                    of LT:  t-=1; s[t] = ord(s[t] <  s[t+1]).Word
+                    of LE:  t-=1; s[t] = ord(s[t] <= s[t+1]).Word
+                    of GT:  t-=1; s[t] = ord(s[t] >  s[t+1]).Word
+                    of GE:  t-=1; s[t] = ord(s[t] >= s[t+1]).Word
                     else: quit("unknown OPR opcode",1)
             of EX1: ex1(a,t)
             #of EX2: ex2(a,s,t)

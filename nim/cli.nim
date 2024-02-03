@@ -66,11 +66,11 @@ proc cli() =
     let text = read_file(cfg.input_path)
     case cfg.format:
         of "hex":
-            code = code_from_hex[Cell](text)
+            code = code_from_hex[Word](text)
         of "b10":
-            code = code_from_num[Cell](text, base=10)
+            code = code_from_num[Word](text, base=10)
         of "b16":
-            code = code_from_num[Cell](text, base=16)
+            code = code_from_num[Word](text, base=16)
     if cfg.benchmark > 0:
         for i in 1..cfg.benchmark:
             reset(quick=true)

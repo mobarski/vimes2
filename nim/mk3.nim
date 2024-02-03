@@ -1,17 +1,17 @@
 # mk3: bytecode, variable number of arguments, a and l swapped
 
-type Cell = int16
+type Word = int16
 const STACK_SIZE = 1000
 
 include mk1_opcodes
 
-var p : Cell # program counter
-var b : Cell # base pointer
-var t : Cell # top of stack pointer
+var p : Word # program counter
+var b : Word # base pointer
+var t : Word # top of stack pointer
 
-var s : array[STACK_SIZE, Cell] # stack
+var s : array[STACK_SIZE, Word] # stack
 
-proc base(level: Cell) : Cell =
+proc base(level: Word) : Word =
     var b1 = b
     var l = level
     while l > 0:
@@ -22,18 +22,18 @@ proc base(level: Cell) : Cell =
 # THIS WON'T WORK NOW AS WE CHANGED run(code) to run() and code is from base.nim
 proc run(code : openArray[int8]) =
     while true:
-        var i = code[p+0].Cell
-        var a = code[p+1].Cell
-        var l : Cell # not always used
+        var i = code[p+0].Word
+        var a = code[p+1].Word
+        var l : Word # not always used
         p += 2
 
         case i:
             of LIT: t+=1; s[t]=a
             of LOD:
-                l = code[p].Cell; p+=1
+                l = code[p].Word; p+=1
                 t+=1; s[t]=s[base(l)+a]
             of STO:
-                l = code[p].Cell; p+=1
+                l = code[p].Word; p+=1
                 s[base(l)+a]=s[t]; t-=1
             of INT: t+=a
             of JMP: p=a
@@ -42,7 +42,7 @@ proc run(code : openArray[int8]) =
                     p = a
                     t -= 1
             of CAL:
-                l = code[p].Cell; p+=1
+                l = code[p].Word; p+=1
                 s[t+1] = base(l)
                 s[t+2] = b
                 s[t+3] = p
@@ -58,28 +58,28 @@ proc run(code : openArray[int8]) =
                     of MOD: t-=1; s[t] =  s[t] mod s[t+1]
                     of ODD:       s[t] =  s[t] mod 2
                     of NEG:       s[t] = -s[t]
-                    of EQ:  t-=1; s[t] = (s[t] == s[t+1]).ord.Cell
-                    of NE:  t-=1; s[t] = (s[t] != s[t+1]).ord.Cell
-                    of LT:  t-=1; s[t] = (s[t] <  s[t+1]).ord.Cell
-                    of LE:  t-=1; s[t] = (s[t] <= s[t+1]).ord.Cell
-                    of GT:  t-=1; s[t] = (s[t] >  s[t+1]).ord.Cell
-                    of GE:  t-=1; s[t] = (s[t] >= s[t+1]).ord.Cell
+                    of EQ:  t-=1; s[t] = (s[t] == s[t+1]).ord.Word
+                    of NE:  t-=1; s[t] = (s[t] != s[t+1]).ord.Word
+                    of LT:  t-=1; s[t] = (s[t] <  s[t+1]).ord.Word
+                    of LE:  t-=1; s[t] = (s[t] <= s[t+1]).ord.Word
+                    of GT:  t-=1; s[t] = (s[t] >  s[t+1]).ord.Word
+                    of GE:  t-=1; s[t] = (s[t] >= s[t+1]).ord.Word
                     else: quit("unknown OPR opcode",1)
             #
             of LIT2:
-                a = a shl 8 or code[p].Cell; p+=1
+                a = a shl 8 or code[p].Word; p+=1
                 t+=1; s[t]=a
             of JMP2:
-                a = a shl 8 or code[p].Cell; p+=1
+                a = a shl 8 or code[p].Word; p+=1
                 p = a
             of JPC2:
-                a = a shl 8 or code[p].Cell; p+=1
+                a = a shl 8 or code[p].Word; p+=1
                 if s[t]==0:
                     p = a
                     t -= 1
             of CAL2:
-                a = a shl 8 or code[p].Cell; p+=1
-                l = code[p].Cell; p+=1
+                a = a shl 8 or code[p].Word; p+=1
+                l = code[p].Word; p+=1
                 s[t+1] = base(l)
                 s[t+2] = b
                 s[t+3] = p

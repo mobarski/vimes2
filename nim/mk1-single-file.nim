@@ -1,6 +1,6 @@
 # mk1: compatible with the original PL/0
 
-type Cell = int16
+type Word = int16
 const STACK_SIZE = 1000
 
 const
@@ -29,13 +29,13 @@ const
     GT  = 12
     GE  = 13
 
-var p : Cell # program counter
-var b : Cell # base pointer
-var t : Cell # top of stack pointer
+var p : Word # program counter
+var b : Word # base pointer
+var t : Word # top of stack pointer
 
-var s : array[STACK_SIZE, Cell] # stack
+var s : array[STACK_SIZE, Word] # stack
 
-proc base(level: Cell) : Cell =
+proc base(level: Word) : Word =
     var b1 = b
     var l = level
     while l > 0:
@@ -45,9 +45,9 @@ proc base(level: Cell) : Cell =
 
 proc run(code : openArray[int]) =
     while true:
-        var i = code[p+0].Cell
-        var l = code[p+1].Cell
-        var a = code[p+2].Cell
+        var i = code[p+0].Word
+        var l = code[p+1].Word
+        var a = code[p+2].Word
         p += 3
 
         case i:
@@ -76,12 +76,12 @@ proc run(code : openArray[int]) =
                     of DIV: t-=1; s[t] = s[t] div s[t+1]
                     of ODD: s[t] = s[t] mod 2
                     of MOD: t-=1; s[t] = s[t] mod s[t+1]
-                    of EQ:  t-=1; s[t] = ord(s[t] == s[t+1]).Cell
-                    of NE:  t-=1; s[t] = ord(s[t] != s[t+1]).Cell
-                    of LT:  t-=1; s[t] = ord(s[t] <  s[t+1]).Cell
-                    of LE:  t-=1; s[t] = ord(s[t] <= s[t+1]).Cell
-                    of GT:  t-=1; s[t] = ord(s[t] >  s[t+1]).Cell
-                    of GE:  t-=1; s[t] = ord(s[t] >= s[t+1]).Cell
+                    of EQ:  t-=1; s[t] = ord(s[t] == s[t+1]).Word
+                    of NE:  t-=1; s[t] = ord(s[t] != s[t+1]).Word
+                    of LT:  t-=1; s[t] = ord(s[t] <  s[t+1]).Word
+                    of LE:  t-=1; s[t] = ord(s[t] <= s[t+1]).Word
+                    of GT:  t-=1; s[t] = ord(s[t] >  s[t+1]).Word
+                    of GE:  t-=1; s[t] = ord(s[t] >= s[t+1]).Word
                     else: assert false
             else: assert false
 

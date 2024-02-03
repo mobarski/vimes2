@@ -2,14 +2,14 @@ import parseutils
 import strutils
 import strformat
 
-type Cell = int16
+type Word = int16
 const STACK_SIZE = 1000
 
-var p : Cell # program counter
-var b : Cell # base pointer
-var t : Cell # top of stack pointer
-var s : array[STACK_SIZE, Cell] # stack
-var code: seq[Cell] # code
+var p : Word # program counter
+var b : Word # base pointer
+var t : Word # top of stack pointer
+var s : array[STACK_SIZE, Word] # stack
+var code: seq[Word] # code
 
 var cc : int64 # cycle counter
 
@@ -19,7 +19,7 @@ when defined(ic):
     import sequtils
     import algorithm
 
-    var ic : Table[Cell, int64]
+    var ic : Table[Word, int64]
     proc show_ic() =
         stderr.write_line ""
         stderr.write_line "+------+------+-----"
@@ -34,7 +34,7 @@ when defined(ic):
             let pct = 100.0 * ic[k].float / total.float
             stderr.write_line "| {opnames[k]:>4} | {pct:>4.1f} | {ic[k]}".fmt
 
-template base(level: Cell) : Cell =
+template base(level: Word) : Word =
     var b1 = b
     var l = level
     while l > 0:
@@ -52,7 +52,7 @@ proc reset(quick=false) =
 proc debug() =
     stderr.write_line "cc:",cc, " p:",p, " b:",b, " t:",t, " s:[ ",s[0..t].join(" ")," ]"
 
-proc trace(a:Cell, code:openArray[Cell]) =
+proc trace(a:Word, code:openArray[Word]) =
     let op = opnames.get_or_default(code[p], "???")
     stderr.write_line """| {cc:2} | {p:2} | {op:>4} {a:<4} | {b:2} | {t:2} | {s[1..t].join(" ")}""".fmt
 
@@ -61,7 +61,7 @@ proc trace_header() =
     stderr.write_line """| CC |  P |    I A    |  B |  T | S --> """
     stderr.write_line """+----+----+-----------+----+----+-------"""
 
-# proc code_from_hex(text:string) : seq[Cell] = 
+# proc code_from_hex(text:string) : seq[Word] = 
 #     var pos = 0
 #     var val : int
 #     var n : int
@@ -74,5 +74,5 @@ proc trace_header() =
 #         #
 #         n = parse_hex(text, val, pos, 4)
 #         assert n == 4, "invalid hex code at position " & $pos
-#         result.add cast[Cell](val)
+#         result.add cast[Word](val)
 #         pos = pos + n

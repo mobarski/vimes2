@@ -8,28 +8,28 @@ include ex1
 include ex2
 include ex3
 
-proc do_lod(a: Cell, code: openArray[Cell]) =
+proc do_lod(a: Word, code: openArray[Word]) =
     let l = code[p]; p+=1
     t+=1; s[t]=s[base(l)+a]
-proc do_cal(a: Cell, code: openArray[Cell]) =
+proc do_cal(a: Word, code: openArray[Word]) =
     let l = code[p]; p+=1
     s[t+1] = base(l)
     s[t+2] = b
     s[t+3] = p
     b = t + 1
     p = a
-proc do_sto(a: Cell, code: openArray[Cell]) =
+proc do_sto(a: Word, code: openArray[Word]) =
     let l = code[p]; p+=1
     s[base(l)+a]=s[t]; t-=1
 
-proc do_lit(a: Cell, code: openArray[Cell]) = t+=1; s[t]=a
-proc do_int(a: Cell, code: openArray[Cell]) = t+=a
-proc do_jmp(a: Cell, code: openArray[Cell]) = p=a
-proc do_jpc(a: Cell, code: openArray[Cell]) =
+proc do_lit(a: Word, code: openArray[Word]) = t+=1; s[t]=a
+proc do_int(a: Word, code: openArray[Word]) = t+=a
+proc do_jmp(a: Word, code: openArray[Word]) = p=a
+proc do_jpc(a: Word, code: openArray[Word]) =
     if s[t]==0:
         p = a
         t -= 1
-proc do_opr(a: Cell, code: openArray[Cell]) =
+proc do_opr(a: Word, code: openArray[Word]) =
     case a:
         of RET: t=b-1; p=s[t+3]; b=s[t+2]
         of ADD: t-=1; s[t] += s[t+1]
@@ -39,12 +39,12 @@ proc do_opr(a: Cell, code: openArray[Cell]) =
         of MOD: t-=1; s[t] =  s[t] mod s[t+1]
         of ODD:       s[t] =  s[t] mod 2
         of NEG:       s[t] = -s[t]
-        of EQ:  t-=1; s[t] = (s[t] == s[t+1]).ord.Cell
-        of NE:  t-=1; s[t] = (s[t] != s[t+1]).ord.Cell
-        of LT:  t-=1; s[t] = (s[t] <  s[t+1]).ord.Cell
-        of LE:  t-=1; s[t] = (s[t] <= s[t+1]).ord.Cell
-        of GT:  t-=1; s[t] = (s[t] >  s[t+1]).ord.Cell
-        of GE:  t-=1; s[t] = (s[t] >= s[t+1]).ord.Cell
+        of EQ:  t-=1; s[t] = (s[t] == s[t+1]).ord.Word
+        of NE:  t-=1; s[t] = (s[t] != s[t+1]).ord.Word
+        of LT:  t-=1; s[t] = (s[t] <  s[t+1]).ord.Word
+        of LE:  t-=1; s[t] = (s[t] <= s[t+1]).ord.Word
+        of GT:  t-=1; s[t] = (s[t] >  s[t+1]).ord.Word
+        of GE:  t-=1; s[t] = (s[t] >= s[t+1]).ord.Word
         else: quit("unknown OPR opcode",1)
 
 let op_func = [do_lit, do_lit, do_opr, do_lod, do_sto, do_cal, do_int, do_jmp, do_jpc, ex1c]

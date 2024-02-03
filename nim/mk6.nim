@@ -7,14 +7,14 @@ import bench
 
 include mk6_opcodes
 include mk6_opnames
-type Cell = int16
+type Word = int16
 
-var pc: Cell # program counter
-var sp: Cell # stack pointer
+var pc: Word # program counter
+var sp: Word # stack pointer
 var cc: int64 # used only when -d:cc is passed
-var mem:   seq[Cell] = @[] # memory
-var stack: seq[Cell] = @[] # return stack
-var code:  seq[Cell] = @[] # program
+var mem:   seq[Word] = @[] # memory
+var stack: seq[Word] = @[] # return stack
+var code:  seq[Word] = @[] # program
 
 proc reset(quick=false) =
     pc=0; sp=0; cc=0
@@ -24,7 +24,7 @@ proc reset(quick=false) =
     for j in low(stack)..high(stack):
         stack[j] = 0
 
-proc trace(op,a,b:Cell) =
+proc trace(op,a,b:Word) =
     let opname = opnames[cast[Instr](op)]
     let va = mem[a]
     let vb = mem[b]
@@ -66,18 +66,18 @@ proc run() =
             of MOD:  mem[a] = mem[a] mod mem[b]
             of NEG:  mem[a] = -mem[a] # b is ignored
             # cmp
-            of EQ:   mem[a] = (mem[a] == mem[b]).ord.Cell
-            of NE:   mem[a] = (mem[a] != mem[b]).ord.Cell
-            of LT:   mem[a] = (mem[a] <  mem[b]).ord.Cell
-            of LE:   mem[a] = (mem[a] <= mem[b]).ord.Cell
-            of GT:   mem[a] = (mem[a] >  mem[b]).ord.Cell
-            of GE:   mem[a] = (mem[a] >= mem[b]).ord.Cell
+            of EQ:   mem[a] = (mem[a] == mem[b]).ord.Word
+            of NE:   mem[a] = (mem[a] != mem[b]).ord.Word
+            of LT:   mem[a] = (mem[a] <  mem[b]).ord.Word
+            of LE:   mem[a] = (mem[a] <= mem[b]).ord.Word
+            of GT:   mem[a] = (mem[a] >  mem[b]).ord.Word
+            of GE:   mem[a] = (mem[a] >= mem[b]).ord.Word
             # stdio - TODO: as extension
             of PUTI: echo mem[a]
             of PUTC: echo mem[a].char
-            of GETC: mem[a] = sio.read_chr().Cell
-            of GETI: mem[a] = sio.read_int().Cell
-            of EOF:  mem[a] = sio.eof.ord.Cell
+            of GETC: mem[a] = sio.read_chr().Word
+            of GETI: mem[a] = sio.read_int().Word
+            of EOF:  mem[a] = sio.eof.ord.Word
             # misc
             of HLT:  pc=0
             else:
@@ -86,7 +86,7 @@ proc run() =
 
 include cli
 if is_main_module:
-    mem   = new_seq[Cell](1024) # TODO: option
-    stack = new_seq[Cell](1024) # TODO: option
+    mem   = new_seq[Word](1024) # TODO: option
+    stack = new_seq[Word](1024) # TODO: option
     cli()
 

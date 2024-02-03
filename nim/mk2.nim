@@ -13,7 +13,7 @@ proc run() =
     while true:
         var i = code[p+0]
         var a = code[p+1]
-        var l : Cell # not always used
+        var l : Word # not always used
         
         when defined(cc): cc+=1 # count cycles
         when defined(trace): trace(a,code) # trace execution
@@ -51,12 +51,12 @@ proc run() =
                     of MOD: t-=1; s[t] =  s[t] mod s[t+1]
                     of ODD:       s[t] =  s[t] mod 2
                     of NEG:       s[t] = -s[t]
-                    of EQ:  t-=1; s[t] = (s[t] == s[t+1]).ord.Cell
-                    of NE:  t-=1; s[t] = (s[t] != s[t+1]).ord.Cell
-                    of LT:  t-=1; s[t] = (s[t] <  s[t+1]).ord.Cell
-                    of LE:  t-=1; s[t] = (s[t] <= s[t+1]).ord.Cell
-                    of GT:  t-=1; s[t] = (s[t] >  s[t+1]).ord.Cell
-                    of GE:  t-=1; s[t] = (s[t] >= s[t+1]).ord.Cell
+                    of EQ:  t-=1; s[t] = (s[t] == s[t+1]).ord.Word
+                    of NE:  t-=1; s[t] = (s[t] != s[t+1]).ord.Word
+                    of LT:  t-=1; s[t] = (s[t] <  s[t+1]).ord.Word
+                    of LE:  t-=1; s[t] = (s[t] <= s[t+1]).ord.Word
+                    of GT:  t-=1; s[t] = (s[t] >  s[t+1]).ord.Word
+                    of GE:  t-=1; s[t] = (s[t] >= s[t+1]).ord.Word
                     else: quit("unknown OPR opcode",1)
             #of EX1: ex1(a,s,t) # 2.5% faster than ex1(a,t)
             of EX1: ex1(a,t) # 10% faster than ex1(a)

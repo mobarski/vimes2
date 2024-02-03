@@ -7,13 +7,13 @@ import bench
 
 include mk7_opcodes
 include mk7_opnames
-type Cell = int16
+type Word = int16
 
-var pc: Cell # program counter
-var acc: Cell # accumulator
+var pc: Word # program counter
+var acc: Word # accumulator
 var cc: int64 # used only when -d:cc is passed
-var mem:   seq[Cell] = @[] # memory
-var code:  seq[Cell] = @[] # program
+var mem:   seq[Word] = @[] # memory
+var code:  seq[Word] = @[] # program
 
 proc reset(quick=false) =
     pc=0; acc=0; cc=0
@@ -21,7 +21,7 @@ proc reset(quick=false) =
     for j in low(mem)..high(mem):
         mem[j] = 0
 
-proc trace(op,a:Cell) =
+proc trace(op,a:Word) =
     let opname = opnames[cast[Instr](op)]
     let va = mem[a]
     stderr.write_line """| {cc:3} | {pc:2} | {opname:>4} {a:2} | {va:3} | """.fmt
@@ -56,7 +56,7 @@ proc run() =
             of DEC:  mem[a] -= 1
             # stdio - TODO: as extension
             of OUT: echo acc # stdout.write $acc & " "
-            of IN:  acc = sio.read_int().Cell
+            of IN:  acc = sio.read_int().Word
             # misc
             of HLT: return
             else:
@@ -64,6 +64,6 @@ proc run() =
 
 include cli
 if is_main_module:
-    mem   = new_seq[Cell](100) # TODO: option
+    mem   = new_seq[Word](100) # TODO: option
     cli()
 
