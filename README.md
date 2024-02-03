@@ -249,6 +249,21 @@ mk7 instructions extended with
 - HLT 0 0 ; halt the program
 ```
 
+### mk10 instruction set
+
+mk9 instructions extended with
+
+```
+- CAL a 0 ; call procedure at address (a)
+- RET 0 0 ; return from procedure
+- PTM a b ; transfer from pointer (b) to memory location (a)
+- MTP a b ; transfer from memory location (b) to pointer (a)
+- ASR a b ; arithmetic shift right mem[a] by (b)
+- NOP a b ; do nothing, (a) can be used to mark labels
+```
+
+
+
 # Trace example
 
 ### mk1 - mk5
