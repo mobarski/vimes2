@@ -22,3 +22,4 @@ def test_comments():
     """
     pcode = asm.compile(text, {})
     assert pcode == [11, 44, 55, 88, 22, 33, 44]
+

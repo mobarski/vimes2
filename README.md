@@ -25,7 +25,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
   - **mk7cc** - `mk7` asm compiled to C code (🚧)
   - **mk8** - `mk7` extended with pointer operations, call/return and some ALU ops (TODO)
 
-- **mk9** - two operands version of `mk7`  (TODO)
+- **mk9** - two operands version of `mk7`
 
   
 

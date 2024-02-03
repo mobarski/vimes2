@@ -7,7 +7,7 @@ import re
 
 CFG = {
     'label_suffix': ':',
-    'line_comment': ';',
+    'line_comment': [';','#','--'],
     'inline_comment_re': r'\(.*?\)',
     'label_offset': 0,
 }
@@ -33,12 +33,17 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
         # split into tokens
         line_tokens = re.split('\\s+',line)
         # process tokens
+        break_outer = False
         for token in line_tokens:
+            if break_outer: break
             if not token: continue
             # comments
-            if token.startswith(CFG['line_comment']): break
+            for line_comment in CFG['line_comment']:
+                if token.startswith(line_comment):
+                    break_outer = True
+                    break
             # labels
-            elif token[-1]==CFG['label_suffix']:
+            if token[-1]==CFG['label_suffix']:
                 name = token[:-1]
                 label[name] = len(tokens)
             else:
