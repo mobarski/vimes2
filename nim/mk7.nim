@@ -31,6 +31,7 @@ proc debug() =
 
 proc run() =
     while true:
+        # {.computedGoto.} # 10% slower :(
         let op = cast[Instr]( code[pc] )
         let a = code[pc+1]
         

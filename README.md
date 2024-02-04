@@ -17,19 +17,21 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
     - **mk4** - switch call threading version of `mk2`
     - **mk5** - indirect call threading version of `mk2`
+
 - **mk6** - register based vm inspired by [smol](https://github.com/mobarski/smol)
+
 - **mk7** - register based vm inspired by [Human Resource Machine](https://store.steampowered.com/app/375820/Human_Resource_Machine/)
   - **mk7c** - `mk7` implemented in C (🚧)
   - **mk7ci** - `mk7` implementation in C, indirect threading (🚧)
     - **mk7ci2** - `mk7ci` with acc as register variable (🚧)
   - **mk7cc** - `mk7` asm compiled to C code (🚧)
   - **mk8** - `mk7` extended with pointer operations, call/return, ashr and nop
+  - **mk11** - `mk7` extended with cooperative multitasking instructions (🚧🚧)
 
 - **mk9** - two operands version of `mk7`
 
   - **mk10** - `mk9` extended with pointer operations, call/return, ashr and nop
-  
-  
+
   
 
 
@@ -41,7 +43,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 | loops3 |  30  |  mk4   | [src](asm/loops3_mk2.asm) |        86         |   279K    | 1000 |  619µs   |       451M        |         10.64         |   A   |
 | loops3 |  30  |  mk5   | [src](asm/loops3_mk2.asm) |        86         |   279K    | 1000 |  621µs   |       449M        |         10.69         |   A   |
 | loops3 |  30  | mk6 🏆  | [src](asm/loops3_mk6.asm) |       51 🥈        |  112K 🥇   | 1000 | 166µs 🥇  |       677M        |         7.09          |   A   |
-| loops3 |  30  |  mk7   | [src](asm/loops3_mk7.asm) |       48 🥇        |  142K 🥈   | 1000 | 191µs 🥉  |       742M        |         6.47          |   A   |
+| loops3 |  30  |  mk7   | [src](asm/loops3_mk7.asm) |       48 🥇        |  142K 🥈   | 1000 | 175µs 🥈  |       813M        |          5.9          |   A   |
 | loops3 |  30  |  mk9   | [src](asm/loops3_mk9.asm) |        54         |   112K🥇   | 1000 | 175µs 🥈  |       640M        |          7.5          |   A   |
 |        |      |        |                           |                   |           |      |          |                   |                       |       |
 |  fibo  |  20  |  mk1   |  [src](asm/fibo_mk1.asm)  |        99         |   372K    | 1000 |  878µs   |       878M        |          5.5          |   A   |
@@ -303,6 +305,10 @@ mk9 instructions extended with
 - https://rosettacode.org/wiki/Category:XPL0
 - http://pascal.hansotten.com/niklaus-wirth/pl0/
 - https://github.com/mobarski/vimes/blob/main/references.md
+- Another World VM:
+  - https://github.com/fabiensanglard/Another-World-Bytecode-Interpreter/blob/master/src/vm.cpp
+  - https://fabiensanglard.net/anotherWorld_code_review/index.php
+  - http://www.anotherworld.fr/anotherworld_uk/another_world.htm
 
 
 
