@@ -13,20 +13,23 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 - **mk1** - machine from [Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth)'s 1976 book [Algorithms + Data Structures = Programs](https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs)
   - **mk2** - `mk1` with variable number of arguments, swapped a and l
     - **mk3** - internal bytecode version of `mk2`
-      - **abandoned** as bytecode requires more work than fixed-width words - instructions variants and assembler changes
+      - **abandoned** as bytecode requires more work than fixed-width words - instructions variants and assembler changes (🛑)
 
     - **mk4** - switch call threading version of `mk2`
     - **mk5** - indirect call threading version of `mk2`
 
 - **mk6** - register based vm inspired by [smol](https://github.com/mobarski/smol)
 
+  - **mk12** - one operand version ok `mk6`
+
 - **mk7** - register based vm inspired by [Human Resource Machine](https://store.steampowered.com/app/375820/Human_Resource_Machine/)
+
   - **mk7c** - `mk7` implemented in C (🚧)
   - **mk7ci** - `mk7` implementation in C, indirect threading (🚧)
     - **mk7ci2** - `mk7ci` with acc as register variable (🚧)
   - **mk7cc** - `mk7` asm compiled to C code (🚧)
   - **mk8** - `mk7` extended with pointer operations, call/return, ashr and nop
-  - **mk11** - `mk7` extended with cooperative multitasking instructions (🚧🚧)
+  - **mk11** - `mk7` extended with cooperative multitasking instructions (🌱)
 
 - **mk9** - two operands version of `mk7`
 

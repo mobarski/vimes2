@@ -24,7 +24,7 @@ proc reset(quick=false) =
 proc trace(op,a:Word) =
     let opname = opnames[cast[Instr](op)]
     let va = mem[a]
-    stderr.write_line """| {cc:3} | {pc:2} | {opname:>4} {a:2} | {va:3} | """.fmt
+    stderr.write_line """| {cc:3} | {pc:2} | {acc:3} | {opname:>4} {a:2} | {va:3} | """.fmt
 
 proc debug() =
     echo "pc:", pc, " acc:", acc, " cc:", cc
