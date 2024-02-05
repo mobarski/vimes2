@@ -29,3 +29,6 @@ type Instr = enum
     #
     LDA=27
     STA=28
+    INC=29
+    DEC=30
+

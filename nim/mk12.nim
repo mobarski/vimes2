@@ -80,6 +80,8 @@ proc run() =
             of EOF:  acc = sio.eof.ord.Word
             # misc
             of HLT:  pc=0
+            of INC: mem[a] += 1
+            of DEC: mem[a] -= 1
             else:
                 quit("unknown opcode op:" & $op, 1)
         if pc==0: break

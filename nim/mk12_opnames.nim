@@ -30,4 +30,6 @@ let opnames = {
     EOF: "EOF",
     LDA: "LDA",
     STA: "STA",
+    INC: "INC",
+    DEC: "DEC",
 }.to_table
