@@ -298,13 +298,15 @@ mk9 instructions extended with
 
 ## Reference materials
 
-- https://en.wikipedia.org/wiki/P-code_machine
+- https://github.com/mobarski/vimes/blob/main/references.md
 - https://github.com/mobarski/vimes
 - https://github.com/mobarski/smol
-- https://rosettacode.org/wiki/Category:PL/0
-- https://rosettacode.org/wiki/Category:XPL0
-- http://pascal.hansotten.com/niklaus-wirth/pl0/
-- https://github.com/mobarski/vimes/blob/main/references.md
+- PL/0 & p-code VM:
+  - https://rosettacode.org/wiki/Category:PL/0
+  - https://rosettacode.org/wiki/Category:XPL0
+  - http://pascal.hansotten.com/niklaus-wirth/pl0/
+  - https://en.wikipedia.org/wiki/P-code_machine
+
 - Another World VM:
   - https://github.com/fabiensanglard/Another-World-Bytecode-Interpreter/blob/master/src/vm.cpp
   - https://fabiensanglard.net/anotherWorld_code_review/index.php
