@@ -8,6 +8,31 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
 
 
+## Key Takeaways
+
+- VM instruction sets are easy to implement, as each instruction is relatively simple.
+
+- The biggest investments when building a new VM are:
+
+  - Transforming assembly into machine code.
+  - Loading machine code into the VM.
+  - Creating a buffered reader for stdin.
+  - Creating tests and benchmarks.
+
+- Wirth's machine is 2-3 times slower than register machines without stack frames.
+
+- Translation of machine code into C results in extremely fast execution but requires special handling of the return stack.
+
+- VMs written in C are typically twice as fast as those written in Nim.
+
+- C enables more performant dispatch techniques, such as indirect and direct threading.
+
+- Indirect and direct threading are twice as fast as switch-based dispatch.
+
+- Nim's {.computedGoto.} pragma resulted in 10% slower code.
+
+  
+
 ## VM versions
 
 - **mk1** - machine from [Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth)'s 1976 book [Algorithms + Data Structures = Programs](https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs)
