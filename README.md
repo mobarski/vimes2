@@ -30,6 +30,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
   - **mk7c** - `mk7` implemented in C (🚧)
   - **mk7ci** - `mk7` implementation in C, indirect threading (🚧)
     - **mk7ci2** - `mk7ci` with acc as register variable (🚧)
+  - **mk7cd** - `mk7` implementation in C, direct threading (🚧)
   - **mk7cc** - `mk7` asm compiled to C code (🚧)
   - **mk8** - `mk7` extended with pointer operations, call/return, ashr and nop
   - **mk11** - `mk7` extended with cooperative multitasking instructions (🌱)
@@ -62,6 +63,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 | loops3 | 300  |   [mk7c](c/mk7c-ugly.c)   | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  207ms   |       652M        |          7.4          |   B   |
 | loops3 | 300  |  [mk7ci](c/mk7ci-ugly.c)  | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  110ms   |       1227M       |          3.9          |   B   |
 | loops3 | 300  | [mk7ci2](c/mk7ci2-ugly.c) | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |   96ms   |       1406M       |          3.4          |   B   |
+| loops3 | 300  |  [mk7cd](c/mk7cd-ugly.c)  | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |   96ms   |       1406M       |          3.4          |   B   |
 | loops3 | 300  |  [mk7cc](c/mk7cc-ugly.c)  |                            |        --         |   135M    | 30   |  10,3µs  |      13106G       |        1/2730         |   B   |
 | loops3 | 300  |  [mk7cc](c/mk7cc-ugly.c)  |                            |        --         |   135M    | 30   |  160ms   |       843M        |          5.7          |   C   |
 
