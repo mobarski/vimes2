@@ -335,7 +335,7 @@ mk9 instructions extended with
 - https://github.com/mobarski/vimes/blob/main/references.md
 - https://github.com/mobarski/vimes
 - https://github.com/mobarski/smol
-- PL/0 & p-code VM:
+- PL/0 and p-code VM:
   - https://rosettacode.org/wiki/Category:PL/0
   - https://rosettacode.org/wiki/Category:XPL0
   - http://pascal.hansotten.com/niklaus-wirth/pl0/
