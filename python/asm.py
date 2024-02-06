@@ -9,6 +9,7 @@ CFG = {
     'line_comment': [';','#','--'],
     'inline_comment_re': r'\(.*?\)', # TODO: multiple
     'ignored_tokens': [',','|'],
+    'kv_separator': '=',
     'case_insensitive': True,
     'force_opcodes_case':0, # -1:lower 1:upper
 }
@@ -57,8 +58,8 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
                 name = token[:-1]
                 label[name] = len(tokens)
             # kv
-            elif ':' in token:
-                k,_,v = token.partition(':')
+            elif CFG['kv_separator'] in token:
+                k,_,v = token.partition(CFG['kv_separator'])
                 if v in opcodes:
                     kv[k] = opcodes[v]
                 else:

@@ -4,17 +4,17 @@
 # end
 
 # commands
-into:sta
-from:lda
-poke:spa
-peek:lpa
+into=sta
+from=lda
+poke=spa
+peek=lpa
 
 # mem
-n:0
-one:1
-two:2
-sp:3   # stack pointer
-tmp:4
+n=0
+one=1
+two=2
+sp=3   # stack pointer
+tmp=4
 
 lit 10 into sp # stack starts at m[10]
 

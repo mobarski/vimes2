@@ -4,11 +4,11 @@
 # end
 
 # mem
-n:0
-one:1
-two:2
-sp:3   # stack pointer
-tmp:4
+n=0
+one=1
+two=2
+sp=3   # stack pointer
+tmp=4
 
 lit 10 sta sp # stack starts at m[10]
 

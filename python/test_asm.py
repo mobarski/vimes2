@@ -34,7 +34,7 @@ def test_comments2():
 
 def test_kv():
     text = """
-        aa:11 22 bb:33 44 cc:55
+        aa=11 22 bb=33 44 cc=55
         bb aa cc
     """
     pcode = asm.compile(text, {})
@@ -42,7 +42,7 @@ def test_kv():
 
 def test_kv2():
     text = """
-        store:sta load:lda
+        store=sta load=lda
         store 9 load 8 load 7 store 6
     """
     pcode = asm.compile(text, {'lda':11, 'sta':22})
