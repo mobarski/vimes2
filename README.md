@@ -98,6 +98,8 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
 **setup C**: i7-9700K @ 4.8GHz, tcc 0.9.27
 
+**setup D**: i7-9700K @ 4.8GHz, zig 0.11.0, cc -O3
+
 
 
 ## VM registers / variable names
