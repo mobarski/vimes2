@@ -32,12 +32,12 @@ int code_from_num(char *filename, Word *code, Word max_code_size) {
 
 typedef struct cli_config {
     char* filename;
-    int   benchmark; // TODO: parse -b:n
-    bool  trace; // TODO: parse --trace
-    bool  debug; // TODO: parse --debug
-    // TODO: mem size
-    // TODO: code size
-    // TODO: stack size
+    int   benchmark;
+    int   mem_size;
+    int   stack_size;
+    int   code_size;
+    bool  trace;
+    bool  debug;
 } cli_config;
 
 int cli(cli_config cfg) {
@@ -56,15 +56,34 @@ int cli(cli_config cfg) {
 
 void print_usage(char *progname) {
     fprintf(stderr, "Usage: %s [options] <filename>\n", progname);
+    fprintf(stderr, "Options:\n");
+    fprintf(stderr, "  -b <n>  benchmark mode, n runs\n");
+    fprintf(stderr, "  -m <n>  memory size (default 1000)\n");
+    fprintf(stderr, "  -s <n>  stack size (default 100)\n");
+    fprintf(stderr, "  -c <n>  code size (default 1000)\n");
+    fprintf(stderr, "  --trace  enable trace mode\n");
+    fprintf(stderr, "  --debug  enable debug mode\n");
+    fprintf(stderr, "  --help   print this message\n");
 }
 
 // parse command line arguments
 int main(int argc, char *argv[]) {
     cli_config cfg = {};
     for (int i = 1; i < argc; i++) {
-        //fprintf(stderr, "arg%d: %s\n", i, argv[i]);
-        if (strcmp(argv[i], "-b")==0) {
+        if (strcmp(argv[i], "--help")==0) {
+            print_usage(argv[0]);
+            return 0;
+        } else if (strcmp(argv[i], "-b")==0) {
             cfg.benchmark = atoi(argv[i+1]);
+            i++;
+        } else if (strcmp(argv[i], "-m")==0) {
+            cfg.mem_size = atoi(argv[i+1]);
+            i++;
+        } else if (strcmp(argv[i], "-s")==0) {
+            cfg.stack_size = atoi(argv[i+1]);
+            i++;
+        } else if (strcmp(argv[i], "-c")==0) {
+            cfg.code_size = atoi(argv[i+1]);
             i++;
         } else if (strcmp(argv[i], "--trace")==0) {
             cfg.trace = true;
