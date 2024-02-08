@@ -97,7 +97,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 | loops3 | 300  |  [mk7c](c/mk7c-ugly.c)  | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  167ms   |       808M        |          5.9          |   D   |
 | loops3 | 300  | [mk7ci](c/mk7ci-ugly.c) | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |   86ms   |       1570M       |          3.1          |   B   |
 | loops3 | 300  | [mk7ci](c/mk7ci-ugly.c) | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  111ms   |       1215M       |          3.9          |   D   |
-| loops3 | 300  | [mk7cd](c/mk7cd-ugly.c) | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |   96ms   |       1406M       |          3.4          |   B   |
+| loops3 | 300  | [mk7cd](c/mk7cd-ugly.c) | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |   80ms   |       1687M       |          2.9          |   B   |
 | loops3 | 300  | [mk7cd](c/mk7cd-ugly.c) | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  112ms   |       1205M       |          3.9          |   D   |
 | loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                            |        --         |   135M    | 30k  |  6.4µs⚡  |       21T⚡        |         1/4k⚡         |   B   |
 | loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                            |        --         |   135M    | 30k  |  0.8µs⚡  |       168T⚡       |        1/35k⚡         |   D   |
