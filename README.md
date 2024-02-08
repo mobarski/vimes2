@@ -10,18 +10,20 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
 ## Key Takeaways
 
-- VM instruction sets are easy to implement, as each instruction is relatively simple.
+**Development:**
 
-- The biggest investments when building a new VM are:
+- VM instruction sets are easy to implement, as each instruction is relatively simple.
+- The biggest investments (so far) when creating a new VM are:
 
   - Transforming assembly into machine code.
   - Loading machine code into the VM.
   - Creating a buffered reader for stdin.
+  - Creating CLI.
   - Creating tests and benchmarks.
 
-- Wirth's machine is 2-3 times slower than register machines without stack frames.
+**Performance:**
 
-- Translation of machine code into C results in extremely fast execution but requires special handling of the return stack.
+- Wirth's machine is 2-3 times slower than register machines without stack frames.
 
 - VMs written in C are typically twice as fast as those written in Nim.
 
@@ -29,7 +31,13 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
 - Indirect and direct threading are twice as fast as switch-based dispatch.
 
+- The performance of C programs compiled with Zig is similar to that of programs compiled with gcc (±20%).
+
 - Nim's {.computedGoto.} pragma resulted in 10% slower code.
+
+- Translation of machine code into C results in **extremely** fast execution but the return from the procedure call is a bit tricky.
+
+- Zig acting as a C compiler outshines gcc in optimization of the translated machine code.
 
   
 
@@ -86,19 +94,24 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 |        |      |                           |                            |                   |           |      |          |                   |                       |       |
 | loops3 | 300  |    [mk7](nim/mk7.nim)     | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  464ms   |       291M        |         16.5          |   A   |
 | loops3 | 300  |   [mk7c](c/mk7c-ugly.c)   | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  207ms   |       652M        |          7.4          |   B   |
+| loops3 | 300  |   [mk7c](c/mk7c-ugly.c)   | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  167ms   |       808M        |          5.9          |   D   |
 | loops3 | 300  |  [mk7ci](c/mk7ci-ugly.c)  | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  110ms   |       1227M       |          3.9          |   B   |
+| loops3 | 300  |  [mk7ci](c/mk7ci-ugly.c)  | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  122ms   |       1106M       |          4.3          |   D   |
 | loops3 | 300  | [mk7ci2](c/mk7ci2-ugly.c) | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |   96ms   |       1406M       |          3.4          |   B   |
+| loops3 | 300  | [mk7ci2](c/mk7ci2-ugly.c) | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  116ms   |       1163M       |          4.1          |   D   |
 | loops3 | 300  |  [mk7cd](c/mk7cd-ugly.c)  | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |   96ms   |       1406M       |          3.4          |   B   |
-| loops3 | 300  |  [mk7cc](c/mk7cc-ugly.c)  |                            |        --         |   135M    | 30   |  10,3µs  |      13106G       |        1/2730         |   B   |
+| loops3 | 300  |  [mk7cd](c/mk7cd-ugly.c)  | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  112ms   |       1205M       |          3.9          |   D   |
+| loops3 | 300  |  [mk7cc](c/mk7cc-ugly.c)  |                            |        --         |   135M    | 30k  |  6.4µs⚡  |       21T⚡        |         1/4k⚡         |   B   |
+| loops3 | 300  |  [mk7cc](c/mk7cc-ugly.c)  |                            |        --         |   135M    | 30k  |  0.8µs⚡  |       168T⚡       |        1/35k⚡         |   D   |
 | loops3 | 300  |  [mk7cc](c/mk7cc-ugly.c)  |                            |        --         |   135M    | 30   |  160ms   |       843M        |          5.7          |   C   |
 
-**setup A**: i7-9700K @ 4.8GHz, gcc 11.4.0, Nim 2.0.0, -d:cc -d:release -d:danger --gc:arc
+**setup A**: i7-9700K @ 4.8GHz, gcc 11.4.0, **nim 2.0.0**, -d:cc -d:release -d:danger --gc:arc
 
-**setup B**: i7-9700K @ 4.8GHz, gcc 11.4.0, -O3
+**setup B**: i7-9700K @ 4.8GHz, **gcc 11.4.0**, -O3
 
-**setup C**: i7-9700K @ 4.8GHz, tcc 0.9.27
+**setup C**: i7-9700K @ 4.8GHz, **tcc 0.9.27**
 
-**setup D**: i7-9700K @ 4.8GHz, zig 0.11.0, cc -O3
+**setup D**: i7-9700K @ 4.8GHz, **zig 0.11.0**, cc -O3
 
 
 
@@ -347,6 +360,12 @@ mk9 instructions extended with
   - https://github.com/fabiensanglard/Another-World-Bytecode-Interpreter/blob/master/src/vm.cpp
   - https://fabiensanglard.net/anotherWorld_code_review/index.php
   - http://www.anotherworld.fr/anotherworld_uk/another_world.htm
+
+
+
+
+
+
 
 
 
