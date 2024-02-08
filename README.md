@@ -31,6 +31,8 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
 - Indirect and direct threading are twice as fast as switch-based dispatch.
 
+- Indirect threading seems to be the best approach when writing a VM in C (10% slower but no code remapping).
+
 - The performance of C programs compiled with Zig is similar to that of programs compiled with gcc (±20%).
 
 - Nim's {.computedGoto.} pragma resulted in 10% slower code.
@@ -93,12 +95,12 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 |  fibo  |  20  |  [mk10](nim/mk10.nim)   |  [src](asm/fibo_mk10.asm)  |        96         |   278K    | 1000 |  484µs   |       573M        |          8.4          |   A   |
 |        |      |                         |                            |                   |           |      |          |                   |                       |       |
 | loops3 | 300  |   [mk7](nim/mk7.nim)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  464ms   |       291M        |         16.5          |   A   |
-| loops3 | 300  |  [mk7c](c/mk7c-ugly.c)  | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  207ms   |       652M        |          7.4          |   B   |
-| loops3 | 300  |  [mk7c](c/mk7c-ugly.c)  | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  167ms   |       808M        |          5.9          |   D   |
-| loops3 | 300  | [mk7ci](c/mk7ci-ugly.c) | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |   86ms   |       1570M       |          3.1          |   B   |
-| loops3 | 300  | [mk7ci](c/mk7ci-ugly.c) | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  111ms   |       1215M       |          3.9          |   D   |
-| loops3 | 300  | [mk7cd](c/mk7cd-ugly.c) | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |   80ms   |       1687M       |          2.9          |   B   |
-| loops3 | 300  | [mk7cd](c/mk7cd-ugly.c) | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  112ms   |       1205M       |          3.9          |   D   |
+| loops3 | 300  |    [mk7c](c/mk7c.c)     | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  207ms   |       652M        |          7.4          |   B   |
+| loops3 | 300  |    [mk7c](c/mk7c.c)     | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  167ms   |       808M        |          5.9          |   D   |
+| loops3 | 300  |   [mk7ci](c/mk7ci.c)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |   86ms   |       1570M       |          3.1          |   B   |
+| loops3 | 300  |   [mk7ci](c/mk7ci.c)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  111ms   |       1215M       |          3.9          |   D   |
+| loops3 | 300  |   [mk7cd](c/mk7cd.c)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |   80ms   |       1687M       |          2.9          |   B   |
+| loops3 | 300  |   [mk7cd](c/mk7cd.c)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  112ms   |       1205M       |          3.9          |   D   |
 | loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                            |        --         |   135M    | 30k  |  6.4µs⚡  |       21T⚡        |         1/4k⚡         |   B   |
 | loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                            |        --         |   135M    | 30k  |  0.8µs⚡  |       168T⚡       |        1/35k⚡         |   D   |
 | loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                            |        --         |   135M    | 30   |  160ms   |       843M        |          5.7          |   C   |
