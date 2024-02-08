@@ -100,9 +100,9 @@ import sys
 
 def get_opcodes_from_text(text: str) -> dict[str,int]:
     opcodes = {}
-    opcode_re = re.compile(r'(\w+)\s*[:=]*\s*(\d+)')
+    opcode_re = re.compile(r'([A-Z][A-Z0-9_]*)\s*[:=]*\s*(\d+)')
     #comment_re = re.compile(r'#.*')
-    text = text.lower()
+    #text = text.lower()
     for line in text.split('\n'):
         #line = comment_re.sub('', line)
         line = line.strip()

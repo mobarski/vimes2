@@ -65,7 +65,7 @@ int main() {
     int64_t cc = 0;
     start = clock();
 
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < 30000; i++) {
         cc += run();
     }
 

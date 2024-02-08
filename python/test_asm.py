@@ -47,3 +47,9 @@ def test_kv2():
     """
     pcode = asm.compile(text, {'lda':11, 'sta':22})
     assert pcode == [22,9, 11,8, 11,7, 22,6]
+
+
+def test_get_opcodes():
+    text = open('../c/mk7c.h').read()
+    opcodes = asm.get_opcodes_from_text(text)
+    print(opcodes)
