@@ -106,8 +106,25 @@ void reset_stack() {
     }
 }
 
+// ============================================================================
+
 void debug_mem() {
-    // TODO
+    int N = 20;
+    fprintf(stderr, "\n");
+    for (int j=0; j<mem_size-N; j+=N) {
+        int n_zeros = 0;
+        for (int k=0; k<N; k++) {
+            if (mem[j+k] == 0) {n_zeros++;}
+        }
+        if (n_zeros == N) {continue;}
+        //
+        fprintf(stderr, "%04d ", j);
+        for (int k=0; k<N; k++) {
+            if (k%5==0) {fprintf(stderr, "| ");}
+            fprintf(stderr, "%d ", mem[j+k]);
+        }
+        fprintf(stderr, "\n");
+    }
 }
 
 // ============================================================================
@@ -202,6 +219,7 @@ int cli_main(int argc, char *argv[]) {
         return -1;
     }
     run_vm(cfg);
+    //debug_mem(); // XXX
     return 0;
 }
 
