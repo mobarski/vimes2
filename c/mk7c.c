@@ -7,15 +7,8 @@ void reset(int quick) {
     if (!quick) reset_stack(); // from cli.h
 }
 
-// Assuming trace function is similar to Nim
-void trace(Word op, Word a) {
-    // This is a simplification; the original Nim code uses string formatting
-    fprintf(stderr, "| %3ld | %2d | %2d %2d | %3d | \n", cc, pc, op, a, mem[a]);
-}
-
-void debug() {
-    printf("pc: %d acc: %d cc: %ld\n", pc, acc, cc);
-}
+// TODO trace
+// TODO debug
 
 void run() {
     while (1) {

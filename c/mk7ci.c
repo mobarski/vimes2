@@ -11,8 +11,8 @@ void reset(int quick) {
 
 void run() {
 
-    register Word pc = 0;    // program counter
-    register Word acc = 0;   // accumulator
+    register Word pc = 0;     // program counter
+    register Word acc = 0;    // accumulator
     register int64_t _cc = 0; // cycle counter
     Word tmp; // used in _IN, as acc is assigned to a register
     Word n;
