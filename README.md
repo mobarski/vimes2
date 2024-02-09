@@ -68,6 +68,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
   - **mk7cd** - `mk7` implementation in C, direct threading
   - **mk7cc** - `mk7` asm compiled to C code (🚧)
   - **mk8** - `mk7` extended with pointer operations, call/return, ashr and nop
+    - **mk8c** - `mk8` implemented in C (🚧)
     - **mk8cc** - `mk8` asm compiled to C code (🌱)
   - **mk11** - `mk7` extended with cooperative multitasking instructions (🌱)
 
@@ -102,9 +103,12 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 | loops3 | 300  |   [mk7ci](c/mk7ci.c)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  111ms   |       1215M       |          3.9          |   D   |
 | loops3 | 300  |   [mk7cd](c/mk7cd.c)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |   80ms   |       1687M       |          2.9          |   B   |
 | loops3 | 300  |   [mk7cd](c/mk7cd.c)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  112ms   |       1205M       |          3.9          |   D   |
-| loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                            |        --         |   135M    | 30k  |  6.4µs⚡  |       21T⚡        |         1/4k⚡         |   B   |
-| loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                            |        --         |   135M    | 30k  |  0.8µs⚡  |       168T⚡       |        1/35k⚡         |   D   |
+| loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                            |        --         |   135M    | 30K  |  6.4µs⚡  |       21T⚡        |         1/4k⚡         |   B   |
+| loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                            |        --         |   135M    | 30K  |  0.8µs⚡  |       168T⚡       |        1/35k⚡         |   D   |
 | loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                            |        --         |   135M    | 30   |  160ms   |       843M        |          5.7          |   C   |
+|        |      |                         |                            |                   |           |      |          |                   |                       |       |
+| sieve  | 900  |   [mk8](nim/mk8.nim)    |  [src](asm/sieve_mk8.asm)  |                   |    83K    | 1K   |  134µs   |                   |                       |   A   |
+| sieve  | 900  |    [mk8c](c/mk8c.c)     |  [src](asm/sieve_mk8.asm)  |                   |    83K    | 1K   |  110µs   |                   |                       |   B   |
 
 **setup A**: i7-9700K @ 4.8GHz, gcc 11.4.0, **nim 2.0.0**, -d:cc -d:release -d:danger --gc:arc
 
