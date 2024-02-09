@@ -7,7 +7,7 @@ poke=spa
 n=2
 i=3 p=4
 j=5 q=6
-array=10
+array=19
 
 lit 0 into 0
 lit 1 into 1
@@ -31,7 +31,10 @@ loop2:
     load n sub i jn end
     peek p jz not_prime
         load i out 0
-        # TODO: dont zero this number !!!
+        # dont zero out the prime number
+        load p into q
+        load i add i into j # j=2*i
+        jmp loop3
     not_prime:
 
     load p into q
