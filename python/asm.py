@@ -10,6 +10,7 @@ CFG = {
     'inline_comment_re': r'\(.*?\)', # TODO: multiple
     'ignored_tokens': [',','|'],
     'kv_separator': '=',
+    'kv_token_separator': ',',
     'case_insensitive': True,
     'force_opcodes_case':0, # -1:lower 1:upper
 }
@@ -60,10 +61,13 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
             # kv
             elif CFG['kv_separator'] in token:
                 k,_,v = token.partition(CFG['kv_separator'])
-                if v in opcodes:
-                    kv[k] = opcodes[v]
-                else:
-                    kv[k] = int(v)
+                v_tokens = []
+                for x in v.split(CFG['kv_token_separator']):
+                    if x in opcodes:
+                        v_tokens += [opcodes[x]]
+                    else:
+                        v_tokens += [int(x)]
+                kv[k] = v_tokens
             else:
                 tokens += [token]
     # second pass - all labels are known
@@ -78,7 +82,7 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
             out += [opcodes[token]]
         # kv use
         elif token in kv:
-            out += [kv[token]]
+            out += kv[token] # kv returns list
         # ignored
         elif token in CFG['ignored_tokens']:
             pass
