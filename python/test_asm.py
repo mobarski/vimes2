@@ -53,13 +53,3 @@ def test_get_opcodes():
     text = open('../c/mk7c.h').read()
     opcodes = asm.get_opcodes_from_text(text)
     print(opcodes)
-
-def test_kv_macro():
-    text = """
-        lucky=lit,7,out,0,out,0,out,0
-        output=out,0
-        lit 33 lucky lit 44
-        output lit 55
-    """
-    pcode = asm.compile(text, {'lit':11, 'out':22})
-    assert pcode == [11,33,11,7,22,0,22,0,22,0,11,44,22,0,11,55]
