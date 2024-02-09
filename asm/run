@@ -20,4 +20,4 @@ python3 ../python/asm.py $opcodes $2 -f b10 -o b10/$2.b10
 python3 ../python/asm.py $opcodes $2 -f b16 -o b16/$2.b16
 
 # run the selected version
-nim r -d:cc -d:release $aux ../nim/$1 -f:$fmt $fmt/$2.$fmt ${@:3}
+nim r -d:cc -d:release $aux ../nim/$1 $fmt/$2.$fmt ${@:3}

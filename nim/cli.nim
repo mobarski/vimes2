@@ -7,7 +7,7 @@ import vimes/load
 import bench
 include debug_mem
 
-let VERSION = "0.2.1"
+let VERSION = "0.3"
 
 type Cfg = object
     input_path: string
@@ -22,11 +22,9 @@ proc print_help() =
     echo "  -d        dump debug info"
     echo "  -t        trace execution"
     echo "  -b <n>    benchmark mode, run <n> times"
-    #echo "  -f <fmt>  input format: hex | b10 | b16"
     echo "  -h        print this help"
     echo "  -help     print this help"
     echo "  -v        print version"
-
 
 proc get_cli_config() : Cfg = 
     result.format = "b10"
@@ -45,10 +43,6 @@ proc get_cli_config() : Cfg =
                         var vi : int
                         if parse_int(p.val, vi) > 0:
                             result.benchmark = vi
-                    # of "f":
-                    #     if p.val notin @["hex", "b10", "b16"]:
-                    #         quit("ERROR: unknown format '" & p.val & "'", 1)
-                    #     result.format = p.val
                     of "v":
                         echo VERSION
                         quit("", 0)
@@ -66,13 +60,7 @@ proc cli() =
     let cfg = get_cli_config()
     var bench = new_bench()
     let text = read_file(cfg.input_path)
-    case cfg.format:
-        of "hex":
-            code = code_from_hex[Word](text)
-        of "b10":
-            code = code_from_num[Word](text, base=10)
-        of "b16":
-            code = code_from_num[Word](text, base=16)
+    code = code_from_num[Word](text, base=10)
     if cfg.benchmark > 0:
         for i in 1..cfg.benchmark:
             reset(quick=true)
