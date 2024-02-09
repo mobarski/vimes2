@@ -22,14 +22,14 @@ proc print_help() =
     echo "  -d        dump debug info"
     echo "  -t        trace execution"
     echo "  -b <n>    benchmark mode, run <n> times"
-    echo "  -f <fmt>  input format: hex | b10 | b16"
+    #echo "  -f <fmt>  input format: hex | b10 | b16"
     echo "  -h        print this help"
     echo "  -help     print this help"
     echo "  -v        print version"
 
 
 proc get_cli_config() : Cfg = 
-    result.format = "hex"
+    result.format = "b10"
     #
     let params = command_line_params()
     var p = init_opt_parser(params)
@@ -45,10 +45,10 @@ proc get_cli_config() : Cfg =
                         var vi : int
                         if parse_int(p.val, vi) > 0:
                             result.benchmark = vi
-                    of "f":
-                        if p.val notin @["hex", "b10", "b16"]:
-                            quit("ERROR: unknown format '" & p.val & "'", 1)
-                        result.format = p.val
+                    # of "f":
+                    #     if p.val notin @["hex", "b10", "b16"]:
+                    #         quit("ERROR: unknown format '" & p.val & "'", 1)
+                    #     result.format = p.val
                     of "v":
                         echo VERSION
                         quit("", 0)
