@@ -62,12 +62,12 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
 - **mk7** - register based vm inspired by [Human Resource Machine](https://store.steampowered.com/app/375820/Human_Resource_Machine/)
 
-  - **mk7c** - `mk7` implemented in C (🚧)
-  - **mk7ci** - `mk7` implementation in C, indirect threading (🚧)
-    - **mk7ci2** - `mk7ci` with acc as register variable (🚧)
-  - **mk7cd** - `mk7` implementation in C, direct threading (🚧)
+  - **mk7c** - `mk7` implemented in C
+  - **mk7ci** - `mk7` implementation in C, indirect threading
+  - **mk7cd** - `mk7` implementation in C, direct threading
   - **mk7cc** - `mk7` asm compiled to C code (🚧)
   - **mk8** - `mk7` extended with pointer operations, call/return, ashr and nop
+    - **mk8cc** - `mk8` asm compiled to C code (🌱)
   - **mk11** - `mk7` extended with cooperative multitasking instructions (🌱)
 
 - **mk9** - two operands version of `mk7`
