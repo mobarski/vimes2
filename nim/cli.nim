@@ -5,6 +5,7 @@ import os
 
 import vimes/load
 import bench
+include debug_mem
 
 let VERSION = "0.2.1"
 
@@ -25,6 +26,7 @@ proc print_help() =
     echo "  -h        print this help"
     echo "  -help     print this help"
     echo "  -v        print version"
+
 
 proc get_cli_config() : Cfg = 
     result.format = "hex"
@@ -81,4 +83,5 @@ proc cli() =
         reset(quick=true)
         run()
     if cfg.debug:
+        debug_mem()
         debug()

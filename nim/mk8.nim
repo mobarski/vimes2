@@ -72,9 +72,10 @@ proc run() =
             else:
                 quit("unknown opcode op:" & $op, 1)
 
+#include debug_mem
 include cli
 if is_main_module:
     mem   = new_seq[Word](100)  # TODO: option
     stack = new_seq[Word](1000) # TODO: option
     cli()
-
+    #debug_mem()
