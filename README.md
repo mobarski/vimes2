@@ -20,6 +20,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
   - Creating a buffered reader for stdin.
   - Creating CLI.
   - Creating tests and benchmarks.
+- The ability to define aliases for values (like `n=1`) and mnemonics (like `peek=lpa`) is a huge step forward in assembly UX with very little changes in the assembler (1 token is still 1 token).
 
 **Performance:**
 
