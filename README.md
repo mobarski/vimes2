@@ -69,7 +69,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
   - **mk7cc** - `mk7` asm compiled to C code (🚧)
   - **mk8** - `mk7` extended with pointer operations, call/return, ashr and nop
     - **mk8c** - `mk8` implemented in C
-    - **mk8cc** - `mk8` asm compiled to C code (🌱)
+    - **mk8cc** - `mk8` asm compiled to C code (🚧)
   - **mk11** - `mk7` extended with cooperative multitasking instructions (🌱)
 
 - **mk9** - two operands version of `mk7`
