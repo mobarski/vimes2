@@ -1,4 +1,4 @@
-# mk7: register-based vm inspired by Human Resource Machine
+# mk8: mk7 with stack and memory addressing
 
 import strformat
 import vimes/sio
@@ -12,7 +12,7 @@ type Word = int16
 var pc: Word # program counter
 var sp: Word # stack pointer
 var acc: Word # accumulator
-var cc: int64 # used only when -d:cc is passed
+var cc: int64 # cycle counter
 var mem:   seq[Word] = @[] # memory
 var code:  seq[Word] = @[] # program
 var stack: seq[Word] = @[] # program

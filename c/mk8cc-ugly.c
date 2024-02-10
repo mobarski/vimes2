@@ -41,16 +41,21 @@ void* stack[100] = {};
 
 int64_t run() {
     register Word   acc = 0; // accumulator
-    register int64_t cc = 0; // used only when -d:cc is passed 
+    register int64_t cc = 0; // cycle counter
     register Word    sp = 0; // stack pointer
 
     in(0); sta(1);
     lit(42); out(0);
-    cal(lucky,xxx);
+    cal(foo,xxx);
+    lit(42); out(0);
+    cal(bar,yyy);
     lit(42); out(0);
     hlt(0);
-    lucky:
+    foo:
         lda(1); out(0); out(0); out(0);
+        ret(0);
+    bar:
+        lit(777); out(0);
         ret(0);
 
     return cc;
