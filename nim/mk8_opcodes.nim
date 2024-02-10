@@ -21,3 +21,6 @@ type Instr = enum
     SPA=16
     ASR=17
     NOP=18
+    # EXTENSION
+    PUSH=19
+    POP=20

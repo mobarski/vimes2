@@ -69,6 +69,9 @@ proc run() =
             of SPA: mem[mem[a]] = acc
             of ASR: acc = ashr(acc,a).Word
             of NOP: discard
+            # EXTENSION
+            of PUSH: mem[a]+=1; mem[mem[a]]=acc
+            of POP:  acc=mem[mem[a]]; mem[a]-=1
             else:
                 quit("unknown opcode op:" & $op, 1)
 

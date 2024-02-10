@@ -22,4 +22,7 @@ let opnames = {
     SPA:"SPA",
     ASR:"ASR",
     NOP:"NOP",
+    # EXTENSION
+    PUSH:"PUSH",
+    POP:"POP",
 }.to_table
