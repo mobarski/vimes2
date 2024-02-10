@@ -28,6 +28,7 @@ typedef enum {
 typedef int16_t Word;
 
 Word pc = 0; // program counter
+Word sp = 0; // stack pointer
 Word acc = 0; // accumulator
 Word *mem; // memory
 Word *code; // code
