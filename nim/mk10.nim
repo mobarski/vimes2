@@ -73,6 +73,4 @@ proc run() =
 
 include cli
 if is_main_module:
-    mem   = new_seq[Word](1024) # TODO: option
-    stack = new_seq[Word](1024) # TODO: option
     cli()

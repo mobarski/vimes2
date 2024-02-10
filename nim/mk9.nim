@@ -13,6 +13,7 @@ var pc: Word # program counter
 var cc: int64 # used only when -d:cc is passed
 var mem:   seq[Word] = @[] # memory
 var code:  seq[Word] = @[] # program
+var stack: seq[Word] = @[] # return stack (not used)
 
 proc reset(quick=false) =
     pc=0; cc=0
@@ -64,5 +65,4 @@ proc run() =
 
 include cli
 if is_main_module:
-    mem   = new_seq[Word](1024) # TODO: option
     cli()

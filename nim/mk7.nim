@@ -14,6 +14,7 @@ var acc: Word # accumulator
 var cc: int64 # used only when -d:cc is passed
 var mem:   seq[Word] = @[] # memory
 var code:  seq[Word] = @[] # program
+var stack: seq[Word] = @[] # return stack (not used)
 
 proc reset(quick=false) =
     pc=0; acc=0; cc=0
@@ -65,6 +66,4 @@ proc run() =
 
 include cli
 if is_main_module:
-    mem   = new_seq[Word](100) # TODO: option
     cli()
-
