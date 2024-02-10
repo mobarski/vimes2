@@ -1,7 +1,7 @@
-# A(x,y) ->
-#   y+1             if x==0
-#   A(x-1,1)        if y==0
-#   A(x-1,A(x,y-1)) otherwise
+# REF: https://en.wikipedia.org/wiki/Ackermann_function
+#  A(x,y) -> y+1             if x==0
+#            A(x-1,1)        if y==0
+#            A(x-1,A(x,y-1)) otherwise
 
 from=lda
 to=sta
