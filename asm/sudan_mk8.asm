@@ -6,8 +6,8 @@ to=sta
 peek=lpa
 poke=spa
 s=3 sb=10
-z=5
-p=6
+z=5 # result
+p=6 # pointer for peeking deeper into the stack
 n=7
 x=8
 y=9
@@ -25,8 +25,7 @@ cal sudan1
 pop s out 0
 hlt 0
 
-# stack ops version
-sudan1: (nxy--z)
+sudan: (nxy--z)
     peek s (y) jz y_is_0
     load s sub 2 to p peek p (n) jz n_is_0
 
@@ -53,14 +52,3 @@ sudan1: (nxy--z)
         pop s (nx--n) (acc=x)
         poke s (n--x)
         ret 0
-
-# variables version
-sudan2:
-    pop s to y
-    pop s to x
-    pop s to n
-
-    load n jz n_is_0
-    load y jz y_is_0
-
-    # TODO
