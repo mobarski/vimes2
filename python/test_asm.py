@@ -25,8 +25,8 @@ def test_comments():
 
 def test_comments2():
     text = """
-        11 (22 33) 44 , 55 # 66 77
-        88 (xxx 99 zzz) 22 (#) 33 , 44
+        11 (22 33) 44 55 # 66 77
+        88 (xxx 99 zzz) 22 (#) 33 44
         321 -- 123 432
     """
     pcode = asm.compile(text, {})
@@ -64,3 +64,12 @@ def test_kv_multi():
     """
     pcode = asm.compile(text, {'lit':1,'inc':11, 'spa':22})
     assert pcode == [1,55,11,5,22,5,1,66,11,5,22,5]
+
+
+def test_kv_empty():
+    text = """
+        [= ]= .= |=
+        [ 11 ] . 22 . 33 | 44 55 | 66 [ 77 ] 88
+    """
+    pcode = asm.compile(text, {})
+    assert pcode == [11,22,33,44,55,66,77,88]

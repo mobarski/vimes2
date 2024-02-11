@@ -8,7 +8,6 @@ import re
 CFG = {
     'line_comment': [';','#','--'],
     'inline_comment_re': r'\(.*?\)', # TODO: multiple
-    'ignored_tokens': [',','|'],
     'kv_separator': '=',
     'kv_token_separator': ',',
     'kv_iters': 100,
@@ -38,7 +37,6 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
     # first pass - collect labels
     label = {} # label_name -> label_pos
     tokens = []
-    n_ignored = 0
     kv = {}
     for line in lines:
         # remove inline comments
@@ -69,6 +67,7 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
                 for _ in range(CFG['kv_iters']):
                     resolved_tokens = []
                     for t in new_tokens:
+                       if not t: continue # skip empty tokens
                        resolved_tokens += kv.get(t,[t])
                     if tuple(resolved_tokens)==tuple(new_tokens):
                         break
@@ -86,9 +85,6 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
         # opcodes
         elif token in opcodes:
             out += [opcodes[token]]
-        # ignored
-        elif token in CFG['ignored_tokens']:
-            pass
         # numbers
         else:
             try:
