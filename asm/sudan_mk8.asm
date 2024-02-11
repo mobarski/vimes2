@@ -21,7 +21,7 @@ in 0 push s (n)
 in 0 push s (x)
 in 0 push s (y)
 
-cal sudan1
+cal sudan
 pop s out 0
 hlt 0
 
@@ -33,12 +33,12 @@ sudan: (nxy--z)
         load s sub 2 to p peek p push s (nxy | n)
         inc p peek p push s             (nxy | n x)
         inc p peek p sub 1 push s       (nxy | n x y-1)
-        cal sudan1 (nxy | z)
+        cal sudan (nxy | z)
         pop s to z (nxy) (z = S[n,x,y-1])
         pop s to y (nxy--nx)
         pop s (nx--n)
         pop s (n) sub 1 push s (n-1)
-        load z push s (n-1 z) add y push s (n-1 z z+y) cal sudan1
+        load z push s (n-1 z) add y push s (n-1 z z+y) cal sudan
         ret 0
 
     n_is_0:
