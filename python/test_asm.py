@@ -53,3 +53,14 @@ def test_get_opcodes():
     text = open('../c/mk7c.h').read()
     opcodes = asm.get_opcodes_from_text(text)
     print(opcodes)
+
+def test_kv_multi():
+    text = """
+        x=5
+        s=x
+        push-s=inc,s,spa,s
+        lit 55 push-s
+        lit 66 push-s
+    """
+    pcode = asm.compile(text, {'lit':1,'inc':11, 'spa':22})
+    assert pcode == [1,55,11,5,22,5,1,66,11,5,22,5]

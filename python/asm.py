@@ -10,6 +10,8 @@ CFG = {
     'inline_comment_re': r'\(.*?\)', # TODO: multiple
     'ignored_tokens': [',','|'],
     'kv_separator': '=',
+    'kv_token_separator': ',',
+    'kv_iters': 100,
     'case_insensitive': True,
     'force_opcodes_case':0, # -1:lower 1:upper
 }
@@ -57,13 +59,21 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
             if token[-1]==':':
                 name = token[:-1]
                 label[name] = len(tokens)
-            # kv
+            # kv definitions
             elif CFG['kv_separator'] in token:
                 k,_,v = token.partition(CFG['kv_separator'])
-                if v in opcodes:
-                    kv[k] = opcodes[v]
-                else:
-                    kv[k] = int(v)
+                kv[k] = v.split(CFG['kv_token_separator'])
+            # kv use
+            elif token in kv:
+                new_tokens = kv[token]
+                for _ in range(CFG['kv_iters']):
+                    resolved_tokens = []
+                    for t in new_tokens:
+                       resolved_tokens += kv.get(t,[t])
+                    if tuple(resolved_tokens)==tuple(new_tokens):
+                        break
+                    new_tokens = resolved_tokens
+                tokens += resolved_tokens
             else:
                 tokens += [token]
     # second pass - all labels are known
@@ -76,9 +86,6 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
         # opcodes
         elif token in opcodes:
             out += [opcodes[token]]
-        # kv use
-        elif token in kv:
-            out += [kv[token]]
         # ignored
         elif token in CFG['ignored_tokens']:
             pass
