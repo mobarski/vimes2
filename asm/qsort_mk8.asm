@@ -31,6 +31,8 @@ main:
     lit sb to s
     cal load-data
 
+    lit 0 push-s
+    load n sub 1 push-s
     cal sort
     cal show
     hlt 0
