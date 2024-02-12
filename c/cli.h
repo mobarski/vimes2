@@ -166,6 +166,11 @@ void run_vm(cli_config cfg) {
     } else {
         run();
     }
+
+    if (cfg.debug) {
+        debug_mem();
+        debug();
+    }
 }
 
 // ============================================================================
@@ -219,7 +224,6 @@ int cli_main(int argc, char *argv[]) {
         return -1;
     }
     run_vm(cfg);
-    //debug_mem(); // XXX
     return 0;
 }
 

@@ -2,13 +2,20 @@
 #include "cli.h"
 
 void reset(int quick) {
-    pc = 0; cc = 0; acc = 0;
+    pc = 0; cc = 0; acc = 0; sp = 0;
     if (!quick) reset_mem();   // from cli.h
     if (!quick) reset_stack(); // from cli.h
 }
 
-// TODO trace
-// TODO debug
+void trace(Word op, Word a) {
+    char* opname = op<=20 ? opnames[op] : "???";
+    fprintf(stderr, "| %4ld | %3d | %3d | %5s %3d | %3d | ", cc, pc, acc, opname, a, sp);
+    fprintf(stderr, "\n");
+}
+ 
+void debug() {
+    fprintf(stderr, "pc=%d sp=%d acc=%d\n", pc, sp, acc);
+}
 
 void run() {
     while (1) {
@@ -17,7 +24,7 @@ void run() {
         Word op = (Word)opc;
         Word a = code[pc + 1];
 
-        //trace(op, a); // XXX
+        //trace(op, a); // TODO: only when cfg.trace and compiled with trace
 
         cc += 1;
         pc += 2;

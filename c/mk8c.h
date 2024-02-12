@@ -26,7 +26,11 @@ typedef enum {
     PUSH = 19,
     POP = 20,
 
-} Instr;
+} Opcode;
+char* opnames[] = {
+    "HLT","IN","OUT","LDA","STA","ADD","SUB","INC","DEC","JMP",
+    "JZ","JN","LIT","CAL","RET","LPA","SPA","ASR","NOP","PUSH","POP",
+};
 
 typedef int16_t Word;
 
@@ -42,5 +46,5 @@ Word stack_size; // stack size
 int64_t cc = 0; // cycle counter
 
 void reset(int quick);
+void debug();
 void run();
-
