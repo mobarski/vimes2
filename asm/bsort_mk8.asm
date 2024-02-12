@@ -15,22 +15,13 @@ y=8
 a=9
 ab=10
 
-init:
+main:
     lit 0 to 0
     lit 1 to 1
-
-load:
-    in 0 to n
-    lit ab to a
-    load n to i
-    loop:
-        load i jz loop_end
-        in 0 poke a inc a dec i
-        jmp loop loop_end:
-
-cal sort
-cal show
-hlt 0
+    cal load-data
+    cal sort
+    cal show
+    hlt 0
 
 
 sort:
@@ -61,6 +52,17 @@ sort:
         load chg jz sort_end
         jmp loop2
     sort_end:
+    ret 0
+
+
+load-data:
+    in 0 to n
+    lit ab to a
+    load n to i
+    loop:
+        load i jz loop_end
+        in 0 poke a inc a dec i
+        jmp loop loop_end:
     ret 0
 
 

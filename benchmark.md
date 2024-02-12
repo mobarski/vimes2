@@ -16,7 +16,7 @@
   - **sudan** - Sudan function (https://rosettacode.org/wiki/Sudan_function)
 
 - sorting:
-  - 🌱 **bsort** - Buttle sort https://rosettacode.org/wiki/Sorting_algorithms/Bubble_sort
+  - **bsort** - Buttle sort https://rosettacode.org/wiki/Sorting_algorithms/Bubble_sort
   - 🌱 **isort** - Insertion sort (https://rosettacode.org/wiki/Sorting_algorithms/Insertion_sort)
   - 🌱 **gsort** - Gnome sort (https://rosettacode.org/wiki/Sorting_algorithms/Gnome_sort)
   - 🌱 **ssort** - Shell sort (https://rosettacode.org/wiki/Sorting_algorithms/Shell_sort)
