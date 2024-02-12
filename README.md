@@ -17,12 +17,15 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
   - Transforming assembly into machine code.
   - Loading machine code into the VM.
-  - Creating a buffered reader for stdin.
+  - Creating a buffered reader and an int parser for stdin.
   - Creating CLI.
   - Creating tests and benchmarks.
 - The ability to define aliases for values (like `n=1`) and mnemonics (like `peek=lpa`) is a huge step forward in assembly UX with very little changes in the assembler (1 token is still 1 token).
+- The ability to define multi-token aliases is another step forward in assembly UX. It also facilitates keeping the instruction set orthogonal.
 
 **Performance:**
+
+- 🔥 [benchmarking results](benchmark.md) 🔥
 
 - Wirth's machine is 2-3 times slower than register machines without stack frames.
 
@@ -67,58 +70,16 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
   - **mk7ci** - `mk7` implementation in C, indirect threading
   - **mk7cd** - `mk7` implementation in C, direct threading
   - **mk7cc** - `mk7` asm compiled to C code (🚧)
-  - **mk8** - `mk7` extended with pointer operations, call/return, ashr and nop
+  - **mk8** - `mk7` extended with pointer operations and subroutine call/return
     - **mk8c** - `mk8` implemented in C
     - **mk8cc** - `mk8` asm compiled to C code (🚧)
   - **mk11** - `mk7` extended with cooperative multitasking instructions (🌱)
 
 - **mk9** - two operands version of `mk7`
 
-  - **mk10** - `mk9` extended with pointer operations, call/return, ashr and nop
+  - **mk10** - `mk9` extended with pointer operations and subroutine call/return
 
   
-
-
-## Quick benchmarking results
-
-|  task  | arg  |           vm            |            src             | code size [words] | vm cycles | runs | avg time | avg vm cycles / s | cpu cycles / vm cycle | setup |
-| :----: | :--: | :---------------------: | :------------------------: | :---------------: | :-------: | ---- | :------: | :---------------: | :-------------------: | :---: |
-| loops3 |  30  |   [mk2](nim/mk2.nim)    | [src](asm/loops3_mk2.asm)  |        86         |   279K    | 1000 |  495µs   |       563M        |         8.53          |   A   |
-| loops3 |  30  |   [mk4](nim/mk4.nim)    | [src](asm/loops3_mk2.asm)  |        86         |   279K    | 1000 |  619µs   |       451M        |         10.64         |   A   |
-| loops3 |  30  |   [mk5](nim/mk5.nim)    | [src](asm/loops3_mk2.asm)  |        86         |   279K    | 1000 |  621µs   |       449M        |         10.69         |   A   |
-| loops3 |  30  |  [mk6](nim/mk6.nim) 🏆   | [src](asm/loops3_mk6.asm)  |       51 🥈        |  112K 🥇   | 1000 | 166µs 🥇  |       677M        |         7.09          |   A   |
-| loops3 |  30  |   [mk7](nim/mk7.nim)    | [src](asm/loops3_mk7.asm)  |       48 🥇        |  142K 🥈   | 1000 | 175µs 🥈  |       813M        |          5.9          |   A   |
-| loops3 |  30  |   [mk9](nim/mk9.nim)    | [src](asm/loops3_mk9.asm)  |        54         |   112K🥇   | 1000 | 175µs 🥈  |       640M        |          7.5          |   A   |
-| loops3 |  30  |  [mk12](nim/mk12.nim)   | [src](asm/loops3_mk12.asm) |        56         |   142k    | 1000 |  235µs   |       606M        |          7.9          |   A   |
-|        |      |                         |                            |                   |           |      |          |                   |                       |       |
-|  fibo  |  20  |   [mk1](nim/mk1.nim)    |  [src](asm/fibo_mk1.asm)   |        99         |   372K    | 1000 |  878µs   |       878M        |          5.5          |   A   |
-|  fibo  |  20  |   [mk6](nim/mk6.nim)    |  [src](asm/fibo_mk6.asm)   |        99         |   284K    | 1000 |  490µs   |       580M        |          8.3          |   A   |
-|  fibo  |  20  |   [mk8](nim/mk8.nim)    |  [src](asm/fibo_mk8.asm)   |        84         |   352K    | 1000 |  467µs   |       752M        |          6.4          |   A   |
-|  fibo  |  20  |  [mk10](nim/mk10.nim)   |  [src](asm/fibo_mk10.asm)  |        96         |   278K    | 1000 |  484µs   |       573M        |          8.4          |   A   |
-|        |      |                         |                            |                   |           |      |          |                   |                       |       |
-| loops3 | 300  |   [mk7](nim/mk7.nim)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  464ms   |       291M        |         16.5          |   A   |
-| loops3 | 300  |    [mk7c](c/mk7c.c)     | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  207ms   |       652M        |          7.4          |   B   |
-| loops3 | 300  |    [mk7c](c/mk7c.c)     | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  167ms   |       808M        |          5.9          |   D   |
-| loops3 | 300  |   [mk7ci](c/mk7ci.c)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |   86ms   |       1570M       |          3.1          |   B   |
-| loops3 | 300  |   [mk7ci](c/mk7ci.c)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  111ms   |       1215M       |          3.9          |   D   |
-| loops3 | 300  |   [mk7cd](c/mk7cd.c)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |   80ms   |       1687M       |          2.9          |   B   |
-| loops3 | 300  |   [mk7cd](c/mk7cd.c)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  112ms   |       1205M       |          3.9          |   D   |
-| loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                            |        --         |   135M    | 30K  |  6.4µs⚡  |       21T⚡        |         1/4k⚡         |   B   |
-| loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                            |        --         |   135M    | 30K  |  0.8µs⚡  |       168T⚡       |        1/35k⚡         |   D   |
-| loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                            |        --         |   135M    | 30   |  160ms   |       843M        |          5.7          |   C   |
-|        |      |                         |                            |                   |           |      |          |                   |                       |       |
-| sieve  | 900  |   [mk8](nim/mk8.nim)    |  [src](asm/sieve_mk8.asm)  |                   |    83K    | 1K   |  134µs   |                   |                       |   A   |
-| sieve  | 900  |    [mk8c](c/mk8c.c)     |  [src](asm/sieve_mk8.asm)  |                   |    83K    | 1K   |  110µs   |                   |                       |   B   |
-
-**setup A**: i7-9700K @ 4.8GHz, gcc 11.4.0, **nim 2.0.0**, -d:cc -d:release -d:danger --gc:arc
-
-**setup B**: i7-9700K @ 4.8GHz, **gcc 11.4.0**, -O3
-
-**setup C**: i7-9700K @ 4.8GHz, **tcc 0.9.27**
-
-**setup D**: i7-9700K @ 4.8GHz, **zig 0.11.0**, cc -O3
-
-
 
 ## VM registers / variable names
 
@@ -280,15 +241,21 @@ Extension 3 - ALU extension (common ops)
 
 ### mk8 instruction set
 
-mk7 instructions extended with
+mk7 instructions extended with:
 
 ```
 - CAL a ; call procedure at address (a)
 - RET 0 ; return from procedure
 - LPA a ; load memory location pointed by (a) to ACC
 - SPA a ; store ACC in memory location pointed by (a)
+```
+
+misc instructions:
+
+```
 - ASR a ; arithmetic shift right ACC by (a)
 - NOP a ; do nothing, (a) can be used to mark labels
+
 ```
 
 ### mk9 instruction set

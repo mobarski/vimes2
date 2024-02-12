@@ -48,6 +48,9 @@ void run() {
             case SPA: mem[mem[a]] = acc;     break;
             case ASR: acc >>= a;             break;
             case NOP:                        break;
+            // EXTENSION
+            case PUSH: mem[a]+=1; mem[mem[a]]=acc; break;
+            case POP:  acc=mem[mem[a]]; mem[a]-=1; break;
             // other
             case HLT: return;
             default:  return;
