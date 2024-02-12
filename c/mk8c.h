@@ -28,8 +28,11 @@ typedef enum {
 
 } Opcode;
 char* opnames[] = {
-    "HLT","IN","OUT","LDA","STA","ADD","SUB","INC","DEC","JMP",
-    "JZ","JN","LIT","CAL","RET","LPA","SPA","ASR","NOP","PUSH","POP",
+    "HLT", "IN",  "OUT", "LDA", "STA",
+    "ADD", "SUB", "INC", "DEC", "JMP",
+    "JZ",  "JN",  "LIT", "CAL", "RET",
+    "LPA", "SPA", "ASR", "NOP", "PUSH",
+    "POP",
 };
 
 typedef int16_t Word;

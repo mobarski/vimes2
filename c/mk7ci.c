@@ -24,7 +24,9 @@ void run() {
     #define NEXT   goto *labels[op]
 
     void *labels[] = {
-        &&_HLT, &&_IN, &&_OUT, &&_LDA, &&_STA, &&_ADD, &&_SUB, &&_INC, &&_DEC, &&_JMP, &&_JZ, &&_JN, &&_LIT
+        &&_HLT, &&_IN,  &&_OUT, &&_LDA, &&_STA,
+        &&_ADD, &&_SUB, &&_INC, &&_DEC, &&_JMP,
+        &&_JZ,  &&_JN,  &&_LIT,
     };
 
     NEXT;

@@ -61,9 +61,9 @@
 | sieve  | 900  |    [mk8c](c/mk8c.c)     |  [src](asm/sieve_mk8.asm)  |                   |    83K    | 1K   |  141µs   |       588M        |                       |   D   |
 |        |      |                         |                            |                   |           |      |          |                   |                       |       |
 | acker  | 3,7  |   [mk8](nim/mk8.nim)    |                            |                   |   12.8M   | 100  |  15.2ms  |       847M        |                       |   A   |
-| acker  | 3,7  |    [mk8c](c/mk8c.c)     |                            |                   |   12.8M   |      |          |                   |                       |   B   |
-| acker  | 3,7  |    [mk8c](c/mk8c.c)     |                            |                   |   12.8M   |      |          |                   |                       |   C   |
-| acker  | 3,7  |    [mk8c](c/mk8c.c)     |                            |                   |   12.8M   |      |          |                   |                       |   D   |
+| acker  | 3,7  |    [mk8c](c/mk8c.c)     |                            |                   |   12.8M   | 100  |  15.6ms  |                   |                       |   B   |
+| acker  | 3,7  |    [mk8c](c/mk8c.c)     |                            |                   |   12.8M   | 100  |   49ms   |                   |                       |   C   |
+| acker  | 3,7  |    [mk8c](c/mk8c.c)     |                            |                   |   12.8M   | 100  |   20ms   |                   |                       |   D   |
 |        |      |                         |                            |                   |           |      |          |                   |                       |       |
 
 **setup A**: i7-9700K @ 4.8GHz, gcc 11.4.0, **nim 2.0.0**, -d:cc -d:release -d:danger --gc:arc
