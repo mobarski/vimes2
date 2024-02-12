@@ -63,7 +63,7 @@ sort:
         load tmp poke b
         inc a
         dec b
-        if1_end
+        if1_end:
       jmp loop1 loop1_end:
     # qsort from left to last index - args
       load a sub ab push-s load right push-s
