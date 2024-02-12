@@ -42,8 +42,8 @@ void run() {
                 // TODO: tmp==0
                 break;
             // MK8
-            case CAL: stack[sp]=pc; sp+=1;   break;
-            case RET: sp-=1; pc=stack[sp];   break;
+            case CAL: stack[sp]=pc; sp+=1; pc=a; break;
+            case RET: sp-=1; pc=stack[sp];       break;
             case LPA: acc = mem[mem[a]];     break;
             case SPA: mem[mem[a]] = acc;     break;
             case ASR: acc >>= a;             break;
