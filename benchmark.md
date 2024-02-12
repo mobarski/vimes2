@@ -7,20 +7,18 @@
 - loops:
   - **loops3** - nested loops (similar to: http://dada.perl.it/shootout/nestedloop_details.html)
   - **sieve** - Sieve of Eratosthenes (https://rosettacode.org/wiki/Sieve_of_Eratosthenes)
-
 - recurrency:
 
   - **fibo** - Fibonacci sequence (https://rosettacode.org/wiki/Fibonacci_sequence)
   - **acker** - Ackermann function (https://rosettacode.org/wiki/Ackermann_function)
 
   - **sudan** - Sudan function (https://rosettacode.org/wiki/Sudan_function)
-
 - sorting:
   - **bsort** - Buttle sort https://rosettacode.org/wiki/Sorting_algorithms/Bubble_sort
+  - 🚧 **qsort** - Quick sort (https://rosettacode.org/wiki/Sorting_algorithms/Quicksort)
   - 🌱 **isort** - Insertion sort (https://rosettacode.org/wiki/Sorting_algorithms/Insertion_sort)
   - 🌱 **gsort** - Gnome sort (https://rosettacode.org/wiki/Sorting_algorithms/Gnome_sort)
   - 🌱 **ssort** - Shell sort (https://rosettacode.org/wiki/Sorting_algorithms/Shell_sort)
-  - 🌱 **qsort** - Quick sort (https://rosettacode.org/wiki/Sorting_algorithms/Quicksort)
   - 🌱 **msort** - Merge sort (https://rosettacode.org/wiki/Sorting_algorithms/Merge_sort)
 
 
