@@ -52,7 +52,7 @@ sort:
         inc a
         jmp loop2 loop2_end:
       # while array[right] > pivot
-      loop3: peek b sub pivot jn loop3_end
+      loop3: peek b sub pivot jz loop3_end
         dec b
         jmp loop3 loop3_end:
       # if left <= right
