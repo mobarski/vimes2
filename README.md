@@ -21,7 +21,8 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
   - Creating CLI.
   - Creating tests and benchmarks.
 - The ability to define aliases for values (like `n=1`) and mnemonics (like `peek=lpa`) is a huge step forward in assembly UX with very little changes in the assembler (1 token is still 1 token).
-- The ability to define multi-token aliases is another step forward in assembly UX. It also facilitates keeping the instruction set orthogonal.
+- The ability to define multi-token aliases facilitates keeping the instruction set orthogonal.
+- Having many different conditional jumps makes the code easier to write and read.
 
 **Performance:**
 
