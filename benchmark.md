@@ -29,42 +29,44 @@
 
 
 
-|  task  | args |           vm            |            src             | code size [words] | vm cycles | runs | avg time | avg vm cycles / s | cpu cycles / vm cycle | setup |
-| :----: | :--: | :---------------------: | :------------------------: | :---------------: | :-------: | ---- | :------: | :---------------: | :-------------------: | :---: |
-| loops3 |  30  |   [mk2](nim/mk2.nim)    | [src](asm/loops3_mk2.asm)  |        86         |   279K    | 1000 |  495µs   |       563M        |         8.53          |   A   |
-| loops3 |  30  |   [mk4](nim/mk4.nim)    | [src](asm/loops3_mk2.asm)  |        86         |   279K    | 1000 |  619µs   |       451M        |         10.64         |   A   |
-| loops3 |  30  |   [mk5](nim/mk5.nim)    | [src](asm/loops3_mk2.asm)  |        86         |   279K    | 1000 |  621µs   |       449M        |         10.69         |   A   |
-| loops3 |  30  |  [mk6](nim/mk6.nim) 🏆   | [src](asm/loops3_mk6.asm)  |       51 🥈        |  112K 🥇   | 1000 | 166µs 🥇  |       677M        |         7.09          |   A   |
-| loops3 |  30  |   [mk7](nim/mk7.nim)    | [src](asm/loops3_mk7.asm)  |       48 🥇        |  142K 🥈   | 1000 | 175µs 🥈  |       813M        |          5.9          |   A   |
-| loops3 |  30  |   [mk9](nim/mk9.nim)    | [src](asm/loops3_mk9.asm)  |        54         |   112K🥇   | 1000 | 175µs 🥈  |       640M        |          7.5          |   A   |
-| loops3 |  30  |  [mk12](nim/mk12.nim)   | [src](asm/loops3_mk12.asm) |        56         |   142k    | 1000 |  235µs   |       606M        |          7.9          |   A   |
-|        |      |                         |                            |                   |           |      |          |                   |                       |       |
-|  fibo  |  20  |   [mk1](nim/mk1.nim)    |  [src](asm/fibo_mk1.asm)   |        99         |   372K    | 1000 |  878µs   |       878M        |          5.5          |   A   |
-|  fibo  |  20  |   [mk6](nim/mk6.nim)    |  [src](asm/fibo_mk6.asm)   |        99         |   284K    | 1000 |  490µs   |       580M        |          8.3          |   A   |
-|  fibo  |  20  |   [mk8](nim/mk8.nim)    |  [src](asm/fibo_mk8.asm)   |        84         |   352K    | 1000 |  467µs   |       752M        |          6.4          |   A   |
-|  fibo  |  20  |  [mk10](nim/mk10.nim)   |  [src](asm/fibo_mk10.asm)  |        96         |   278K    | 1000 |  484µs   |       573M        |          8.4          |   A   |
-|        |      |                         |                            |                   |           |      |          |                   |                       |       |
-| loops3 | 300  |   [mk7](nim/mk7.nim)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  464ms   |       291M        |         16.5          |   A   |
-| loops3 | 300  |    [mk7c](c/mk7c.c)     | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  207ms   |       652M        |          7.4          |   B   |
-| loops3 | 300  |    [mk7c](c/mk7c.c)     | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  167ms   |       808M        |          5.9          |   D   |
-| loops3 | 300  |   [mk7ci](c/mk7ci.c)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |   86ms   |       1570M       |          3.1          |   B   |
-| loops3 | 300  |   [mk7ci](c/mk7ci.c)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  111ms   |       1215M       |          3.9          |   D   |
-| loops3 | 300  |   [mk7cd](c/mk7cd.c)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |   80ms   |       1687M       |          2.9          |   B   |
-| loops3 | 300  |   [mk7cd](c/mk7cd.c)    | [src](asm/loops3_mk7.asm)  |        48         |   135M    | 30   |  112ms   |       1205M       |          3.9          |   D   |
-| loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                            |        --         |   135M    | 30K  |  6.4µs⚡  |       21T⚡        |         1/4k⚡         |   B   |
-| loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                            |        --         |   135M    | 30K  |  0.8µs⚡  |       168T⚡       |        1/35k⚡         |   D   |
-| loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                            |        --         |   135M    | 30   |  160ms   |       843M        |          5.7          |   C   |
-|        |      |                         |                            |                   |           |      |          |                   |                       |       |
-| sieve  | 900  |   [mk8](nim/mk8.nim)    |  [src](asm/sieve_mk8.asm)  |                   |    83K    | 1K   |  134µs   |       619M        |                       |   A   |
-| sieve  | 900  |    [mk8c](c/mk8c.c)     |  [src](asm/sieve_mk8.asm)  |                   |    83K    | 1K   |  107µs   |       775M        |                       |   B   |
-| sieve  | 900  |    [mk8c](c/mk8c.c)     |  [src](asm/sieve_mk8.asm)  |                   |    83K    | 1K   |  313µs   |       265M        |                       |   C   |
-| sieve  | 900  |    [mk8c](c/mk8c.c)     |  [src](asm/sieve_mk8.asm)  |                   |    83K    | 1K   |  141µs   |       588M        |                       |   D   |
-|        |      |                         |                            |                   |           |      |          |                   |                       |       |
-| acker  | 3,7  |   [mk8](nim/mk8.nim)    |                            |                   |   12.8M   | 100  |  15.2ms  |       847M        |                       |   A   |
-| acker  | 3,7  |    [mk8c](c/mk8c.c)     |                            |                   |   12.8M   | 100  |  15.6ms  |                   |                       |   B   |
-| acker  | 3,7  |    [mk8c](c/mk8c.c)     |                            |                   |   12.8M   | 100  |   49ms   |                   |                       |   C   |
-| acker  | 3,7  |    [mk8c](c/mk8c.c)     |                            |                   |   12.8M   | 100  |   20ms   |                   |                       |   D   |
-|        |      |                         |                            |                   |           |      |          |                   |                       |       |
+|  task  | args |           vm            |               src                | vm cycles | runs | avg time | avg vm cycles / s | cpu cycles / vm cycle | setup |
+| :----: | :--: | :---------------------: | :------------------------------: | :-------: | ---- | :------: | :---------------: | :-------------------: | :---: |
+| loops3 |  30  |   [mk2](nim/mk2.nim)    |    [src](asm/loops3_mk2.asm)     |   279K    | 1000 |  495µs   |       563M        |         8.53          |   A   |
+| loops3 |  30  |   [mk4](nim/mk4.nim)    |    [src](asm/loops3_mk2.asm)     |   279K    | 1000 |  619µs   |       451M        |         10.64         |   A   |
+| loops3 |  30  |   [mk5](nim/mk5.nim)    |    [src](asm/loops3_mk2.asm)     |   279K    | 1000 |  621µs   |       449M        |         10.69         |   A   |
+| loops3 |  30  |  [mk6](nim/mk6.nim) 🏆   |    [src](asm/loops3_mk6.asm)     |  112K 🥇   | 1000 | 166µs 🥇  |       677M        |         7.09          |   A   |
+| loops3 |  30  |   [mk7](nim/mk7.nim)    |    [src](asm/loops3_mk7.asm)     |  142K 🥈   | 1000 | 175µs 🥈  |       813M        |          5.9          |   A   |
+| loops3 |  30  |   [mk9](nim/mk9.nim)    |    [src](asm/loops3_mk9.asm)     |   112K🥇   | 1000 | 175µs 🥈  |       640M        |          7.5          |   A   |
+| loops3 |  30  |  [mk12](nim/mk12.nim)   |    [src](asm/loops3_mk12.asm)    |   142k    | 1000 |  235µs   |       606M        |          7.9          |   A   |
+|        |      |                         |                                  |           |      |          |                   |                       |       |
+|  fibo  |  20  |   [mk1](nim/mk1.nim)    |     [src](asm/fibo_mk1.asm)      |   372K    | 1000 |  878µs   |       878M        |          5.5          |   A   |
+|  fibo  |  20  |   [mk6](nim/mk6.nim)    |     [src](asm/fibo_mk6.asm)      |   284K    | 1000 |  490µs   |       580M        |          8.3          |   A   |
+|  fibo  |  20  |   [mk8](nim/mk8.nim)    |     [src](asm/fibo_mk8.asm)      |   352K    | 1000 |  467µs   |       752M        |          6.4          |   A   |
+|  fibo  |  20  |  [mk10](nim/mk10.nim)   |     [src](asm/fibo_mk10.asm)     |   278K    | 1000 |  484µs   |       573M        |          8.4          |   A   |
+|        |      |                         |                                  |           |      |          |                   |                       |       |
+| loops3 | 300  |   [mk7](nim/mk7.nim)    |    [src](asm/loops3_mk7.asm)     |   135M    | 30   |  464ms   |       291M        |         16.5          |   A   |
+| loops3 | 300  |    [mk7c](c/mk7c.c)     |    [src](asm/loops3_mk7.asm)     |   135M    | 30   |  207ms   |       652M        |          7.4          |   B   |
+| loops3 | 300  |    [mk7c](c/mk7c.c)     |    [src](asm/loops3_mk7.asm)     |   135M    | 30   |  167ms   |       808M        |          5.9          |   D   |
+| loops3 | 300  |   [mk7ci](c/mk7ci.c)    |    [src](asm/loops3_mk7.asm)     |   135M    | 30   |   86ms   |       1570M       |         3.1 🥈         |   B   |
+| loops3 | 300  |   [mk7ci](c/mk7ci.c)    |    [src](asm/loops3_mk7.asm)     |   135M    | 30   |  111ms   |       1215M       |          3.9          |   D   |
+| loops3 | 300  |   [mk7cd](c/mk7cd.c)    |    [src](asm/loops3_mk7.asm)     |   135M    | 30   |   80ms   |       1687M       |         2.9 🥇         |   B   |
+| loops3 | 300  |   [mk7cd](c/mk7cd.c)    |    [src](asm/loops3_mk7.asm)     |   135M    | 30   |  112ms   |       1205M       |          3.9          |   D   |
+| loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                                  |   135M    | 30K  |  6.4µs⚡  |       21T⚡        |         1/4k⚡         |   B   |
+| loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                                  |   135M    | 30K  |  0.8µs⚡  |       168T⚡       |        1/35k⚡         |   D   |
+| loops3 | 300  | [mk7cc](c/mk7cc-ugly.c) |                                  |   135M    | 30   |  160ms   |       843M        |          5.7          |   C   |
+|        |      |                         |                                  |           |      |          |                   |                       |       |
+| sieve  | 900  |   [mk8](nim/mk8.nim)    |     [src](asm/sieve_mk8.asm)     |    83K    | 1K   |  134µs   |       619M        |          7.7          |   A   |
+| sieve  | 900  |    [mk8c](c/mk8c.c)     |     [src](asm/sieve_mk8.asm)     |    83K    | 1K   |  107µs   |       775M        |          6.2          |   B   |
+| sieve  | 900  |    [mk8c](c/mk8c.c)     |     [src](asm/sieve_mk8.asm)     |    83K    | 1K   |  313µs   |       265M        |          18           |   C   |
+| sieve  | 900  |    [mk8c](c/mk8c.c)     |     [src](asm/sieve_mk8.asm)     |    83K    | 1K   |  141µs   |       588M        |          8.2          |   D   |
+|        |      |                         |                                  |           |      |          |                   |                       |       |
+| acker  | 3,7  |   [mk8](nim/mk8.nim)    | [src](asm/ackerman_mk8_mtkv.asm) |   12.8M   | 100  |  15.2ms  |       847M        |          5.7          |   A   |
+| acker  | 3,7  |    [mk8c](c/mk8c.c)     | [src](asm/ackerman_mk8_mtkv.asm) |   12.8M   | 100  |  15.6ms  |       842M        |          5.7          |   B   |
+| acker  | 3,7  |    [mk8c](c/mk8c.c)     | [src](asm/ackerman_mk8_mtkv.asm) |   12.8M   | 100  |   49ms   |       261M        |          18           |   C   |
+| acker  | 3,7  |    [mk8c](c/mk8c.c)     | [src](asm/ackerman_mk8_mtkv.asm) |   12.8M   | 100  |   20ms   |       640M        |          7.5          |   D   |
+| acker  | 3,7  |   [mk8ci](c/mk8ci.c)    | [src](asm/ackerman_mk8_mtkv.asm) |   12.8M   | 100  |  9.9ms   |       1292M       |          3.7          |   B   |
+| acker  | 3,7  |   [mk8ci](c/mk8ci.c)    | [src](asm/ackerman_mk8_mtkv.asm) |   12.8M   | 100  |  9.8ms   |       1306M       |          3.7          |   D   |
+| acker  | 3,7  |   [mk8cd](c/mk8cd.c)    | [src](asm/ackerman_mk8_mtkv.asm) |   12.8M   | 100  |  9.24ms  |       1385M       |          3.5          |   B   |
 
 **setup A**: i7-9700K @ 4.8GHz, gcc 11.4.0, **nim 2.0.0**, -d:cc -d:release -d:danger --gc:arc
 
