@@ -48,22 +48,22 @@ sort:
     # select first element as the pivot
     peek a to pivot
     # while left <= right
-    loop1: load right sub left jn loop1_end
+    loop1: load b sub a jn loop1_end
       # while array[left] < pivot
       loop2: peek a to tmp load pivot sub tmp jn loop2_end 
         inc a
         jmp loop2 loop2_end:
       # while array[right] > pivot
-      loop3: peek b sub pivot jz loop3_end
-        dec b
+      loop3: peek b sub pivot jn loop3_end jz loop3_end
+        dec b 
         jmp loop3 loop3_end:
       # if left <= right
-      load right sub left jn if1_end
+      load b sub a jn if1_end
         # swap array[left] and array[right]
         peek a to tmp
         peek b poke a
         load tmp poke b
-        inc a
+        inc a 
         dec b
         if1_end:
       jmp loop1 loop1_end:

@@ -8,8 +8,15 @@ void reset(int quick) {
 }
 
 void trace(Word op, Word a) {
+    Word watch[10] = {5,6,11,12,13};
+
     char* opname = op<=20 ? opnames[op] : "???";
     fprintf(stderr, "| %4ld | %3d | %3d | %5s %3d | %3d | ", cc, pc, acc, opname, a, sp);
+    for (int i=0; i<10; i++) {
+        if ((watch[i]>0) && (watch[i] < mem_size)) {
+            fprintf(stderr, "%3d | ", mem[watch[i]]);
+        }
+    }
     fprintf(stderr, "\n");
 }
  
@@ -24,7 +31,7 @@ void run() {
         Word op = (Word)opc;
         Word a = code[pc + 1];
 
-        //trace(op, a); // TODO: only when cfg.trace and compiled with trace
+        trace(op, a); // TODO: only when cfg.trace and compiled with trace
 
         cc += 1;
         pc += 2;
