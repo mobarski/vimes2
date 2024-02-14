@@ -68,8 +68,25 @@ def test_kv_multi():
 
 def test_kv_empty():
     text = """
-        [= ]= .= |=
-        [ 11 ] . 22 . 33 | 44 55 | 66 [ 77 ] 88
+        [= ]= ,= |=
+        [ 11 ] , 22 , 33 | 44 55 | 66 [ 77 ] 88
     """
     pcode = asm.compile(text, {})
     assert pcode == [11,22,33,44,55,66,77,88]
+
+def test_local_labels():
+    text = """
+        111
+        aaa: 222
+            .xxx: 333
+        bbb: 444
+            .xxx: 555
+        end:
+    """
+    pcode,labels = asm.compile(text, {}, with_labels=True)
+    assert(labels['aaa']==1)
+    assert(labels['aaa.xxx']==2)
+    assert(labels['bbb']==3)
+    assert(labels['bbb.xxx']==4)
+    assert(labels['end']==5)
+    assert pcode == [111, 222, 333, 444, 555]

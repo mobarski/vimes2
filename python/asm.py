@@ -15,7 +15,7 @@ CFG = {
     'force_opcodes_case':0, # -1:lower 1:upper
 }
 
-def compile(text, opcodes: dict[str,int]) -> list[int]:
+def compile(text, opcodes: dict[str,int], with_labels=False) -> list[int]:
     """compile text into p-code
     converts opcode names to numbers
     converts python integer literals  (ie. `1_234`) to plain numbers
@@ -38,6 +38,7 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
     label = {} # label_name -> label_pos
     tokens = []
     kv = {}
+    current_label = "_"
     for line in lines:
         # remove inline comments
         line = re.sub(CFG['inline_comment_re'], '', line)
@@ -56,7 +57,14 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
             # labels
             if token[-1]==':':
                 name = token[:-1]
+                if name[0]=='.':
+                    name = current_label + name
+                else:
+                    current_label = name
                 label[name] = len(tokens)
+            elif token[0]=='.': # local label
+                name = current_label + token
+                tokens += [name]
             # kv definitions
             elif CFG['kv_separator'] in token:
                 k,_,v = token.partition(CFG['kv_separator'])
@@ -92,7 +100,7 @@ def compile(text, opcodes: dict[str,int]) -> list[int]:
                 continue
             except:
                 raise Exception(f'Unknown token "{token}"')
-    return out
+    return out if not with_labels else (out,label)
 
 # === CLI =====================================================================
 
