@@ -38,7 +38,7 @@ right=12
 pivot=13
 first=14
 last=15
-ab=20
+array=20
 sb=999
 
 # this stack grows down!
@@ -51,8 +51,8 @@ main:
     lit sb to s
     call load-data
 
-    lit 0 push-s
-    load n sub 1 push-s
+    lit array push-s # left
+    lit array add n sub 1 push-s # right
     call sort
     call show
     hlt 0
@@ -102,7 +102,7 @@ sort:
 
 load-data:
     in 0 to n
-    lit ab to a
+    lit array to a
     load n to i
     load_loop:
         load i jz load_loop_end
@@ -113,7 +113,7 @@ load-data:
 
 show:
     load n to i
-    lit ab to a
+    lit array to a
     show_loop:
         load i jz show_end
         peek a out 0 inc a dec i
