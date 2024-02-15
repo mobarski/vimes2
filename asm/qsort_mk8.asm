@@ -1,10 +1,28 @@
 # REF: https://rosettacode.org/wiki/Sorting_algorithms/Quicksort
 
+# function quicksort(array)
+#     if length(array) > 1
+#         pivot := select any element of array
+#         left := first index of array
+#         right := last index of array
+#         while left ≤ right
+#             while array[left] < pivot
+#                 left := left + 1
+#             while array[right] > pivot
+#                 right := right - 1
+#             if left ≤ right
+#                 swap array[left] with array[right]
+#                 left := left + 1
+#                 right := right - 1
+#         quicksort(array from first index to right)
+#         quicksort(array from left to last index)
+
 # aliases
 load=lda
 to=sta
 peek=lpa
 poke=spa
+call=cal
 
 # variable location
 n=2
@@ -18,6 +36,8 @@ s=10
 left=11
 right=12
 pivot=13
+first=14
+last=15
 ab=20
 sb=999
 
@@ -29,51 +49,53 @@ main:
     lit 0 to 0
     lit 1 to 1
     lit sb to s
-    cal load-data
+    call load-data
 
     lit 0 push-s
     load n sub 1 push-s
-    cal sort
-    cal show
+    call sort
+    call show
     hlt 0
 
 (left right--)
 sort:
-    pop-s to right
-    pop-s to left
+    # load args from the stack
+    pop-s to right to last
+    pop-s to left  to first
+    # if length(array) > 1
     load right sub left jz sort_end
     sub 1 jz sort_end
-    lit ab add left to a
-    lit ab add right to b
     # select first element as the pivot
-    peek a to pivot
+    peek left to pivot
     # while left <= right
-    loop1: load b sub a jn loop1_end
+    loop1: load right sub left jn loop1_end
       # while array[left] < pivot
-      loop2: peek a to tmp load pivot sub tmp jn loop2_end 
-        inc a
+      loop2: peek left to tmp load pivot sub tmp jn loop2_end 
+        inc left
         jmp loop2 loop2_end:
       # while array[right] > pivot
-      loop3: peek b sub pivot jn loop3_end jz loop3_end
-        dec b 
+      loop3: peek right sub pivot jn loop3_end jz loop3_end
+        dec right
         jmp loop3 loop3_end:
       # if left <= right
-      load b sub a jn if1_end
+      load right sub left jn if1_end
         # swap array[left] and array[right]
-        peek a to tmp
-        peek b poke a
-        load tmp poke b
-        inc a 
-        dec b
+        peek left to tmp
+        peek right poke left
+        load tmp poke right
+        inc left 
+        dec right
         if1_end:
       jmp loop1 loop1_end:
     # qsort from left to last index - args
-      load a sub ab push-s load right push-s
+      load left push-s
+      load last push-s
     # qsort from first index to right - args and call
-      load left push-s load b sub ab push-s
-      cal sort
+      load first push-s
+      load right push-s
+      call sort
     # qsort from left to last index - call
-      cal sort
+      call sort
     #end
     sort_end:
     ret 0
