@@ -15,7 +15,7 @@
   - **sudan** - Sudan function (https://rosettacode.org/wiki/Sudan_function)
 - sorting:
   - **bsort** - Bubble sort https://rosettacode.org/wiki/Sorting_algorithms/Bubble_sort
-  - 🚧 **qsort** - Quick sort (https://rosettacode.org/wiki/Sorting_algorithms/Quicksort)
+  - **qsort** - Quick sort (https://rosettacode.org/wiki/Sorting_algorithms/Quicksort)
   - 🌱 **isort** - Insertion sort (https://rosettacode.org/wiki/Sorting_algorithms/Insertion_sort)
   - 🌱 **gsort** - Gnome sort (https://rosettacode.org/wiki/Sorting_algorithms/Gnome_sort)
   - 🌱 **ssort** - Shell sort (https://rosettacode.org/wiki/Sorting_algorithms/Shell_sort)
@@ -70,6 +70,11 @@
 | bsort  | 640 items |    [mk8c](c/mk8c.c)     |     [src](asm/bsort_mk8.asm)     |    3M     | 1000 |  3.61ms  |       849M        |          5.6          |   B   |
 | bsort  | 640 items |   [mk8ci](c/mk8ci.c)    |     [src](asm/bsort_mk8.asm)     |    3M     | 1000 |  2.5ms   |       1227M       |          3.9          |   B   |
 | bsort  | 640 items |   [mk8cd](c/mk8cd.c)    |     [src](asm/bsort_mk8.asm)     |    3M     | 1000 |  2.48ms  |       1237M       |          3.9          |   B   |
+|        |           |                         |                                  |           |      |          |                   |                       |       |
+| qsort  | 640 items |   [mk8](nim/mk8.nim)    |     [src](asm/qsort_mk8.asm)     |   119k    | 1000 |  310µs   |       383M        |         12.6          |   A   |
+| qsort  | 640 items |    [mk8c](c/mk8c.c)     |     [src](asm/qsort_mk8.asm)     |   119k    | 1000 |  227µs   |       524M        |          9.2          |   B   |
+| qsort  | 640 items |   [mk8ci](c/mk8ci.c)    |     [src](asm/qsort_mk8.asm)     |   119k    | 1000 |  173µs   |       688M        |           7           |   B   |
+| qsort  | 640 items |   [mk8cd](c/mk8cd.c)    |     [src](asm/qsort_mk8.asm)     |   119k    | 1000 |  181µs   |       658M        |          7.3          |   B   |
 
 **setup A**: i7-9700K @ 4.8GHz, gcc 11.4.0, **nim 2.0.0**, -d:cc -d:release -d:danger --gc:arc
 

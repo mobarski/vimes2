@@ -31,7 +31,7 @@ void run() {
         Word op = (Word)opc;
         Word a = code[pc + 1];
 
-        trace(op, a); // TODO: only when cfg.trace and compiled with trace
+        //trace(op, a); // TODO: only when cfg.trace and compiled with trace
 
         cc += 1;
         pc += 2;
