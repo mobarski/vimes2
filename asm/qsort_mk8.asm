@@ -63,14 +63,13 @@ sort:
     pop-s to right to last
     pop-s to left  to first
     # if length(array) > 1
-    load right sub left jz sort_end
-    sub 1 jz sort_end
+    load right sub left jz sort_end jn sort_end
     # select first element as the pivot
     peek left to pivot
     # while left <= right
     loop1: load right sub left jn loop1_end
       # while array[left] < pivot
-      loop2: peek left to tmp load pivot sub tmp jn loop2_end 
+      loop2: peek left to tmp load pivot sub tmp jn loop2_end jz loop2_end
         inc left
         jmp loop2 loop2_end:
       # while array[right] > pivot

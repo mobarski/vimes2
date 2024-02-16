@@ -39,7 +39,11 @@ def compile(text, opcodes: dict[str,int], with_labels=False) -> list[int]:
     tokens = []
     kv = {}
     current_label = "_"
-    for line in lines:
+    for i,line in enumerate(lines):
+        # prepare explanation
+        line_num = i+1
+        pc = len(tokens)
+        #print(f"{pc:3} | {line}")
         # remove inline comments
         line = re.sub(CFG['inline_comment_re'], '', line)
         # split into tokens
