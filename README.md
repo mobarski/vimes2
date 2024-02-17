@@ -22,7 +22,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
   - Creating tests and benchmarks.
 - The ability to define aliases for values (like `n=1`) and mnemonics (like `peek=lpa`) is a huge step forward in assembly UX with very little changes in the assembler (1 token is still 1 token).
 - The ability to define multi-token aliases facilitates keeping the instruction set orthogonal.
-- Having many different conditional jumps makes the code easier to write and read.
+- Having all 3 conditional jumps related to comparison (<0, >0, ==0) makes the code much easier to write and read.
 
 **Performance:**
 
@@ -71,7 +71,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
   - **mk7ci** - `mk7` implementation in C, indirect threading
   - **mk7cd** - `mk7` implementation in C, direct threading
   - **mk7cc** - `mk7` asm compiled to C code (🚧)
-  - **mk8** - `mk7` extended with pointer operations and subroutine call/return
+  - **mk8** - `mk7` extended with pointer operations, subroutine call/return and one more conditional jump
     - **mk8c** - `mk8` implemented in C
     - **mk8ci** - `mk8` implemented in C, indirect threading
     - **mk8cd** - `mk8` implemented in C, indirect threading
