@@ -74,6 +74,11 @@ proc run() =
                 if acc>0: pc=a
             of PUSH: mem[a]+=1; mem[mem[a]]=acc
             of POP:  acc=mem[mem[a]]; mem[a]-=1
+            # EXTENSION 2
+            of JZP:
+                if acc>=0: pc=a
+            of JZN:
+                if acc<=0: pc=a
             else:
                 quit("unknown opcode op:" & $op, 1)
 

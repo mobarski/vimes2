@@ -26,4 +26,6 @@ let opnames = {
     PUSH:"PUSH",
     POP:"POP",
     JP:"JP",
+    JZP:"JZP",
+    JZN:"JZN",
 }.to_table

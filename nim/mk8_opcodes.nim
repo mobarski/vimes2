@@ -25,3 +25,5 @@ type Instr = enum
     PUSH=19
     POP=20
     JP=21
+    JZP=22
+    JZN=23

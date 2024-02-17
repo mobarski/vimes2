@@ -76,6 +76,7 @@
 | qsort  | 640 items |   [mk8ci](c/mk8ci.c)    |     [src](asm/qsort_mk8.asm)     |   119k    | 1000 |  173µs   |       688M        |           7           |   B   |
 | qsort  | 640 items |   [mk8cd](c/mk8cd.c)    |     [src](asm/qsort_mk8.asm)     |   119k    | 1000 |  181µs   |       658M        |       <br />7.3       |   B   |
 | qsort  | 640 items | [mk8](nim/mk8.nim) ext  |   [src](asm/qsort_mk8_ext.asm)   |    99k    | 1000 |  287µs   |       342M        |                       |   A   |
+| qsort  | 640 items | [mk8](nim/mk8.nim) ext2 |  [src](asm/qsort_mk8_ext2.asm)   |    91k    | 1000 |  277µs   |       327M        |                       |   A   |
 
 **setup A**: i7-9700K @ 4.8GHz, gcc 11.4.0, **nim 2.0.0**, -d:cc -d:release -d:danger --gc:arc
 
