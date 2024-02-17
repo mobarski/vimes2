@@ -63,7 +63,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
   - **mk12** - one operand version ok `mk6`
 
-  - **mk13** - `mk6` with stack frame similar to `mk1` (🌱)
+  - **mkXX**- `mk6` with stack frame similar to `mk1` (🌱)
 
 - **mk7** - register based vm inspired by [Human Resource Machine](https://store.steampowered.com/app/375820/Human_Resource_Machine/)
 
@@ -73,8 +73,10 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
   - **mk7cc** - `mk7` asm compiled to C code (🚧)
   - **mk8** - `mk7` extended with pointer operations and subroutine call/return
     - **mk8c** - `mk8` implemented in C
+    - **mk8ci** - `mk8` implemented in C, indirect threading
+    - **mk8cd** - `mk8` implemented in C, indirect threading
     - **mk8cc** - `mk8` asm compiled to C code (🚧)
-  - **mk11** - `mk7` extended with cooperative multitasking instructions (🌱)
+  - **mkXX** - `mk7` extended with cooperative multitasking instructions (🌱)
 
 - **mk9** - two operands version of `mk7`
 

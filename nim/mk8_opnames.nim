@@ -25,4 +25,5 @@ let opnames = {
     # EXTENSION
     PUSH:"PUSH",
     POP:"POP",
+    JP:"JP",
 }.to_table

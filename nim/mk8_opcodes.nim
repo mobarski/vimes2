@@ -24,3 +24,4 @@ type Instr = enum
     # EXTENSION
     PUSH=19
     POP=20
+    JP=21
