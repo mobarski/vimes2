@@ -57,25 +57,25 @@ main:
 
 sort:
     lit 1 to i
+    lit array add i to ai
     # for i from 1 to length[A]-1 do
     .loop1: load i cmp n add 1 jgt .loop1_end
         # value := A[i]
-        lit array add i to a peek a to value
+        peek ai to value
         # j = i-1
-        load i sub 1 to j
+        load ai to aj dec aj
         # while j >= 0 and A[j] > value do
-        .loop2: load j cmp 0 jlt .loop2_end  lit array add j to b peek b cmp value jlt .loop2_end jeq .loop2_end
+        .loop2: load aj cmp array jlt .loop2_end (and) peek aj cmp value jlt .loop2_end jeq .loop2_end
             # A[j+1] := A[j]
-            lit array add j add 1 to b
-            lit array add j to a peek a poke b
+            peek aj to tmp
+            inc aj load tmp poke aj dec aj
             # j := j-1
-            dec j
+            dec aj
             jmp .loop2 .loop2_end:
         # A[j+1] = value
-        lit array add j add 1 to b
-        load value poke b
+        inc aj load value poke aj dec aj
         # i++
-        inc i jmp .loop1 .loop1_end:
+        inc i inc ai jmp .loop1 .loop1_end:
     ret 0
 
 load-data:

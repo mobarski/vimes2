@@ -25,6 +25,9 @@ typedef enum {
     // EXTENSION
     PUSH = 19,
     POP = 20,
+    JP = 21,
+    JZP = 22,
+    JZN = 23,
 
 } Opcode;
 char* opnames[] = {
@@ -32,7 +35,7 @@ char* opnames[] = {
     "ADD", "SUB", "INC", "DEC", "JMP",
     "JZ",  "JN",  "LIT", "CAL", "RET",
     "LPA", "SPA", "ASR", "NOP", "PUSH",
-    "POP",
+    "POP"  "JP",  "JZP", "JZN"
 };
 
 typedef int16_t Word;

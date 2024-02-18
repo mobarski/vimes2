@@ -74,13 +74,12 @@
 | qsort  | 640 items |   [mk8](nim/mk8.nim)    |     [src](asm/qsort_mk8.asm)     |   119K    | 1000 |  310µs   |       383M        |         12.6          |   A   |
 | qsort  | 640 items |    [mk8c](c/mk8c.c)     |     [src](asm/qsort_mk8.asm)     |   119K    | 1000 |  227µs   |       524M        |          9.2          |   B   |
 | qsort  | 640 items |   [mk8ci](c/mk8ci.c)    |     [src](asm/qsort_mk8.asm)     |   119K    | 1000 |  173µs   |       688M        |           7           |   B   |
-| qsort  | 640 items |   [mk8cd](c/mk8cd.c)    |     [src](asm/qsort_mk8.asm)     |   119K    | 1000 |  181µs   |       658M        |       <br />7.3       |   B   |
-| qsort  | 640 items | [mk8](nim/mk8.nim) ext  |   [src](asm/qsort_mk8_ext.asm)   |    99K    | 1000 |  287µs   |       342M        |                       |   A   |
-| qsort  | 640 items | [mk8](nim/mk8.nim) ext2 |  [src](asm/qsort_mk8_ext2.asm)   |    91K    | 1000 |  277µs   |       327M        |                       |   A   |
+| qsort  | 640 items |   [mk8cd](c/mk8cd.c)    |     [src](asm/qsort_mk8.asm)     |   119K    | 1000 |  181µs   |       658M        |          7.3          |   B   |
+| qsort  | 640 items | [mk8](nim/mk8.nim) ext  |   [src](asm/qsort_mk8_ext.asm)   |    99K    | 1000 |  287µs   |       342M        |          14           |   A   |
+| qsort  | 640 items | [mk8](nim/mk8.nim) ext2 |  [src](asm/qsort_mk8_ext2.asm)   |    91K    | 1000 |  277µs   |       327M        |         14.7          |   A   |
 |        |           |                         |                                  |           |      |          |                   |                       |       |
-| isort  | 640 items | [mk8](nim/mk8.nim) ext  |                v1                |   1330K   | 1000 |  1.65ms  |       806M        |                       |   A   |
-| isort  | 640 items | [mk8](nim/mk8.nim) ext  |                v2                |   1018K   | 1000 |  1.30ms  |       780M        |                       |   A   |
-| isort  | 640 items | [mk8](nim/mk8.nim) ext  |                v3                |   669K    | 1000 |  900µs   |       742M        |                       |   A   |
+| isort  | 640 items | [mk8](nim/mk8.nim) ext  |   [src](asm/isort_mk8_ext.asm)   |   669K    | 1000 |  900µs   |       742M        |          6.5          |   A   |
+| isort  | 640 items |  [mk8c](c/mk8c.c) ext   |   [src](asm/isort_mk8_ext.asm)   |   669K    | 1000 |  813µs   |       822M        |          5.9          |   B   |
 
 **setup A**: i7-9700K @ 4.8GHz, gcc 11.4.0, **nim 2.0.0**, -d:cc -d:release -d:danger --gc:arc
 

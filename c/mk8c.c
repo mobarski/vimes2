@@ -65,6 +65,9 @@ void run() {
             // EXTENSION
             case PUSH: mem[a]+=1; mem[mem[a]]=acc; break;
             case POP:  acc=mem[mem[a]]; mem[a]-=1; break;
+            case JP:   if (acc >  0)  pc = a;  break;
+            case JZP:  if (acc >= 0)  pc = a;  break;
+            case JZN:  if (acc <= 0)  pc = a;  break;
             // other
             case HLT: return;
             default:  return;
