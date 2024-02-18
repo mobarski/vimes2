@@ -67,6 +67,8 @@ proc run() =
             of MTP: mem[mem[a]] = mem[b]
             of ASR: mem[a] = ashr(mem[a],b).Word
             of NOP: discard
+            of JP:
+                if mem[b]>0:  pc=a
             else:
                 quit("unknown opcode op:" & $op, 1)
         if pc==0: break

@@ -17,4 +17,5 @@ let opnames = {
     NOP: "NOP",
     PTM: "PTM",
     MTP: "MTP",
+    JP:  "JP",
 }.to_table

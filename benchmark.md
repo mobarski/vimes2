@@ -16,7 +16,7 @@
 - sorting:
   - **bsort** - Bubble sort https://rosettacode.org/wiki/Sorting_algorithms/Bubble_sort
   - **qsort** - Quick sort (https://rosettacode.org/wiki/Sorting_algorithms/Quicksort)
-  - 🚧 **isort** - Insertion sort (https://rosettacode.org/wiki/Sorting_algorithms/Insertion_sort)
+  - **isort** - Insertion sort (https://rosettacode.org/wiki/Sorting_algorithms/Insertion_sort)
   - 🌱 **gsort** - Gnome sort (https://rosettacode.org/wiki/Sorting_algorithms/Gnome_sort)
   - 🌱 **ssort** - Shell sort (https://rosettacode.org/wiki/Sorting_algorithms/Shell_sort)
   - 🌱 **msort** - Merge sort (https://rosettacode.org/wiki/Sorting_algorithms/Merge_sort)

@@ -81,7 +81,9 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 - **mk9** - two operands version of `mk7`
 
   - **mk10** - `mk9` extended with pointer operations and subroutine call/return
-
+    - **mk11** - `mk10` with operands order similar to natural language (🌱)
+  
+  
   
 
 ## VM registers / variable names
@@ -287,6 +289,7 @@ mk9 instructions extended with
 - MTP a b ; transfer from memory location (b) to pointer (a)
 - ASR a b ; arithmetic shift right mem[a] by (b)
 - NOP a b ; do nothing, (a) can be used to mark labels
+- JP  a b ; jump to address (a) if mem[b] is positve (>0)
 ```
 
 

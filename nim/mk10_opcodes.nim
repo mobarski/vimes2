@@ -16,3 +16,4 @@ type Instr = enum
     NOP=13
     PTM=14
     MTP=15
+    JP=16
