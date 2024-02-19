@@ -44,7 +44,7 @@ sort:
     lit i 1
     lit ai array
     add ai 1
-    .loop1: mov acc i cmp acc n sub acc 1 jeq .end1 acc
+    .loop1: mov acc i cmp acc n jeq .end1 acc
         ptm val ai
         mov aj ai
         sub aj 1
