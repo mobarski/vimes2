@@ -71,7 +71,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
   - **mk7ci** - `mk7` implementation in C, indirect threading
   - **mk7cd** - `mk7` implementation in C, direct threading
   - **mk7cc** - `mk7` asm compiled to C code (🚧)
-  - **mk8** - `mk7` extended with pointer operations, subroutine call/return and one more conditional jump
+  - **mk8** - `mk7` extended with pointer operations, subroutine call/return and one more conditional jump (🏆)
     - **mk8c** - `mk8` implemented in C
     - **mk8ci** - `mk8` implemented in C, indirect threading
     - **mk8cd** - `mk8` implemented in C, indirect threading
@@ -81,7 +81,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 - **mk9** - two operands version of `mk7`
 
   - **mk10** - `mk9` extended with pointer operations and subroutine call/return
-    - **mk11** - `mk10` with operands order changes (🌱)
+    - **mk11** - `mk10` with better UX (🌱)
   
   
   
