@@ -2,10 +2,10 @@
 cd $(dirname $0)
 
 # basic configuration
-aux="-d:trace -d:ic"
+#aux="-d:trace -d:ic"
 #aux=""
 #aux="-d:danger --gc:none"
-#aux="-d:danger --gc:arc"
+aux="-d:danger --gc:arc"
 
 # configure opcodes for the assembler
 opcodes=../nim/${1}_opcodes.nim
@@ -13,8 +13,7 @@ if [ ! -f $opcodes ]; then
     opcodes=../nim/mk1_opcodes.nim
 fi
 
-# create all versions for easy comparison
-python3 ../python/asm.py $opcodes $2 -f b10 -o pcode/$2.b10
+python3 ../python/asm.py $opcodes $2 -f b10 -o ../pcode/$2.b10
 
 # run the selected version
-nim r -d:cc -d:release $aux ../nim/$1 pcode/$2.b10 ${@:3}
+nim r -d:cc -d:release $aux ../nim/$1 ../pcode/$2.b10 ${@:3}
