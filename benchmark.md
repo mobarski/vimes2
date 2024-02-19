@@ -80,6 +80,7 @@
 |        |           |                         |                                  |           |      |          |                   |                       |       |
 | isort  | 640 items | [mk8](nim/mk8.nim) ext  |   [src](asm/isort_mk8_ext.asm)   |   669K    | 1000 |  900µs   |       742M        |          6.5          |   A   |
 | isort  | 640 items |  [mk8c](c/mk8c.c) ext   |   [src](asm/isort_mk8_ext.asm)   |   669K    | 1000 |  813µs   |       822M        |          5.9          |   B   |
+| isort  | 640 items |          mk10           |    [src](asm/isort_mk10.asm)     |   764K    | 1000 |  1.18ms  |       644M        |          7.5          |   A   |
 
 **setup A**: i7-9700K @ 4.8GHz, gcc 11.4.0, **nim 2.0.0**, -d:cc -d:release -d:danger --gc:arc
 

@@ -20,6 +20,7 @@ ai=9
 aj=10
 val=11
 acc=12
+an=13
 aptr=19
 array=20
 
@@ -41,10 +42,9 @@ main:
     hlt 0 0
 
 sort:
-    lit i 1
-    lit ai array
-    add ai 1
-    .loop1: mov acc i cmp acc n jeq .end1 acc
+    lit ai array add ai 1
+    lit an array add an n
+    .loop1: mov acc ai cmp acc an jeq .end1 acc
         ptm val ai
         mov aj ai
         sub aj 1
@@ -58,7 +58,7 @@ sort:
         add aj 1
         mtp aj val
         sub aj 1
-        add i 1 add ai 1 jmp .loop1 0 .end1:
+        add ai 1 jmp .loop1 0 .end1:
     ret 0 0
 
 load-data:
