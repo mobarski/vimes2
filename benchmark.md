@@ -82,8 +82,10 @@
 | isort  | 640 items |  [mk8c](c/mk8c.c) ext   |   [src](asm/isort_mk8_ext.asm)   |   669K    | 1000 |  813µs   |       822M        |          5.9          |   B   |
 | isort  | 640 items |  [mk10](nim/mk10.nim)   |    [src](asm/isort_mk10.asm)     |   764K    | 1000 |  1.18ms  |       644M        |          7.5          |   A   |
 |        |           |                         |                                  |           |      |          |                   |                       |       |
-| ssort  | 640 items | [mk8](nim/mk8.nim) ext  |     [src](asm/ssort_mk8.asm)     |   4.14M   | 1000 |  4.82ms  |       858M        |          5.6          |   A   |
-| ssort  |    640    |  [mk8c](c/mk8c.c) ext   |   [src](asm/isort_mk8_ext.asm)   |   4.14M   | 1000 |  4.69ms  |       883M        |          5.5          |   B   |
+| ssort  | 640 items | [mk8](nim/mk8.nim) ext  |     [src](asm/ssort_mk8.asm)     |   4.2M    | 1000 |  4.82ms  |       858M        |          5.6          |   A   |
+| ssort  | 640 items |  [mk8c](c/mk8c.c) ext   |   [src](asm/isort_mk8_ext.asm)   |   4.2M    | 1000 |  4.69ms  |       883M        |          5.5          |   B   |
+| ssort  | 640 items | [mk8](nim/mk8.nim) ext  |  [src v2](asm/ssort_v2_mk8.asm)  |   2.5M    | 1000 |  3.0ms   |       830M        |          5.8          |   A   |
+| ssort  | 640 items |  [mk8c](c/mk8c.c) ext   |  [src v2](asm/ssort_v2_mk8.asm)  |   2.5M    | 1000 |  2.86ms  |       872M        |          5.5          |   B   |
 
 **setup A**: i7-9700K @ 4.8GHz, gcc 11.4.0, **nim 2.0.0**, -d:cc -d:release -d:danger --gc:arc
 
