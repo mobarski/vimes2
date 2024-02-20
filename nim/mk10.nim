@@ -59,7 +59,7 @@ proc run() =
             of OUT: echo mem[a]
             of IN:   mem[a] = sio.read_int().Word
             # misc
-            of HLT:  pc=0
+            of HLT: break
             # MK10
             of CAL: stack[sp]=pc; sp+=1; pc=a
             of RET: sp-=1; pc=stack[sp]
@@ -71,7 +71,6 @@ proc run() =
                 if mem[b]>0:  pc=a
             else:
                 quit("unknown opcode op:" & $op, 1)
-        if pc==0: break
 
 include cli
 if is_main_module:

@@ -17,8 +17,8 @@
   - **bsort** - Bubble sort https://rosettacode.org/wiki/Sorting_algorithms/Bubble_sort
   - **qsort** - Quick sort (https://rosettacode.org/wiki/Sorting_algorithms/Quicksort)
   - **isort** - Insertion sort (https://rosettacode.org/wiki/Sorting_algorithms/Insertion_sort)
+  - 🌱 **ssort** - Selection sort (https://rosettacode.org/wiki/Sorting_algorithms/Selection_sort)
   - 🌱 **gsort** - Gnome sort (https://rosettacode.org/wiki/Sorting_algorithms/Gnome_sort)
-  - 🌱 **ssort** - Shell sort (https://rosettacode.org/wiki/Sorting_algorithms/Shell_sort)
   - 🌱 **msort** - Merge sort (https://rosettacode.org/wiki/Sorting_algorithms/Merge_sort)
 
 
@@ -80,7 +80,7 @@
 |        |           |                         |                                  |           |      |          |                   |                       |       |
 | isort  | 640 items | [mk8](nim/mk8.nim) ext  |   [src](asm/isort_mk8_ext.asm)   |   669K    | 1000 |  900µs   |       742M        |          6.5          |   A   |
 | isort  | 640 items |  [mk8c](c/mk8c.c) ext   |   [src](asm/isort_mk8_ext.asm)   |   669K    | 1000 |  813µs   |       822M        |          5.9          |   B   |
-| isort  | 640 items |          mk10           |    [src](asm/isort_mk10.asm)     |   764K    | 1000 |  1.18ms  |       644M        |          7.5          |   A   |
+| isort  | 640 items |  [mk10](nim/mk10.nim)   |    [src](asm/isort_mk10.asm)     |   764K    | 1000 |  1.18ms  |       644M        |          7.5          |   A   |
 
 **setup A**: i7-9700K @ 4.8GHz, gcc 11.4.0, **nim 2.0.0**, -d:cc -d:release -d:danger --gc:arc
 
