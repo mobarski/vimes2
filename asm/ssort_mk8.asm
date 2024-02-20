@@ -49,6 +49,7 @@ main:
 
 
 sort:
+    lit 0 to i
     # for i=0; i<n; i++
     .loop1: load i cmp n jgt .end jeq .end
         # for j=i, m=i; j<n; j++
@@ -60,13 +61,13 @@ sort:
             load a cmp b jeq .end3 jgt .end3
                 load j to m
             .end3:
-            # t = a[i]
-            lit ab add i to ai peek ai to t
-            # a[i] = a[m]
-            lit ab add m to am peek am poke ai
-            # a[m] = t
-            load t poke am
         inc j jmp .loop2 .end2:
+        # t = a[i]
+        lit ab add i to ai peek ai to t
+        # a[i] = a[m]
+        lit ab add m to am peek am poke ai
+        # a[m] = t
+        load t poke am
     inc i jmp .loop1 .end:
     ret 0
 
