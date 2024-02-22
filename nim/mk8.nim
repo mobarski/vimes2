@@ -79,6 +79,13 @@ proc run() =
                 if acc>=0: pc=a
             of JZN:
                 if acc<=0: pc=a
+            # EXTENSION 3
+            of LPAO:
+                b = code[pc]; pc+=1
+                acc = mem[mem[a]+b]
+            of SPAO:
+                b = code[pc]; pc+=1
+                mem[mem[a]+b] = acc
             else:
                 quit("unknown opcode op:" & $op, 1)
 

@@ -27,3 +27,5 @@ type Instr = enum
     JP=21
     JZP=22
     JZN=23
+    LPAO=24
+    SPAO=25

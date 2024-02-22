@@ -28,4 +28,6 @@ let opnames = {
     JP:"JP",
     JZP:"JZP",
     JZN:"JZN",
+    LPAO:"LPAO",
+    SPAO:"SPAO",
 }.to_table

@@ -30,8 +30,6 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
 - Wirth's machine is 2-3 times slower than register machines without stack frames.
 
-- VMs written in C are typically twice as fast as those written in Nim.
-
 - C enables more performant dispatch techniques, such as indirect and direct threading.
 
 - Indirect and direct threading are twice as fast as switch-based dispatch.
