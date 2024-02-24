@@ -63,6 +63,8 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
   - **mkXX**- `mk6` with stack frame similar to `mk1` (🌱)
 
+  - **mk11** - `mk6` with different conditional jumps
+
 - **mk7** - register based vm inspired by [Human Resource Machine](https://store.steampowered.com/app/375820/Human_Resource_Machine/)
 
   - **mk7c** - `mk7` implemented in C
@@ -79,7 +81,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 - **mk9** - two operands version of `mk7`
 
   - **mk10** - `mk9` extended with pointer operations and subroutine call/return
-    - **mk11** - `mk10` with better UX (🌱)
+    - **mkXX** - `mk10` with better UX (🌱)
   
   
   
