@@ -29,7 +29,7 @@ proc trace(op,a,b:Word) =
     let opname = opnames[cast[Instr](op)]
     let va = mem[a]
     let vb = mem[b]
-    stderr.write_line """| {cc:3} | {pc:2} | {sp:2} | {opname:>4} {a:2} {b:2} | {va:3} | {vb:3} | """.fmt
+    stderr.write_line """| {cc:3} | {pc:2} | {acc:2} | {opname:>4} {a:2} {b:2} | {va:3} | {vb:3} | """.fmt
 
 proc debug() =
     echo "pc:", pc, " sp:", sp, " cc:", cc

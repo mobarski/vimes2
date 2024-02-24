@@ -35,6 +35,7 @@
 | loops3 |    30     |  [mk6](nim/mk6.nim) 🏆   |    [src](asm/loops3_mk6.asm)     |  112K 🥇   | 1000 | 166µs 🥇  |       677M        |         7.09          |   A   |
 | loops3 |    30     |   [mk7](nim/mk7.nim)    |    [src](asm/loops3_mk7.asm)     |  142K 🥈   | 1000 | 175µs 🥈  |       813M        |          5.9          |   A   |
 | loops3 |    30     |   [mk9](nim/mk9.nim)    |    [src](asm/loops3_mk9.asm)     |   112K🥇   | 1000 | 175µs 🥈  |       640M        |          7.5          |   A   |
+| loops3 |    30     |  [mk11](nim/mk11.nim)   |    [src](asm/loops3_mk11.asm)    |   142K    | 1000 |  190µs   |       742M        |                       |   A   |
 | loops3 |    30     |  [mk12](nim/mk12.nim)   |    [src](asm/loops3_mk12.asm)    |   142K    | 1000 |  235µs   |       606M        |          7.9          |   A   |
 | loops3 |    30     |  [mk13](nim/mk13.nim)   |    [src](asm/loops3_mk13.asm)    |   142K    | 1000 |  206µs   |       684M        |                       |   A   |
 |        |           |                         |                                  |           |      |          |                   |                       |       |
