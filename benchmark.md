@@ -36,8 +36,8 @@
 | loops3 |    30     |   [mk7](nim/mk7.nim)    |    [src](asm/loops3_mk7.asm)     |  142K 🥈   | 1000 | 175µs 🥈  |       813M        |          5.9          |   A   |
 | loops3 |    30     |   [mk9](nim/mk9.nim)    |    [src](asm/loops3_mk9.asm)     |   112K🥇   | 1000 | 175µs 🥈  |       640M        |          7.5          |   A   |
 | loops3 |    30     |  [mk11](nim/mk11.nim)   |    [src](asm/loops3_mk11.asm)    |   142K    | 1000 |  190µs   |       742M        |                       |   A   |
-| loops3 |    30     |  [mk12](nim/mk12.nim)   |    [src](asm/loops3_mk12.asm)    |   142K    | 1000 |  235µs   |       606M        |          7.9          |   A   |
-| loops3 |    30     |  [mk13](nim/mk13.nim)   |    [src](asm/loops3_mk13.asm)    |   142K    | 1000 |  206µs   |       684M        |                       |   A   |
+| loops3 |    30     |  [mk12](nim/mk12.nim)   |    [src](asm/loops3_mk12.asm)    |   142K    | 1000 |  181µs   |       786M        |                       |   A   |
+| loops3 |    30     |  [mk13](nim/mk13.nim)   |    [src](asm/loops3_mk13.asm)    |   142K    | 1000 |  199µs   |       710M        |                       |   A   |
 |        |           |                         |                                  |           |      |          |                   |                       |       |
 |  fibo  |    20     |   [mk1](nim/mk1.nim)    |     [src](asm/fibo_mk1.asm)      |   372K    | 1000 |  878µs   |       878M        |          5.5          |   A   |
 |  fibo  |    20     |   [mk6](nim/mk6.nim)    |     [src](asm/fibo_mk6.asm)      |   284K    | 1000 |  490µs   |       580M        |          8.3          |   A   |
