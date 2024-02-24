@@ -18,7 +18,7 @@ var stack: seq[Word] = @[] # return stack
 var code:  seq[Word] = @[] # program
 
 proc reset(quick=false) =
-    pc=0; sp=0; cc=0
+    pc=0; sp=0; cc=0; acc=0
     if quick: return
     for j in low(mem)..high(mem):
         mem[j] = 0
