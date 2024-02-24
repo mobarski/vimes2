@@ -344,8 +344,8 @@ mk9 instructions extended with
 - INC  a  ; mem[a] += 1
 - DEC  a  ; mem[b] -= 1
 
-- PUTI 0  ; write acc as integer to stdout
-- GETI 0  ; acc = read integer from stdin (skip whitespace, block)
+- PUT 0   ; write acc as integer to stdout
+- GET 0   ; acc = read integer from stdin (skip whitespace, block)
 - EOF  0  ; acc = 1 if stdid.eof else 0
 - PUTC 0  ; write acc as character to stdout
 - GETC 0  ; acc = read character from stdin (block)
