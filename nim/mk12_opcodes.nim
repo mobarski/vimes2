@@ -21,9 +21,9 @@ type Instr = enum
     LE=19
     GT=20
     GE=21
-    PUTI=22
+    PUT=22
     PUTC=23
-    GETI=24
+    GET=24
     GETC=25
     EOF=26
     #

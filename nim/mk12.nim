@@ -73,18 +73,17 @@ proc run() =
             of GT:   acc = (acc >  mem[a]).ord.Word
             of GE:   acc = (acc >= mem[a]).ord.Word
             # stdio - TODO: as extension
-            of PUTI: echo acc
-            of PUTC: echo acc.char
-            of GETC: acc = sio.read_chr().Word
-            of GETI: acc = sio.read_int().Word
+            of PUT:  echo acc
+            of GET : acc = sio.read_int().Word
             of EOF:  acc = sio.eof.ord.Word
+            of GETC: acc = sio.read_chr().Word
+            of PUTC: echo acc.char
             # misc
-            of HLT:  pc=0
+            of HLT: break
             of INC: mem[a] += 1
             of DEC: mem[a] -= 1
             else:
                 quit("unknown opcode op:" & $op, 1)
-        if pc==0: break
 
 include cli
 if is_main_module:

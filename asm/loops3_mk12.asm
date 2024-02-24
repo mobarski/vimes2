@@ -1,31 +1,29 @@
-n:2 y:3 i:4 j:5 k:6
-COPY:LDA
-INTO:STA
+n=2 y=3 i=4 j=5 k=6
 
-LIT 0 INTO 0
-LIT 1 INTO 1
+load=lda
+to=sta
 
-GETI 0 INTO n
+lit 0 to 0
+lit 1 to 1
 
-COPY n INTO i ; i = n
+get 0 to n
+
+load n to i
 loop1:
-    COPY i JZ loop1_end
-    DEC i ; i--
-    COPY n INTO j ; j = n
+    load i jz end1
+    dec i
+    load n to j
     loop2:
-        COPY j JZ loop2_end
-        DEC j ; j--
-        COPY n INTO k ; k = n
+        load j jz end2
+        dec j
+        load n to k
         loop3:
-            COPY k JZ loop3_end
-            DEC k ; k--
-            INC y ; y++
-        JMP loop3
-        loop3_end:
-    JMP loop2
-    loop2_end:
-JMP loop1
-loop1_end:
+            load k jz end3
+            dec k
+            inc y
+            jmp loop3 end3:
+        jmp loop2 end2:
+    jmp loop1 end1:
 
-COPY y PUTI 0
-HLT 0
+load y put 0
+hlt 0
