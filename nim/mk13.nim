@@ -29,7 +29,7 @@ proc trace(op,a,b:Word) =
     let opname = opnames[cast[Instr](op)]
     let va = mem[a]
     let vb = mem[b]
-    stderr.write_line """| {cc:3} | {pc:2} | {sp:2} | {opname:>4} {a:2} {b:2} | {va:3} | {vb:3} | """.fmt
+    stderr.write_line """| {cc:3} | {pc:2} | {acc:2} | {opname:>4} {a:2} {b:2} | {va:3} | {vb:3} | """.fmt
 
 proc debug() =
     echo "pc:", pc, " sp:", sp, " cc:", cc
@@ -48,17 +48,17 @@ proc run() =
         case op:
             # control flow
             of JZ:
-                if acc==0: pc=b
+                if acc==0: pc=a # b is ignored
             of JNZ:
-                if acc!=0: pc=b
+                if acc!=0: pc=a # b is ignored
             of CAL:  stack[sp]=pc; sp+=1; pc=a # b is ignored
             of RET:  sp-=1; pc=stack[sp]       # a and b are ignored
             of JMP:  pc=a                      # b is ignored
             # memory
             of LIT:  mem[a] = b
             of MOV:  mem[a] = mem[b]
-            of LDA:  acc = mem[a]
-            of STA:  mem[a] = acc
+            of LDA:  acc = mem[a] # b is ignored
+            of STA:  mem[a] = acc # b is ignored
             of PEEK: acc = mem[mem[a]+b]
             of POKE: mem[mem[a]+b] = acc
             # alu
@@ -76,11 +76,11 @@ proc run() =
             of GT:   acc = (mem[a] >  mem[b]).ord.Word
             of GE:   acc = (mem[a] >= mem[b]).ord.Word
             # stdio
-            of PUT : echo mem[a]
-            of PUTC: echo mem[a].char
-            of GETC: mem[a] = sio.read_chr().Word
-            of GET : mem[a] = sio.read_int().Word
-            of EOF:  mem[a] = sio.eof.ord.Word
+            of PUT : echo mem[a]                   # b is ignored
+            of PUTC: echo mem[a].char              # b is ignored
+            of GETC: mem[a] = sio.read_chr().Word  # b is ignored
+            of GET : mem[a] = sio.read_int().Word  # b is ignored
+            of EOF:  mem[a] = sio.eof.ord.Word     # b is ignored
             # misc
             of HLT:  break
             else:
