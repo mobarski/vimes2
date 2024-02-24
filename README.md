@@ -57,12 +57,16 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
     - **mk4** - switch call threading version of `mk2`
     - **mk5** - indirect call threading version of `mk2`
+
 - **mk6** - register based vm inspired by [smol](https://github.com/mobarski/smol)
+
   - **mk11** - similar to `mk6` but conditional jumps are based on `acc` register
     - **mk13** - similar to `mk11` but closer to the [smol](https://github.com/mobarski/smol) language
   - **mk12** - one operand version ok `mk6`
   - **mkXX**- `mk6` with stack frame similar to `mk1` (🌱)
+
 - **mk7** - register based vm inspired by [Human Resource Machine](https://store.steampowered.com/app/375820/Human_Resource_Machine/)
+
   - **mk7c** - `mk7` implemented in C
   - **mk7ci** - `mk7` implementation in C, indirect threading
   - **mk7cd** - `mk7` implementation in C, direct threading
@@ -72,14 +76,12 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
     - **mk8ci** - `mk8` implemented in C, indirect threading
     - **mk8cd** - `mk8` implemented in C, indirect threading
     - **mk8cc** - `mk8` asm compiled to C code (🚧)
+  - **mk9** - two operands version of `mk7`
+    - **mk10** - `mk9` extended with pointer operations and subroutine call/return
+      - **mkXX** - `mk10` with better UX (🌱)
   - **mkXX** - `mk7` extended with cooperative multitasking instructions (🌱)
-- **mk9** - two operands version of `mk7`
 
-  - **mk10** - `mk9` extended with pointer operations and subroutine call/return
-    - **mkXX** - `mk10` with better UX (🌱)
-
-
-
+  
 
 ## VM registers / variable names
 
