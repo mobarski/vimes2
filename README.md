@@ -312,6 +312,7 @@ mk9 instructions extended with
 - MOD  a b  ; mem[a] = mem[a] % mem[b]
 - NEG  a 0  ; mem[a] = -mem[a]
 
+- CMP  a b  ; acc = mem[a] - mem[b] (compare)
 - JEQ  a 0  ; jump to (a) if acc == 0
 - JLT  a 0  ; jump to (a) if acc < 0
 - JGT  a 0  ; jump to (a) if acc > 0
@@ -354,7 +355,6 @@ mk9 instructions extended with
 - LE   a b  ; acc = 1 if mem[a] <= mem[b] else 0
 - GT   a b  ; acc = 1 if mem[a] >  mem[b] else 0
 - GE   a b  ; acc = 1 if mem[a] >= mem[b] else 0
-
 - JZ   a 0  ; jump to (a) if acc == 0 
 - JNZ  a 0  ; jump to (a) if acc != 0
 
