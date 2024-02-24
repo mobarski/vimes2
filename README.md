@@ -327,6 +327,45 @@ mk9 instructions extended with
 - PUTC a 0  ; write mem[a] as character to stdout
 ```
 
+### mk12 instruction set
+
+```
+- LIT  a  ; acc = a
+- LDA  a  ; acc = mem[a]
+- STA  a  ; mem[a] = acc
+- PEEK a  ; acc = mem[mem[a]]
+- POKE a  ; mem[mem[a]] = acc
+
+- JMP  a  ; jump to program location (a)
+- CAL  a  ; call subroutine at (a)
+- RET  0  ; return from subroutine call
+- HLT  0  ; halt the program
+
+- EQ   a  ; acc = 1 if acc == mem[b] else 0
+- NE   a  ; acc = 1 if acc != mem[b] else 0
+- LT   a  ; acc = 1 if acc <  mem[b] else 0
+- LE   a  ; acc = 1 if acc <= mem[b] else 0
+- GT   a  ; acc = 1 if acc >  mem[b] else 0
+- GE   a  ; acc = 1 if acc >= mem[b] else 0
+- JZ   a  ; jump to (a) if acc == 0 
+- JNZ  a  ; jump to (a) if acc != 0
+
+- ADD  a  ; acc += mem[a]
+- SUB  a  ; acc -= mem[a]
+- MUL  a  ; acc *= mem[a]
+- DIV  a  ; acc /= mem[a]
+- MOD  a  ; acc %= mem[a]
+- NEG  0  ; acc = -acc
+- INC  a  ; mem[a] += 1
+- DEC  a  ; mem[b] -= 1
+
+- PUTI 0  ; write acc as integer to stdout
+- GETI 0  ; acc = read integer from stdin (skip whitespace, block)
+- EOF  0  ; acc = 1 if stdid.eof else 0
+- PUTC 0  ; write acc as character to stdout
+- GETC 0  ; acc = read character from stdin (block)
+```
+
 ### mk13 instruction set
 
 ```
