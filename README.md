@@ -171,54 +171,40 @@ Extension 3 - ALU extension (common ops)
 
 ### mk6 instruction set
 
-**DATA TRANSFER**
-
 ```
 - LIT  a b  ; set memory location (a) to literal value (b)
 - MOV  a b  ; set memory location (a) to value from memory location (b)
 - PEEK a b  ; set memory location (a) with value from memory location indicated by (b)
 - POKE a b  ; set memory location indicated by (a) to value from memory location (b)
-```
 
-**CONTROL FLOW**
-
-```
 - JMP  a 0  ; jump to program location (a)
 - JZ   a b  ; if memory location (a) is zero then jump to program location (b)
 - JNZ  a b  ; if memory location (a) is not zero then jump to program location (b)
 - CAL  a 0  ; call subroutine at program location (a)
 - RET  0 0  ; return from subroutine call
 - HLT  0 0  ; halt the program
-```
 
-**ALU**
-
-```
 - ADD  a b  ; mem[a] = mem[a] + mem[b]
 - SUB  a b  ; mem[a] = mem[a] - mem[b]
 - MUL  a b  ; mem[a] = mem[a] * mem[b]
 - DIV  a b  ; mem[a] = mem[a] / mem[b]
 - MOD  a b  ; mem[a] = mem[a] % mem[b]
 - NEG  a 0  ; mem[a] = -mem[a]
+
 - EQ   a b  ; mem[a] = 1 if mem[a] == mem[b] else 0
 - NE   a b  ; mem[a] = 1 if mem[a] != mem[b] else 0
 - LT   a b  ; mem[a] = 1 if mem[a] <  mem[b] else 0
 - LE   a b  ; mem[a] = 1 if mem[a] <= mem[b] else 0
 - GT   a b  ; mem[a] = 1 if mem[a] >  mem[b] else 0
 - GE   a b  ; mem[a] = 1 if mem[a] >= mem[b] else 0
-```
 
-**IO**
-
-```
 - PUTC a 0  ; write the value from memory location (a) to stdout (as character)
 - PUTI a 0  ; write the value from memory location (a) to stdout (as integer)
 - GETC a 0  ; read a character from stdin and store it in memory location (a)
 - GETI a 0  ; read an integer from stdin and store it in memory location (a), skip initial whitespaces
 - EOF  a 0  ; set memory location (a) to 1 if stdin indicates end-of-file or to 0 otherwise
+
 ```
-
-
 
 ### mk7 instruction set
 
