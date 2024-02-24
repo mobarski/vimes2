@@ -59,6 +59,7 @@
 | sieve  |    900    |    [mk8c](c/mk8c.c)     |     [src](asm/sieve_mk8.asm)     |    83K    | 1K   |  107µs   |       775M        |          6.2          |   B   |
 | sieve  |    900    |    [mk8c](c/mk8c.c)     |     [src](asm/sieve_mk8.asm)     |    83K    | 1K   |  313µs   |       265M        |          18           |   C   |
 | sieve  |    900    |    [mk8c](c/mk8c.c)     |     [src](asm/sieve_mk8.asm)     |    83K    | 1K   |  141µs   |       588M        |          8.2          |   D   |
+| sieve  |    900    |  [mk13](nim/mk13.nim)   |    [src](asm/sieve_mk13.asm)     |    42K    | 1K   |   94µs   |       440M        |                       |   A   |
 |        |           |                         |                                  |           |      |          |                   |                       |       |
 | acker  |    3,7    |   [mk8](nim/mk8.nim)    | [src](asm/ackerman_mk8_mtkv.asm) |   12.8M   | 100  |  15.2ms  |       847M        |          5.7          |   A   |
 | acker  |    3,7    |    [mk8c](c/mk8c.c)     | [src](asm/ackerman_mk8_mtkv.asm) |   12.8M   | 100  |  15.6ms  |       842M        |          5.7          |   B   |
