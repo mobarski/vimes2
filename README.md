@@ -280,10 +280,10 @@ mk9 instructions extended with
 ```
 - LIT  a b  ; mem[a] = b
 - MOV  a b  ; mem[a] = mem[b]
-- LDA  a 0  ; acc = mem[a]
-- LDAP a b  ; acc = mem[mem[a]+b]
-- STA  a 0  ; mem[a] = acc
-- STAP a b  ; mem[mem[a]+b] = acc
+- LDA  a 0  ; acc = mem[a] + b
+- LDAP a b  ; acc = mem[mem[a]+mem[b]]
+- STA  a 0  ; mem[a] = acc + b
+- STAP a b  ; mem[mem[a]+mem[b]] = acc
 
 - JMP  a 0  ; jump to program location (a)
 - CAL  a 0  ; call subroutine at (a)

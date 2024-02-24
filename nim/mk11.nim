@@ -83,10 +83,10 @@ proc run() =
             of JLE:
                 if acc <= 0: pc=a  # b is ignored
             # MK11 - acc
-            of LDA:  acc = mem[a] # b is ignored
-            of LDAP: acc = mem[mem[a]+b]
-            of STA:  mem[a] = acc # b is ignored
-            of STAP: mem[mem[a]+b] = acc
+            of LDA:  acc = mem[a] + b 
+            of LDAP: acc = mem[mem[a]+mem[b]]
+            of STA:  mem[a] = acc + b
+            of STAP: mem[mem[a]+mem[b]] = acc
             else:
                 quit("unknown opcode op:" & $op, 1)
 
