@@ -57,6 +57,8 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
     - **mk4** - switch call threading version of `mk2`
     - **mk5** - indirect call threading version of `mk2`
 - **mk6** - register based vm inspired by [smol](https://github.com/mobarski/smol)
+  - **mk11** - similar to `mk6` but conditional jumps are based on `acc` register
+    - **mk13** - similar to `mk11` but closer to the [smol](https://github.com/mobarski/smol) language
   - **mk12** - one operand version ok `mk6`
   - **mkXX**- `mk6` with stack frame similar to `mk1` (🌱)
 - **mk7** - register based vm inspired by [Human Resource Machine](https://store.steampowered.com/app/375820/Human_Resource_Machine/)
@@ -76,11 +78,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
     - **mkXX** - `mk10` with better UX (🌱)
 
 
-- **mk11** - another vm inspired with [smol](https://github.com/mobarski/smol) but with conditional jumps based on `acc` register
 
-- **mk13** - another vm inspired with [smol](https://github.com/mobarski/smol), closer to the language than `mk11`
-
-  
 
 ## VM registers / variable names
 
