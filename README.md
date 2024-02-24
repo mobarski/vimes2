@@ -290,6 +290,83 @@ mk9 instructions extended with
 
 
 
+### mk11 instruction set
+
+```
+- LIT  a b  ; mem[a] = b
+- MOV  a b  ; mem[a] = mem[b]
+- LDA  a 0  ; acc = mem[a]
+- LDAP a b  ; acc = mem[mem[a]+b]
+- STA  a 0  ; mem[a] = acc
+- STAP a b  ; mem[mem[a]+b] = acc
+
+- JMP  a 0  ; jump to program location (a)
+- CAL  a 0  ; call subroutine at (a)
+- RET  0 0  ; return from subroutine call
+- HLT  0 0  ; halt the program
+
+- ADD  a b  ; mem[a] = mem[a] + mem[b]
+- SUB  a b  ; mem[a] = mem[a] - mem[b]
+- MUL  a b  ; mem[a] = mem[a] * mem[b]
+- DIV  a b  ; mem[a] = mem[a] / mem[b]
+- MOD  a b  ; mem[a] = mem[a] % mem[b]
+- NEG  a 0  ; mem[a] = -mem[a]
+
+- JEQ   a 0  ; jump to (a) if acc == 0
+- JLT   a 0  ; jump to (a) if acc < 0
+- JGT   a 0  ; jump to (a) if acc > 0
+- JNE   a 0  ; jump to (a) if acc != 0
+- JLE   a 0  ; jump to (a) if acc <= 0
+- JGE   a 0  ; jump to (a) if acc >= 0
+
+- GET  a 0  ; mem[a] = read integer from stdin (skip whitespace, block)
+- PUT  a 0  ; write mem[a] as integer to stdout
+- EOF  a 0  ; mem[a] = 1 if stdid.eof else 0
+- GETC a 0  ; mem[a] = read character from stdin (block)
+- PUTC a 0  ; write mem[a] as character to stdout
+```
+
+### mk13 instruction set
+
+```
+- LIT  a b  ; mem[a] = b
+- MOV  a b  ; mem[a] = mem[b]
+- LDA  a 0  ; acc = mem[a]
+- LDAP a b  ; acc = mem[mem[a]+b]
+- STA  a 0  ; mem[a] = acc
+- STAP a b  ; mem[mem[a]+b] = acc
+
+- JMP  a 0  ; jump to program location (a)
+- CAL  a 0  ; call subroutine at (a)
+- RET  0 0  ; return from subroutine call
+- HLT  0 0  ; halt the program
+
+- ADD  a b  ; mem[a] = mem[a] + mem[b]
+- SUB  a b  ; mem[a] = mem[a] - mem[b]
+- MUL  a b  ; mem[a] = mem[a] * mem[b]
+- DIV  a b  ; mem[a] = mem[a] / mem[b]
+- MOD  a b  ; mem[a] = mem[a] % mem[b]
+- NEG  a 0  ; mem[a] = -mem[a]
+
+- EQ   a b  ; acc = 1 if mem[a] == mem[b] else 0
+- NE   a b  ; acc = 1 if mem[a] != mem[b] else 0
+- LT   a b  ; acc = 1 if mem[a] <  mem[b] else 0
+- LE   a b  ; acc = 1 if mem[a] <= mem[b] else 0
+- GT   a b  ; acc = 1 if mem[a] >  mem[b] else 0
+- GE   a b  ; acc = 1 if mem[a] >= mem[b] else 0
+
+- JZ   a 0  ; jump to (a) if acc == 0 
+- JNZ  a 0  ; jump to (a) if acc != 0
+
+- GET  a 0  ; mem[a] = read integer from stdin (skip whitespace, block)
+- PUT  a 0  ; write mem[a] as integer to stdout
+- EOF  a 0  ; mem[a] = 1 if stdid.eof else 0
+- GETC a 0  ; mem[a] = read character from stdin (block)
+- PUTC a 0  ; write mem[a] as character to stdout
+```
+
+
+
 # Trace example
 
 ### mk1 - mk5

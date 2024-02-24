@@ -62,10 +62,10 @@ proc run() =
             of NEG:  mem[a] = -mem[a] # b is ignored
             # stdio - TODO: change
             of PUT:  echo mem[a]                   # b is ignored
-            of PUTC: echo mem[a].char              # b is ignored  
             of GET:  mem[a] = sio.read_int().Word  # b is ignored
-            of GETC: mem[a] = sio.read_chr().Word  # b is ignored
             of EOF:  mem[a] = sio.eof.ord.Word     # b is ignored
+            of GETC: mem[a] = sio.read_chr().Word  # b is ignored
+            of PUTC: echo mem[a].char              # b is ignored  
             # misc
             of HLT:  break  # a and b ignored
             # MK11 - cmp

@@ -58,9 +58,9 @@ proc run() =
             of LIT:  mem[a] = b
             of MOV:  mem[a] = mem[b]
             of LDA:  acc = mem[a] # b is ignored
+            of LDAP: acc = mem[mem[a]+b]
             of STA:  mem[a] = acc # b is ignored
-            of PEEK: acc = mem[mem[a]+b]
-            of POKE: mem[mem[a]+b] = acc
+            of STAP: mem[mem[a]+b] = acc
             # alu
             of ADD:  mem[a] = mem[a] + mem[b]
             of SUB:  mem[a] = mem[a] - mem[b]
@@ -77,10 +77,10 @@ proc run() =
             of GE:   acc = (mem[a] >= mem[b]).ord.Word
             # stdio
             of PUT : echo mem[a]                   # b is ignored
-            of PUTC: echo mem[a].char              # b is ignored
-            of GETC: mem[a] = sio.read_chr().Word  # b is ignored
             of GET : mem[a] = sio.read_int().Word  # b is ignored
             of EOF:  mem[a] = sio.eof.ord.Word     # b is ignored
+            of GETC: mem[a] = sio.read_chr().Word  # b is ignored
+            of PUTC: echo mem[a].char              # b is ignored
             # misc
             of HLT:  break
             else:
