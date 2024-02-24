@@ -49,24 +49,17 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 ## VM versions
 
 - **mk1** - machine from [Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth)'s 1976 book [Algorithms + Data Structures = Programs](https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs)
-  
+
   - **mk2** - `mk1` with variable number of arguments, swapped a and l
     - **mk3** - internal bytecode version of `mk2`
       - **abandoned** as bytecode requires more work than fixed-width words - instructions variants and assembler changes (🛑)
-  
+
     - **mk4** - switch call threading version of `mk2`
     - **mk5** - indirect call threading version of `mk2`
-  
 - **mk6** - register based vm inspired by [smol](https://github.com/mobarski/smol)
-
   - **mk12** - one operand version ok `mk6`
-
   - **mkXX**- `mk6` with stack frame similar to `mk1` (🌱)
-
-  - **mk11** - `mk6` with different conditional jumps
-
 - **mk7** - register based vm inspired by [Human Resource Machine](https://store.steampowered.com/app/375820/Human_Resource_Machine/)
-
   - **mk7c** - `mk7` implemented in C
   - **mk7ci** - `mk7` implementation in C, indirect threading
   - **mk7cd** - `mk7` implementation in C, direct threading
@@ -77,14 +70,13 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
     - **mk8cd** - `mk8` implemented in C, indirect threading
     - **mk8cc** - `mk8` asm compiled to C code (🚧)
   - **mkXX** - `mk7` extended with cooperative multitasking instructions (🌱)
-
 - **mk9** - two operands version of `mk7`
 
   - **mk10** - `mk9` extended with pointer operations and subroutine call/return
     - **mkXX** - `mk10` with better UX (🌱)
-  
-  
-  
+
+
+- **mk11** - another vm inspired with [smol](https://github.com/mobarski/smol) but with conditional jumps based on `acc` register
 
 ## VM registers / variable names
 

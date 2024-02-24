@@ -47,18 +47,12 @@ proc run() =
         pc += 3
         case op:
             # control flow
-            of JZ:
-                if mem[a]==0: pc=b
-            of JNZ:
-                if mem[a]!=0: pc=b
             of CAL:  stack[sp]=pc; sp+=1; pc=a # b is ignored
             of RET:  sp-=1; pc=stack[sp]       # a and b are ignored
             of JMP:  pc=a                      # b is ignored
             # memory
-            of LIT:  mem[a] = b # rename to LOAD?
-            of MOV:  mem[a] = mem[b]
-            of PEEK: mem[a] = mem[mem[b]]
-            of POKE: mem[mem[a]] = mem[b]
+            of LIT:  mem[a] = b
+            of MOV:  mem[a] = mem[b] # rename to set or copy ???
             # alu
             of ADD:  mem[a] = mem[a] + mem[b]
             of SUB:  mem[a] = mem[a] - mem[b]
@@ -66,38 +60,35 @@ proc run() =
             of DIV:  mem[a] = mem[a] div mem[b]
             of MOD:  mem[a] = mem[a] mod mem[b]
             of NEG:  mem[a] = -mem[a] # b is ignored
-            # cmp
-            of EQ:   mem[a] = (mem[a] == mem[b]).ord.Word
-            of NE:   mem[a] = (mem[a] != mem[b]).ord.Word
-            of LT:   mem[a] = (mem[a] <  mem[b]).ord.Word
-            of LE:   mem[a] = (mem[a] <= mem[b]).ord.Word
-            of GT:   mem[a] = (mem[a] >  mem[b]).ord.Word
-            of GE:   mem[a] = (mem[a] >= mem[b]).ord.Word
-            # stdio - TODO: as extension
-            of PUTI: echo mem[a]
-            of PUTC: echo mem[a].char
-            of GETC: mem[a] = sio.read_chr().Word
-            of GETI: mem[a] = sio.read_int().Word
-            of EOF:  mem[a] = sio.eof.ord.Word
+            # stdio - TODO: change
+            of PUT:  echo mem[a]                   # b is ignored
+            of PUTC: echo mem[a].char              # b is ignored  
+            of GET:  mem[a] = sio.read_int().Word  # b is ignored
+            of GETC: mem[a] = sio.read_chr().Word  # b is ignored
+            of EOF:  mem[a] = sio.eof.ord.Word     # b is ignored
             # misc
-            of HLT:  pc=0
-            # MK11
+            of HLT:  break  # a and b ignored
+            # MK11 - cmp
             of CMP: acc = mem[a] - mem[b]
             of JEQ:
-                if acc == 0: pc=a
+                if acc == 0: pc=a  # b is ignored
             of JGT:
-                if acc > 0:  pc=a
+                if acc > 0:  pc=a  # b is ignored
             of JLT:
-                if acc < 0:  pc=a
+                if acc < 0:  pc=a  # b is ignored
             of JNE:
-                if acc != 0: pc=a
+                if acc != 0: pc=a  # b is ignored
             of JGE:
-                if acc >= 0: pc=a
+                if acc >= 0: pc=a  # b is ignored
             of JLE:
-                if acc <= 0: pc=a
+                if acc <= 0: pc=a  # b is ignored
+            # MK11 - acc
+            of LDA:  acc = mem[a] # b is ignored
+            of LDAP: acc = mem[mem[a]+b]
+            of STA:  mem[a] = acc # b is ignored
+            of STAP: mem[mem[a]+b] = acc
             else:
                 quit("unknown opcode op:" & $op, 1)
-        if pc==0: break
 
 include cli
 if is_main_module:
