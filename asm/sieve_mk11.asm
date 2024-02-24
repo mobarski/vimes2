@@ -9,6 +9,7 @@ peek=ldap
 poke=stap
 load=lda
 to=sta
+jz=jeq
 
 lit 0 0
 lit 1 1
@@ -27,7 +28,7 @@ loop1:
 lit i 2
 loop2:
     cmp i n jge end2 0
-    peek a i jeq not_prime 0 # jz=jeq UGLY !!!
+    peek a i jz not_prime 0
 
     prime:
         put i 0
