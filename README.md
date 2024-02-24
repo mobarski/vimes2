@@ -23,6 +23,7 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 - The ability to define aliases for values (like `n=1`) and mnemonics (like `peek=lpa`) is a huge step forward in assembly UX with very little changes in the assembler (1 token is still 1 token).
 - The ability to define multi-token aliases facilitates keeping the instruction set orthogonal (ie you can quickly add stacks with `peek`, `poke`, `inc`, `dec` and they can either grow up or down).
 - Having all 3 conditional jumps related to comparison (<0, >0, ==0) makes the code much easier to write and read.
+- Having array like access (ptr+offset) vs just pointers is a huge step forward in the assembly UX.
 
 **Performance:**
 
@@ -355,9 +356,9 @@ mk9 instructions extended with
 ```
 - LIT  a b  ; mem[a] = b
 - MOV  a b  ; mem[a] = mem[b]
-- LDA  a 0  ; acc = mem[a]
+- LDA  a b  ; acc = mem[a] + b
 - LDAP a b  ; acc = mem[mem[a]+mem[b]]
-- STA  a 0  ; mem[a] = acc
+- STA  a b  ; mem[a] = acc + b
 - STAP a b  ; mem[mem[a]+mem[b]] = acc
 
 - JMP  a 0  ; jump to program location (a)

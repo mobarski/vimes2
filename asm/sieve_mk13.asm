@@ -9,6 +9,7 @@ then=jnz
 else=jz
 peek=ldap
 poke=stap
+load=lda
 
 lit 0 0
 lit 1 1
@@ -20,7 +21,7 @@ get n 0
 lit i 0
 loop1:
     (if) eq i n then end1 0
-    lda 1 0 poke a i
+    load 0 1 poke a i
     add i 1
     jmp loop1 0 end1:
 
@@ -37,7 +38,7 @@ loop2:
         add j i
         loop3:
             (if) ge j n then end3 0
-            lda 0 0 poke a j
+            load 0 0 poke a j
             add j i
             jmp loop3 0 end3:
 

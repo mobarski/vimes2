@@ -57,9 +57,9 @@ proc run() =
             # memory
             of LIT:  mem[a] = b
             of MOV:  mem[a] = mem[b]
-            of LDA:  acc = mem[a] # b is ignored
+            of LDA:  acc = mem[a] + b
             of LDAP: acc = mem[mem[a]+mem[b]]
-            of STA:  mem[a] = acc # b is ignored
+            of STA:  mem[a] = acc + b
             of STAP: mem[mem[a]+mem[b]] = acc
             # alu
             of ADD:  mem[a] = mem[a] + mem[b]
