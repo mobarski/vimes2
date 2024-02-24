@@ -312,12 +312,12 @@ mk9 instructions extended with
 - MOD  a b  ; mem[a] = mem[a] % mem[b]
 - NEG  a 0  ; mem[a] = -mem[a]
 
-- JEQ   a 0  ; jump to (a) if acc == 0
-- JLT   a 0  ; jump to (a) if acc < 0
-- JGT   a 0  ; jump to (a) if acc > 0
-- JNE   a 0  ; jump to (a) if acc != 0
-- JLE   a 0  ; jump to (a) if acc <= 0
-- JGE   a 0  ; jump to (a) if acc >= 0
+- JEQ  a 0  ; jump to (a) if acc == 0
+- JLT  a 0  ; jump to (a) if acc < 0
+- JGT  a 0  ; jump to (a) if acc > 0
+- JNE  a 0  ; jump to (a) if acc != 0
+- JLE  a 0  ; jump to (a) if acc <= 0
+- JGE  a 0  ; jump to (a) if acc >= 0
 
 - GET  a 0  ; mem[a] = read integer from stdin (skip whitespace, block)
 - PUT  a 0  ; write mem[a] as integer to stdout
