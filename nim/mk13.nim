@@ -48,9 +48,9 @@ proc run() =
         case op:
             # control flow
             of JZ:
-                if acc==0: pc=a # b is ignored
+                if acc==0: pc=a                # b is ignored
             of JNZ:
-                if acc!=0: pc=a # b is ignored
+                if acc!=0: pc=a                # b is ignored
             of CAL:  stack[sp]=pc; sp+=1; pc=a # b is ignored
             of RET:  sp-=1; pc=stack[sp]       # a and b are ignored
             of JMP:  pc=a                      # b is ignored
