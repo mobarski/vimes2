@@ -12,4 +12,6 @@
 # MK13
 
 - IDEA: stdio reads and writes from acc
-- 
+- IDEA: acc used for offset in array access
+  - poke a b ; mem[a+acc] = b
+  - peek a b; a = mem[b+acc]
