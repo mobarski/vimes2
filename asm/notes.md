@@ -7,3 +7,9 @@
 | **if a >= b** | `load a sub b jn end-if ... end-if:`           |
 |  **if a > b** | `load a sub b jn end-if jz end-if ... end-if:` |
 
+
+
+# MK13
+
+- IDEA: stdio reads and writes from acc
+- 
