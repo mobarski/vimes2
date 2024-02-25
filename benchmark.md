@@ -35,9 +35,9 @@
 | loops3 |    30     |  [mk6](nim/mk6.nim) 🏆   |    [src](asm/loops3_mk6.asm)     |  112K 🥇   | 1000 | 166µs 🥇  |       677M        |         7.09          |   A   |
 | loops3 |    30     |   [mk7](nim/mk7.nim)    |    [src](asm/loops3_mk7.asm)     |  142K 🥈   | 1000 | 175µs 🥈  |       813M        |          5.9          |   A   |
 | loops3 |    30     |   [mk9](nim/mk9.nim)    |    [src](asm/loops3_mk9.asm)     |   112K🥇   | 1000 | 175µs 🥈  |       640M        |          7.5          |   A   |
-| loops3 |    30     |  [mk11](nim/mk11.nim)   |    [src](asm/loops3_mk11.asm)    |   142K    | 1000 |  190µs   |       742M        |                       |   A   |
-| loops3 |    30     |  [mk12](nim/mk12.nim)   |    [src](asm/loops3_mk12.asm)    |   142K    | 1000 |  181µs   |       786M        |                       |   A   |
-| loops3 |    30     |  [mk13](nim/mk13.nim)   |    [src](asm/loops3_mk13.asm)    |   142K    | 1000 |  199µs   |       710M        |                       |   A   |
+| loops3 |    30     |  [mk11](nim/mk11.nim)   |    [src](asm/loops3_mk11.asm)    |   142K    | 1000 |  190µs   |       742M        |          6.5          |   A   |
+| loops3 |    30     |  [mk12](nim/mk12.nim)   |    [src](asm/loops3_mk12.asm)    |   142K    | 1000 |  181µs   |       786M        |          6.1          |   A   |
+| loops3 |    30     |  [mk13](nim/mk13.nim)   |    [src](asm/loops3_mk13.asm)    |   142K    | 1000 |  199µs   |       710M        |          6.8          |   A   |
 |        |           |                         |                                  |           |      |          |                   |                       |       |
 |  fibo  |    20     |   [mk1](nim/mk1.nim)    |     [src](asm/fibo_mk1.asm)      |   372K    | 1000 |  878µs   |       878M        |          5.5          |   A   |
 |  fibo  |    20     |   [mk6](nim/mk6.nim)    |     [src](asm/fibo_mk6.asm)      |   284K    | 1000 |  490µs   |       580M        |          8.3          |   A   |
@@ -59,9 +59,10 @@
 | sieve  |    900    |    [mk8c](c/mk8c.c)     |     [src](asm/sieve_mk8.asm)     |    83K    | 1K   |  107µs   |       775M        |          6.2          |   B   |
 | sieve  |    900    |    [mk8c](c/mk8c.c)     |     [src](asm/sieve_mk8.asm)     |    83K    | 1K   |  313µs   |       265M        |          18           |   C   |
 | sieve  |    900    |    [mk8c](c/mk8c.c)     |     [src](asm/sieve_mk8.asm)     |    83K    | 1K   |  141µs   |       588M        |          8.2          |   D   |
-| sieve  |    900    |  [mk11](nim/mk11.nim)   |    [src](asm/sieve_mk11.asm)     |    42K    | 1K   |   92µs   |       449M        |                       |   A   |
-| sieve  |    900    |  [mk12](nim/mk12.nim)   |    [src](asm/sieve_mk12.asm)     |    76K    | 1K   |  127µs   |       599M        |                       |   A   |
-| sieve  |    900    |  [mk13](nim/mk13.nim)   |    [src](asm/sieve_mk13.asm)     |    42K    | 1K   |   94µs   |       440M        |                       |   A   |
+| sieve  |    900    |  [mk11](nim/mk11.nim)   |    [src](asm/sieve_mk11.asm)     |    42K    | 1K   |   92µs   |       449M        |         10.7          |   A   |
+| sieve  |    900    |  [mk12](nim/mk12.nim)   |    [src](asm/sieve_mk12.asm)     |    76K    | 1K   |  127µs   |       599M        |          8.1          |   A   |
+| sieve  |    900    |          mk12           | [src v2](asm/sieve_v2_mk12.asm)  |    63K    | 1K   |  114µs   |       551M        |          8.8          |   A   |
+| sieve  |    900    |  [mk13](nim/mk13.nim)   |    [src](asm/sieve_mk13.asm)     |    42K    | 1K   |   94µs   |       440M        |          11           |   A   |
 |        |           |                         |                                  |           |      |          |                   |                       |       |
 | acker  |    3,7    |   [mk8](nim/mk8.nim)    | [src](asm/ackerman_mk8_mtkv.asm) |   12.8M   | 100  |  15.2ms  |       847M        |          5.7          |   A   |
 | acker  |    3,7    |    [mk8c](c/mk8c.c)     | [src](asm/ackerman_mk8_mtkv.asm) |   12.8M   | 100  |  15.6ms  |       842M        |          5.7          |   B   |
