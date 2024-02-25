@@ -328,12 +328,12 @@ mk9 instructions extended with
 - RET  0  ; return from subroutine call
 - HLT  0  ; halt the program
 
-- EQ   a  ; acc = 1 if acc == mem[b] else 0
-- NE   a  ; acc = 1 if acc != mem[b] else 0
-- LT   a  ; acc = 1 if acc <  mem[b] else 0
-- LE   a  ; acc = 1 if acc <= mem[b] else 0
-- GT   a  ; acc = 1 if acc >  mem[b] else 0
-- GE   a  ; acc = 1 if acc >= mem[b] else 0
+- EQ   a  ; acc = 1 if acc == mem[a] else 0
+- NE   a  ; acc = 1 if acc != mem[a] else 0
+- LT   a  ; acc = 1 if acc <  mem[a] else 0
+- LE   a  ; acc = 1 if acc <= mem[a] else 0
+- GT   a  ; acc = 1 if acc >  mem[a] else 0
+- GE   a  ; acc = 1 if acc >= mem[a] else 0
 - JZ   a  ; jump to (a) if acc == 0 
 - JNZ  a  ; jump to (a) if acc != 0
 
@@ -392,35 +392,6 @@ mk9 instructions extended with
 ```
 
 
-
-# Trace example
-
-### mk1 - mk5
-
-```
-+----+----+-----------+----+----+-------
-| CC |  P |    I A    |  B |  T | S --> 
-+----+----+-----------+----+----+-------
-|  1 |  0 |  INT 2    |  0 |  0 | 
-|  2 |  2 |  EX1 2    |  0 |  2 | 0 0
-|  3 |  4 |  STO 1    |  0 |  3 | 0 0 1
-|  4 |  7 |  CAL 17   |  0 |  2 | 1 0
-|  5 | 17 |  INT 3    |  3 |  2 | 1 0
-|  6 | 19 |  INT 1    |  3 |  5 | 1 0 0 0 10
-|  7 | 21 |  LOD 1    |  3 |  6 | 1 0 0 0 10 0
-|  8 | 24 |  STO 3    |  3 |  7 | 1 0 0 0 10 0 1
-|  9 | 27 |  LOD 3    |  3 |  6 | 1 0 0 0 10 1
-| 10 | 30 |  LIT 1    |  3 |  7 | 1 0 0 0 10 1 1
-| 11 | 32 |  OPR 11   |  3 |  8 | 1 0 0 0 10 1 1 1
-| 12 | 34 |  JPC 44   |  3 |  7 | 1 0 0 0 10 1 1
-| 13 | 36 |  LOD 3    |  3 |  7 | 1 0 0 0 10 1 1
-| 14 | 39 |  STO 2    |  3 |  8 | 1 0 0 0 10 1 1 1
-| 15 | 42 |  OPR 0    |  3 |  7 | 1 1 0 0 10 1 1
-| 16 | 10 |  LOD 2    |  0 |  2 | 1 1
-| 17 | 13 |  EX1 1    |  0 |  3 | 1 1 1
-| 18 | 15 |  JMP 0    |  0 |  2 | 1 1
-
-```
 
 ## Reference materials
 
