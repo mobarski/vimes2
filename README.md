@@ -107,6 +107,17 @@ These machines use the same variable names as Wirth's example p-code machine fro
 
   
 
+### mk6+
+
+- **pc** - program counter
+- **sp** - stack pointer
+- **acc** - accumulator / main register of the VM
+- **code** - program storage memory
+- **mem** - main memory
+- **stack** - return stack
+
+
+
 ## VM instructions
 
 ### mk1 - mk5
