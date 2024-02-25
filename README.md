@@ -111,7 +111,7 @@ These machines use the same variable names as Wirth's example p-code machine fro
 
 ### mk1 - mk5
 
-Basic instructions:
+**instructions**
 
 ```
 - LIT a   ; load constant (a)
@@ -129,7 +129,7 @@ Basic instructions:
 - HLT     ; halt the program
 ```
 
-**operations:**
+**operations**
 
 ```
 - ADD ; (ab--c)  c = a + b
@@ -152,23 +152,36 @@ The notation `(ab--c)` describes the stack effect of an operation. It indicates 
 
 
 
-Extension 1 - stdio:
+**extensions**
 
-- `PUTC`, `PUTI`
-- `GETC`, `GETI`
-- `EOF`
+```
+Extension 1 - stdtio:
+- PUTI ; (a--) 
+- GETI ; (--a) 
+- EOF  ; (--a) 
+- PUTC ; (a--) 
+- GETC ; (--a) 
 
-Extension 2 - ALU extension (bit ops):
+Extension 2 - ALU - bit ops
+- AND ; (ab--c) 
+- OR  ; (ab--c) 
+- XOR ; (ab--c) 
+- NOT ; (a--b)  
+- SHL ; (ab--c) 
+- SHR ; (ab--c) 
+- SAR ; (ab--c) 
 
-- `AND`, `OR`, `XOR`, `NOT`
-- `SHL`, `SHR`, `SAR`
+Extension 3 - ALU - common ops
+- INC ; (a--)   
+- DEC ; (a--)   
+- EQZ ; (ab--c) 
+- NEZ ; (ab--c) 
+- LTZ ; (ab--c) 
+- LEZ ; (ab--c) 
+- GTZ ; (ab--c) 
+- GEZ ; (ab--c) 
 
-Extension 3 - ALU extension (common ops)
-
-- `INC`, `DEC`
-- `EQZ`, `NEZ`, `LTZ`, `LEZ`, `GTZ`, `GEZ`
-
-
+```
 
 ### mk6 instruction set
 
@@ -346,8 +359,8 @@ mk9 instructions extended with
 - INC  a  ; mem[a] += 1
 - DEC  a  ; mem[b] -= 1
 
-- PUT 0   ; write acc as integer to stdout
-- GET 0   ; acc = read integer from stdin (skip whitespace, block)
+- PUT  0  ; write acc as integer to stdout
+- GET  0  ; acc = read integer from stdin (skip whitespace, block)
 - EOF  0  ; acc = 1 if stdid.eof else 0
 - PUTC 0  ; write acc as character to stdout
 - GETC 0  ; acc = read character from stdin (block)
