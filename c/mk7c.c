@@ -10,6 +10,10 @@ void reset(int quick) {
 // TODO trace
 // TODO debug
 
+void debug() {
+    fprintf(stderr, "pc=%d acc=%d\n", pc, acc);
+}
+
 void run() {
     while (1) {
         Word tmp;

@@ -6,6 +6,10 @@ void reset(int quick) {
     if (!quick) reset_stack(); // from cli.h
 }
 
+void debug() {
+    fprintf(stderr, "pc=%d acc=%d\n", pc, acc);
+}
+
 void run() {
 
     register Word pc = 0;     // program counter
