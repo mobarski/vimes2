@@ -41,6 +41,12 @@ def sort(inp):            # n, then n values
     n, *xs = inp
     return sorted(xs[:n])
 
+def _i16(x): return (x + 0x8000) % 0x10000 - 0x8000
+
+def int16(inp):           # a+b a-b -a a>>1 with int16 wrap-around
+    a, b = inp
+    return [_i16(a+b), _i16(a-b), _i16(-a), _i16(a) >> 1]
+
 # === Rosetta Code tasks (int16 adaptations) ==================================
 
 def loops_for(inp):       # rows 1..n, row i = 1..i (numbers instead of stars)
