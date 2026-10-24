@@ -1,0 +1,37 @@
+# vimes2 test cases
+# format: machine  asm_file  oracle  input
+#   input: space separated ints (stdin) or @path to an input file
+#   oracle: function name in tests/oracle.py that computes the expected output
+
+# === existing benchmark programs (regression) ================================
+mk7   asm/loops3_mk7.asm          loops3      5
+mk7   asm/loops3_mk7.asm          loops3      12
+mk8   asm/fibo_mk8.asm            fibo        15
+mk8   asm/ackerman_mk8.asm        ackermann   2 3
+mk8   asm/ackerman_mk8_ext.asm    ackermann   2 3
+mk8   asm/sudan_mk8.asm           sudan       1 3 3
+mk8   asm/sieve_mk8.asm           sieve       100
+mk8   asm/qsort_mk8.asm           sort        @tests/sort_input_10.txt
+mk8   asm/qsort_mk8.asm           sort        @tests/sort_input_80.txt
+mk8   asm/bsort_mk8.asm           sort        @tests/sort_input_40.txt
+mk8   asm/ssort_mk8.asm           sort        @tests/sort_input_40.txt
+mk8   asm/ssort_v2_mk8.asm        sort        @tests/sort_input_40.txt
+# KNOWN BUG (excluded): isort_mk8_ext.asm compares pointer with `cmp array` = sub mem[20]
+#   (value of A[0], not the address 20) -> outputs unsorted data on all variants
+# mk8   asm/isort_mk8_ext.asm       sort        @tests/sort_input_40.txt
+# WIP (excluded): gsort_mk8.asm is marked 🚧 in benchmark.md - crashes / unknown opcode
+# mk8   asm/gsort_mk8.asm           sort        @tests/sort_input_40.txt
+mk6   asm/fibo_mk6.asm            fibo        15
+mk6   asm/loops3_mk6.asm          loops3      10
+mk9   asm/loops3_mk9.asm          loops3      10
+mk10  asm/fibo_mk10.asm           fibo        15
+mk10  asm/isort_mk10.asm          sort        @tests/sort_input_40.txt
+mk11  asm/loops3_mk11.asm         loops3      10
+mk11  asm/sieve_mk11.asm          sieve       100
+mk11  asm/isort_mk11.asm          sort        @tests/sort_input_40.txt
+mk12  asm/loops3_mk12.asm         loops3      10
+mk12  asm/sieve_mk12.asm          sieve       100
+mk12  asm/sieve_v2_mk12.asm       sieve       100
+mk13  asm/loops3_mk13.asm         loops3      10
+mk13  asm/sieve_mk13.asm          sieve       100
+mk13  asm/isort_mk13.asm          sort        @tests/sort_input_40.txt
