@@ -186,7 +186,7 @@ def main():
 
     print()
     print(f"cases: {len(cases)}  runs passed: {n_pass}  failed: {n_fail}  "
-          f"skipped: {n_skip}  consistency failures: {n_cons_fail}")
+          f"skipped runs (backend not available): {n_skip}  consistency failures: {n_cons_fail}")
     if skipped_backends:
         print('skipped backends (not built / not available):', ' '.join(sorted(skipped_backends)))
     sys.exit(1 if (n_fail or n_cons_fail) else 0)

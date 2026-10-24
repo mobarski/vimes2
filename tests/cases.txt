@@ -68,5 +68,6 @@ mk13  asm/sum_digits_mk13.asm       sum_digits        5  0 1 1234 9999 32767
 mk13  asm/primality_mk13.asm        primality         10  0 1 2 3 4 17 25 97 7919 32749
 mk13  asm/factorial_mk13.asm        factorial         8  0 1 2 3 4 5 6 7
 mk13  asm/fibonacci_mk13.asm        fibonacci         22
+mk13  asm/hailstone_mk13.asm        hailstone         7
 mk13  asm/hailstone_mk13.asm        hailstone         27
 mk13  asm/doors100_mk13.asm         doors100          100
