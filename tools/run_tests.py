@@ -22,12 +22,17 @@ import oracle  # noqa: E402
 
 # === MACHINES ================================================================
 # backend = (name, kind, path relative to ROOT)
+# js path may have a dispatch variant suffix: js/mk2.js:call -> node js/mk2.js prog --variant call
 
 def c_backends(*names):   return [(n, 'c',   f'bin/{n}')           for n in names]
 def nim_backends(*names): return [(f'{n}_nim', 'nim', f'bin/{n}_nim') for n in names]
 def js_backends(*names):  return [(f'{n}_js',  'js',  f'js/{n}.js')   for n in names]
+def js_variants(name, *variants): return [(f'{name}_js_{v}', 'js', f'js/{name}.js:{v}') for v in variants]
 
 MACHINES = {
+    # mk1/mk2: JS only (nim/mk1..mk5 do not compile, see tests/README.md); mk4/mk5 = mk2 JS variants call/table
+    'mk1':  dict(opcodes='nim/mk1_opcodes.nim',  backends=js_backends('mk1')),
+    'mk2':  dict(opcodes='nim/mk1_opcodes.nim',  backends=js_backends('mk2') + js_variants('mk2', 'call', 'table')),
     'mk6':  dict(opcodes='nim/mk6_opcodes.nim',  backends=nim_backends('mk6') + js_backends('mk6')),
     'mk7':  dict(opcodes='nim/mk7_opcodes.nim',  backends=c_backends('mk7c', 'mk7ci', 'mk7cd') + nim_backends('mk7') + js_backends('mk7')),
     'mk8':  dict(opcodes='nim/mk8_opcodes.nim',  backends=c_backends('mk8c', 'mk8ci', 'mk8cd') + nim_backends('mk8') + js_backends('mk8')),
@@ -85,7 +90,9 @@ def run_backend(kind, exe, pcode_path, inp):
     elif kind == 'nim':
         cmd = [exe, pcode_path, '-d']                # -d -> "pc:.. cc:N" on stdout
     elif kind == 'js':
-        cmd = ['node', exe, pcode_path]              # hook for P2 (browser card)
+        script, _, variant = exe.partition('.js:')
+        script = script + '.js' if variant else exe
+        cmd = ['node', script, pcode_path] + (['--variant', variant] if variant else [])
     p = subprocess.run(cmd, input=inp, capture_output=True, text=True, timeout=TIMEOUT)
     stdout, stderr = p.stdout, p.stderr
     cycles = None
@@ -105,7 +112,7 @@ def run_backend(kind, exe, pcode_path, inp):
     return [int(t) for t in stdout.split()], cycles
 
 def available(kind, path):
-    full = os.path.join(ROOT, path)
+    full = os.path.join(ROOT, path.split(':')[0] if kind == 'js' else path)
     if kind == 'js':
         return os.path.exists(full) and shutil.which('node') is not None
     return os.path.exists(full) and os.access(full, os.X_OK)

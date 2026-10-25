@@ -36,6 +36,13 @@ mk13  asm/loops3_mk13.asm         loops3      10
 mk13  asm/sieve_mk13.asm          sieve       100
 mk13  asm/isort_mk13.asm          sort        @tests/sort_input_40.txt
 
+# === p-code machines (JS only: nim mk1..mk5 do not compile; mk2 runs as switch/call/table = mk2/mk4/mk5)
+mk1   asm/fibo_mk1.asm            fibo        15
+mk1   asm/gcd_mk1.asm             gcd         5  48 18  7 5  100 75  1071 1029  32767 1
+mk2   asm/fibo_mk2.asm            fibo        15
+mk2   asm/loops3_mk2.asm          loops3      10
+mk2   asm/gcd_mk2.asm             gcd         5  48 18  7 5  100 75  1071 1029  32767 1
+
 # === int16 edge cases (wrap-around must be identical on all variants) =========
 mk8   asm/int16_mk8.asm           int16       32767 1
 mk8   asm/int16_mk8.asm           int16       -32768 1
