@@ -18,7 +18,7 @@ NIMFLAGS  ?= --hints:off --warnings:off -d:cc -d:release -d:danger --mm:arc
 PYTHON    ?= python3
 
 C_VMS   = mk7c mk7ci mk7cd mk8c mk8ci mk8cd
-NIM_VMS = mk6 mk7 mk8 mk9 mk10 mk11 mk12 mk13
+NIM_VMS = mk1 mk2 mk4 mk5 mk6 mk7 mk8 mk9 mk10 mk11 mk12 mk13
 
 .PHONY: all bin c-bin nim-bin test test-vm test-c test-nim test-js test-web web test-asm expected docs clean
 

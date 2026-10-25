@@ -30,9 +30,9 @@ def js_backends(*names):  return [(f'{n}_js',  'js',  f'js/{n}.js')   for n in n
 def js_variants(name, *variants): return [(f'{name}_js_{v}', 'js', f'js/{name}.js:{v}') for v in variants]
 
 MACHINES = {
-    # mk1/mk2: JS only (nim/mk1..mk5 do not compile, see tests/README.md); mk4/mk5 = mk2 JS variants call/table
-    'mk1':  dict(opcodes='nim/mk1_opcodes.nim',  backends=js_backends('mk1')),
-    'mk2':  dict(opcodes='nim/mk1_opcodes.nim',  backends=js_backends('mk2') + js_variants('mk2', 'call', 'table')),
+    # p-code: nim mk4/mk5 = call threading / indirect call threading versions of mk2 (JS: variants call/table)
+    'mk1':  dict(opcodes='nim/mk1_opcodes.nim',  backends=nim_backends('mk1') + js_backends('mk1')),
+    'mk2':  dict(opcodes='nim/mk1_opcodes.nim',  backends=nim_backends('mk2', 'mk4', 'mk5') + js_backends('mk2') + js_variants('mk2', 'call', 'table')),
     'mk6':  dict(opcodes='nim/mk6_opcodes.nim',  backends=nim_backends('mk6') + js_backends('mk6')),
     'mk7':  dict(opcodes='nim/mk7_opcodes.nim',  backends=c_backends('mk7c', 'mk7ci', 'mk7cd') + nim_backends('mk7') + js_backends('mk7')),
     'mk8':  dict(opcodes='nim/mk8_opcodes.nim',  backends=c_backends('mk8c', 'mk8ci', 'mk8cd') + nim_backends('mk8') + js_backends('mk8')),
@@ -48,13 +48,15 @@ TIMEOUT = 30 # seconds per run
 # === CASES ===================================================================
 
 def read_cases(path):
-    """line format: machine  asm_file  oracle  input...  (input: ints or @file)"""
+    """line format: machine  asm_file  oracle  input...  [skip=backend,backend]  (input: ints or @file)"""
     cases = []
     seen = {}
     for line_num, line in enumerate(open(path), 1):
         line = line.split('#')[0].strip()
         if not line: continue
         machine, asm_path, oracle_name, *inp = line.split()
+        skip = [b for t in inp if t.startswith('skip=') for b in t[5:].split(',') if b]
+        inp = [t for t in inp if not t.startswith('skip=')]
         if len(inp) == 1 and inp[0].startswith('@'):
             inp_text = open(os.path.join(ROOT, inp[0][1:])).read()
         else:
@@ -63,7 +65,7 @@ def read_cases(path):
         seen[stem] = seen.get(stem, 0) + 1
         cases.append(dict(
             id=f'{stem}__{seen[stem]}', line=line_num, machine=machine,
-            asm=asm_path, oracle=oracle_name, input=inp_text,
+            asm=asm_path, oracle=oracle_name, input=inp_text, skip=skip,
             input_label=' '.join(inp) if len(' '.join(inp)) < 40 else ' '.join(inp)[:37] + '...',
         ))
     return cases
@@ -104,6 +106,9 @@ def run_backend(kind, exe, pcode_path, inp):
         if m:
             cycles = int(m.group(1))
             stdout = stdout[:m.start()]
+        else:                                        # p-code VMs (nim/base.nim): "cc:N p:.. b:.. t:.." on stderr
+            m = re.search(r'^cc:(\d+) p:', stderr, re.M)
+            cycles = int(m.group(1)) if m else None
     elif kind == 'js':
         m = re.search(r'cycles: (\d+)', stderr)
         cycles = int(m.group(1)) if m else None
@@ -137,7 +142,7 @@ def main():
         cases = [c for c in cases if c['machine'] == args.machine]
 
     exp_dir = os.path.join(ROOT, 'tests', 'expected')
-    n_pass = n_fail = n_skip = n_cons_fail = 0
+    n_pass = n_fail = n_skip = n_cons_fail = n_excl = 0
     skipped_backends = set()
     results = []
     for case in cases:
@@ -158,6 +163,9 @@ def main():
         runs = {}
         for name, kind, path in m['backends']:
             if args.backend and kind != args.backend: continue
+            if name in case['skip']:                 # skip= in cases.txt: variant cannot run this program
+                n_excl += 1
+                continue
             if not available(kind, path):
                 skipped_backends.add(name); n_skip += 1
                 continue
@@ -194,6 +202,8 @@ def main():
     print()
     print(f"cases: {len(cases)}  runs passed: {n_pass}  failed: {n_fail}  "
           f"skipped runs (backend not available): {n_skip}  consistency failures: {n_cons_fail}")
+    if n_excl:
+        print(f'excluded runs (skip= in tests/cases.txt): {n_excl}')
     if skipped_backends:
         print('skipped backends (not built / not available):', ' '.join(sorted(skipped_backends)))
     sys.exit(1 if (n_fail or n_cons_fail) else 0)

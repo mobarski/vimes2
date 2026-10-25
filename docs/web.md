@@ -39,9 +39,9 @@ mk3 (bytecode) is not ported - abandoned in the repo.
   Unlike sio.nim, a non-numeric character in the input is skipped (sio.nim would loop forever).
 - Output: numbers one per line, `PUTC` characters as-is (Nim `echo` adds a newline after a char; mk1/mk2 `PUTI` add no separator).
 - mk6, mk9, mk1: `HLT` sets pc to 0 and any jump to 0 halts the machine (as in Nim).
-- mk2: `HLT` halts and so does a jump to 0 on every variant. In Nim, mk2 only stops on `HLT`
-  (`fibo_mk2.asm` ends with `JMP 0` and never stops there), and mk4/mk5 only stop on a jump to 0
-  (`HLT` is an unknown opcode in mk4 and crashes mk5). JS accepts both so that every mk2 program runs on all variants.
+- mk2: `HLT` halts and so does a jump to 0 on every variant (same as Nim mk2). Nim mk4/mk5 stop only on
+  a jump to 0 (`HLT` is an unknown opcode in mk4 and crashes mk5 - fix on branch `necron/fix-nim-mk4-5-hlt`);
+  JS accepts both, so every mk2 program runs on all JS variants.
 - Runtime errors are reported as `mkN: <message> (pc=.. sp=.. acc=.. cc=..)`:
   pc outside the code, return stack overflow/underflow, indirect memory address out of range,
   division by zero, unknown opcode, cycle limit (the page uses 50M cycles). Direct addresses in
@@ -49,7 +49,6 @@ mk3 (bytecode) is not ported - abandoned in the repo.
 
 ## Verification
 
-- `tools/run_tests.py`: every JS machine/variant against `tests/oracle.py`, plus equal cycle counts with the C and Nim variants.
+- `tools/run_tests.py`: every JS machine/variant against `tests/oracle.py`, plus equal cycle counts with the C and Nim
+  variants (also for the p-code machines: Nim mk1, mk2, mk4, mk5).
 - `tools/asm_parity.py`: `js/asm.js` == `python/asm.py` on every `asm/*.asm`.
-- mk1/mk2/mk4/mk5 were also compared with Nim builds after a local one-line fix of `nim/base.nim`
-  (not committed): fibo_mk1 33542 cycles, gcd_mk1 182, loops3_mk2 11111, gcd_mk2 182, fibo_mk2 on mk4/mk5 33542 - all equal.
