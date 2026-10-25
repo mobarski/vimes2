@@ -64,7 +64,7 @@ proc run() =
             #of EX3: ex3(a)
             of HLT: return
             else: quit("unknown opcode " & $i & " at p=" & $(p-2),1)
-        #if p == 0: break
+        if p == 0: break # jump to 0 halts too (as in mk1, mk4, mk5)
     when defined(ic): show_ic()
 
 # ============================================================
