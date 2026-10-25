@@ -10,6 +10,7 @@ var b : Word # base pointer
 var t : Word # top of stack pointer
 var s : array[STACK_SIZE, Word] # stack
 var code: seq[Word] # code
+var mem, stack: seq[Word] # not used by p-code VMs (stack is s), needed by cli.nim and debug_mem.nim
 
 var cc : int64 # cycle counter
 
