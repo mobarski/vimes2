@@ -28,13 +28,13 @@ def nim_backends(*names): return [(f'{n}_nim', 'nim', f'bin/{n}_nim') for n in n
 def js_backends(*names):  return [(f'{n}_js',  'js',  f'js/{n}.js')   for n in names]
 
 MACHINES = {
-    'mk6':  dict(opcodes='nim/mk6_opcodes.nim',  backends=nim_backends('mk6')),
+    'mk6':  dict(opcodes='nim/mk6_opcodes.nim',  backends=nim_backends('mk6') + js_backends('mk6')),
     'mk7':  dict(opcodes='nim/mk7_opcodes.nim',  backends=c_backends('mk7c', 'mk7ci', 'mk7cd') + nim_backends('mk7') + js_backends('mk7')),
     'mk8':  dict(opcodes='nim/mk8_opcodes.nim',  backends=c_backends('mk8c', 'mk8ci', 'mk8cd') + nim_backends('mk8') + js_backends('mk8')),
-    'mk9':  dict(opcodes='nim/mk9_opcodes.nim',  backends=nim_backends('mk9')),
-    'mk10': dict(opcodes='nim/mk10_opcodes.nim', backends=nim_backends('mk10')),
-    'mk11': dict(opcodes='nim/mk11_opcodes.nim', backends=nim_backends('mk11')),
-    'mk12': dict(opcodes='nim/mk12_opcodes.nim', backends=nim_backends('mk12')),
+    'mk9':  dict(opcodes='nim/mk9_opcodes.nim',  backends=nim_backends('mk9') + js_backends('mk9')),
+    'mk10': dict(opcodes='nim/mk10_opcodes.nim', backends=nim_backends('mk10') + js_backends('mk10')),
+    'mk11': dict(opcodes='nim/mk11_opcodes.nim', backends=nim_backends('mk11') + js_backends('mk11')),
+    'mk12': dict(opcodes='nim/mk12_opcodes.nim', backends=nim_backends('mk12') + js_backends('mk12')),
     'mk13': dict(opcodes='nim/mk13_opcodes.nim', backends=nim_backends('mk13') + js_backends('mk13')),
 }
 

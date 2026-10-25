@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>vimes2 - VMs in the browser</title>
+<style>
+  body { font-family: sans-serif; margin: 1em; max-width: 1200px; }
+  textarea, pre { font-family: monospace; font-size: 13px; }
+  textarea { width: 100%; box-sizing: border-box; }
+  pre { background: #f4f4f4; padding: .5em; overflow: auto; max-height: 20em; margin: .3em 0; }
+  .row { display: flex; gap: 1em; }
+  .col { flex: 1; min-width: 0; }
+  .err { color: #b00; }
+  .ok  { color: #070; }
+  label { margin-right: .5em; }
+  button { margin-right: .3em; }
+</style>
+</head>
+<body>
+<h2>vimes2 - virtual machines in the browser</h2>
+<p>
+  <label>machine <select id="machine"></select></label>
+  <label>example <select id="example"></select></label>
+  <label>variant <select id="variant"></select></label>
+  <span id="desc"></span>
+</p>
+<div class="row">
+  <div class="col">
+    <b>assembly</b>
+    <textarea id="src" rows="28" spellcheck="false"></textarea>
+  </div>
+  <div class="col">
+    <b>input</b> (stdin) <span id="expected"></span>
+    <textarea id="input" rows="2" spellcheck="false"></textarea>
+    <p>
+      <button id="run">Run</button>
+      <button id="trace">Trace (first 200 steps)</button>
+      <button id="bench">Benchmark</button>
+      <label>runs <input id="runs" type="number" value="100" min="1" style="width:5em"></label>
+    </p>
+    <b>output</b> <span id="status"></span>
+    <pre id="out"></pre>
+    <b>memory</b> (non-zero rows)
+    <pre id="mem"></pre>
+    <b>code</b> (b10)
+    <pre id="code"></pre>
+    <b>trace</b>
+    <pre id="tracebox"></pre>
+  </div>
+</div>
+<pre id="selftest" style="display:none"></pre>
+
+<script src="../js/vimes.js"></script>
+<script src="../js/opcodes.js"></script>
+<script src="../js/asm.js"></script>
+<script src="../js/mk8.js"></script>
+<script src="examples.js"></script>
+<script>
+'use strict'
+const V = window.VIMES
+const $ = id => document.getElementById(id)
+
+function machineNames() {
+    return Object.keys(V.machines).sort((a, b) => parseInt(a.slice(2)) - parseInt(b.slice(2)))
+}
+
+function fill(sel, items) {
+    sel.innerHTML = ''
+    for (const [value, text] of items) {
+        const o = document.createElement('option')
+        o.value = value; o.textContent = text
+        sel.appendChild(o)
+    }
+}
+
+function selectMachine() {
+    const m = V.machines[$('machine').value]
+    $('desc').textContent = m.description || ''
+    fill($('variant'), Object.keys(m.variants).map(v => [v, v]))
+    const ex = V.examples.map((e, i) => [i, e]).filter(([i, e]) => e.machine === m.name)
+    fill($('example'), ex.map(([i, e]) => [i, `${e.id} (${e.input_label})`]))
+    selectExample()
+}
+
+function selectExample() {
+    const e = V.examples[$('example').value]
+    if (!e) return
+    $('src').value = V.sources[e.asm]
+    $('input').value = e.input
+    $('expected').textContent = 'expected: ' + e.expected.join(' ')
+}
+
+function assemble(machineName, src) {
+    return V.asm.compile(src, V.machines[machineName].opcodes).join(' ')
+}
+
+function runCurrent(opts = {}) {
+    const name = $('machine').value
+    $('status').className = ''
+    try {
+        const b10 = assemble(name, $('src').value)
+        $('code').textContent = b10
+        const res = V.run(name, b10, $('input').value, Object.assign({ variant: $('variant').value, maxCycles: 50000000 }, opts))
+        $('out').textContent = V.outputText(res.out)
+        $('mem').textContent = V.memDump(res.vm.mem)
+        $('status').textContent = `cycles: ${res.cycles}  time: ${res.ms.toFixed(2)} ms`
+        return res
+    } catch (err) {
+        $('status').textContent = 'ERROR: ' + err.message
+        $('status').className = 'err'
+    }
+}
+
+$('run').onclick = () => { $('tracebox').textContent = ''; runCurrent() }
+
+$('trace').onclick = () => {
+    const lines = []
+    runCurrent({ trace: t => {
+        if (lines.length < 200) lines.push(`cc:${t.cc} pc:${t.pc} ${t.opname || t.op} ${t.a}  acc:${t.acc} sp:${t.sp}`)
+    }})
+    $('tracebox').textContent = lines.join('\n')
+}
+
+$('bench').onclick = () => {
+    const n = Math.max(1, parseInt($('runs').value, 10) || 1)
+    const name = $('machine').value
+    let b10
+    try { b10 = assemble(name, $('src').value) } catch (err) { $('status').textContent = 'ERROR: ' + err.message; return }
+    let ms = 0, cycles = 0, res
+    for (let i = 0; i < n; i++) {
+        res = V.run(name, b10, $('input').value, { variant: $('variant').value })
+        ms += res.ms; cycles += res.cycles
+    }
+    $('out').textContent = V.outputText(res.out)
+    $('status').textContent = `runs: ${n}  avg time: ${(ms / n).toFixed(3)} ms  avg vm cycles/s: ${(cycles / (ms / 1000)).toExponential(2)}`
+}
+
+// selftest: index.html?selftest - assembles and runs every example of every loaded machine
+// and writes "SELFTEST PASS n/n" or "SELFTEST FAIL ..." into #selftest (checked by tools/web_smoke.py)
+function selftest() {
+    const lines = []
+    let pass = 0, total = 0
+    for (const e of V.examples) {
+        const m = V.machines[e.machine]
+        if (!m) continue
+        for (const variant of Object.keys(m.variants)) {
+            total++
+            try {
+                const res = V.run(e.machine, assemble(e.machine, V.sources[e.asm]), e.input, { variant, maxCycles: 50000000 })
+                if (res.out.join(' ') === e.expected.join(' ')) pass++
+                else lines.push(`FAIL ${e.id} [${e.input_label}] ${variant}: got ${res.out.join(' ')} expected ${e.expected.join(' ')}`)
+            } catch (err) {
+                lines.push(`FAIL ${e.id} [${e.input_label}] ${variant}: ${err.message}`)
+            }
+        }
+    }
+    const machines = machineNames().join(',')
+    lines.unshift(`SELFTEST ${pass === total && total > 0 ? 'PASS' : 'FAIL'} ${pass}/${total} machines:${machines}`)
+    const box = $('selftest')
+    box.style.display = 'block'
+    box.className = pass === total ? 'ok' : 'err'
+    box.textContent = lines.join('\n')
+}
+
+fill($('machine'), machineNames().map(n => [n, n]))
+$('machine').onchange = selectMachine
+$('example').onchange = selectExample
+selectMachine()
+if (location.search.includes('selftest')) selftest()
+</script>
+</body>
+</html>
