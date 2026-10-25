@@ -8,7 +8,7 @@ void reset(int quick) {
 }
 
 void trace(Word op, Word a) {
-    char* opname = op<=20 ? opnames[op] : "???";
+    char* opname = op<=23 ? opnames[op] : "???";
     fprintf(stderr, "| %4ld | %3d | %3d | %5s %3d | %3d | ", cc, pc, acc, opname, a, sp);
     fprintf(stderr, "\n");
 }
@@ -36,7 +36,7 @@ void run() {
         &&_ADD, &&_SUB, &&_INC, &&_DEC, &&_JMP,
         &&_JZ,  &&_JN,  &&_LIT, &&_CAL, &&_RET,
         &&_LPA, &&_SPA, &&_ASR, &&_NOP, &&_PUSH,
-        &&_POP,
+        &&_POP, &&_JP,  &&_JZP, &&_JZN,
     };
     for (int i=0; i<code_size; i+=2) {
         code2[i] = labels[code[i]];
@@ -68,6 +68,9 @@ void run() {
     // EXTENSION
     _PUSH: BEFORE; mem[a]+=1; mem[mem[a]]=acc; pc+=2; NEXT;
     _POP:  BEFORE; acc=mem[mem[a]]; mem[a]-=1; pc+=2; NEXT;
+    _JP:   BEFORE; pc = (acc>0)  ? a :         pc+2;  NEXT;
+    _JZP:  BEFORE; pc = (acc>=0) ? a :         pc+2;  NEXT;
+    _JZN:  BEFORE; pc = (acc<=0) ? a :         pc+2;  NEXT;
     END:
     cc = _cc;
 }

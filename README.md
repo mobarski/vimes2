@@ -47,6 +47,15 @@ Another take on my [Vimes project](https://github.com/mobarski/vimes).
 
   
 
+## Testing
+
+`make test` builds the C (and Nim, if available) machines and runs all test cases from `tests/cases.txt`
+against reference outputs from `tests/oracle.py`, including cross-variant checks (same output and the same
+number of VM cycles on every dispatch variant). Details: [tests/README.md](tests/README.md).
+Rosetta Code examples: [docs/rosetta.md](docs/rosetta.md), mk8 reference: [docs/mk8.md](docs/mk8.md).
+
+
+
 ## VM versions
 
 - **mk1** - machine from [Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth)'s 1976 book [Algorithms + Data Structures = Programs](https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs)

@@ -30,5 +30,6 @@ Word stack_size; // stack size
 int64_t cc = 0; // cycle counter
 
 void reset(int quick);
+void debug();
 void run();
 

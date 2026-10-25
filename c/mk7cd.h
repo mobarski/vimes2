@@ -31,4 +31,5 @@ int64_t cc = 0; // cycle counter
 void *code2[2000]; // code as native pointers TODO: calloc
 
 void reset(int quick);
+void debug();
 void run();

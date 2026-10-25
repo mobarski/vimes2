@@ -1,0 +1,45 @@
+# vimes2 tests
+
+```
+make test        # build C (and Nim if available) VMs, run assembler tests and all VM test cases
+make test-c      # only C backends: mk7c mk7ci mk7cd mk8c mk8ci mk8cd
+make test-nim    # only Nim backends: mk6 mk7 mk8 mk9 mk10 mk11 mk12 mk13 (needs nim and ../nim-bench)
+make test-js     # only JS backends (hook for the browser implementation)
+make expected    # regenerate tests/expected/ from tests/oracle.py
+make docs        # regenerate docs/rosetta.md and docs/mk8.md
+```
+
+## How it works
+
+- `tests/cases.txt` - one test case per line: `machine  asm_file  oracle  input`
+  (input = space separated ints passed on stdin, or `@path` to an input file).
+- `tests/oracle.py` - reference implementations in Python. Expected outputs come from here,
+  not from the VMs, so a test catches bugs both in the asm program and in the machine.
+- `tests/expected/<program>__<n>.txt` - the oracle output, committed for humans (checked against the oracle on every run).
+- `tools/run_tests.py` - assembles each program with `python/asm.py` (opcodes from `nim/mkN_opcodes.nim`),
+  runs it on every available backend of the machine and compares whitespace-separated numbers.
+- **Cross-variant consistency:** all backends of a machine must print the same output **and execute the
+  same number of VM cycles** (C: `-b 1` -> `total cycles` on stderr; Nim built with `-d:cc`: `-d` -> `cc:` line).
+- Results are saved to `build/results.json` (used by `tools/gen_docs.py`).
+
+## Backends
+
+| kind | binary | how cycles are read |
+|---|---|---|
+| c   | `bin/mkNc`, `bin/mkNci`, `bin/mkNcd` (`make c-bin`) | `-b 1` -> stderr `total cycles: N` |
+| nim | `bin/mkN_nim` (`make nim-bin`, `-d:cc -d:danger`) | `-d` -> stdout `pc:... cc:N` (removed from output) |
+| js  | `js/mkN.js` (not implemented yet) | `node js/mkN.js prog.b10 < input` must print numbers on stdout and `cycles: N` on stderr |
+
+Missing backends are skipped (reported in the summary), so the suite runs on machines without nim or node.
+
+## Adding a test
+
+1. Write `asm/<task>_mkN.asm` (header: `# REF:` link, pseudocode, `in:`/`out:`/`ex:` lines).
+2. Add a function to `tests/oracle.py` (input ints -> output ints).
+3. Add a line to `tests/cases.txt`, run `make expected` and `make test`.
+
+## Known issues (excluded from the suite)
+
+- `asm/isort_mk8_ext.asm`: `cmp array` subtracts `mem[20]` (value of A[0]) instead of the address 20 -> prints unsorted data on all variants.
+- `asm/gsort_mk8.asm`: work in progress (🚧 in benchmark.md), crashes.
+- Nim mk1-mk5 do not compile with the current `debug_mem.nim` (`mem` undeclared) - not part of the suite.

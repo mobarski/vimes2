@@ -35,7 +35,7 @@ char* opnames[] = {
     "ADD", "SUB", "INC", "DEC", "JMP",
     "JZ",  "JN",  "LIT", "CAL", "RET",
     "LPA", "SPA", "ASR", "NOP", "PUSH",
-    "POP"  "JP",  "JZP", "JZN"
+    "POP", "JP",  "JZP", "JZN"
 };
 
 typedef int16_t Word;

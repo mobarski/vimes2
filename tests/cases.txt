@@ -1,0 +1,73 @@
+# vimes2 test cases
+# format: machine  asm_file  oracle  input
+#   input: space separated ints (stdin) or @path to an input file
+#   oracle: function name in tests/oracle.py that computes the expected output
+
+# === existing benchmark programs (regression) ================================
+mk7   asm/loops3_mk7.asm          loops3      5
+mk7   asm/loops3_mk7.asm          loops3      12
+mk8   asm/fibo_mk8.asm            fibo        15
+mk8   asm/ackerman_mk8.asm        ackermann   2 3
+mk8   asm/ackerman_mk8_ext.asm    ackermann   2 3
+mk8   asm/sudan_mk8.asm           sudan       1 3 3
+mk8   asm/sieve_mk8.asm           sieve       100
+mk8   asm/qsort_mk8.asm           sort        @tests/sort_input_10.txt
+mk8   asm/qsort_mk8.asm           sort        @tests/sort_input_80.txt
+mk8   asm/bsort_mk8.asm           sort        @tests/sort_input_40.txt
+mk8   asm/ssort_mk8.asm           sort        @tests/sort_input_40.txt
+mk8   asm/ssort_v2_mk8.asm        sort        @tests/sort_input_40.txt
+# KNOWN BUG (excluded): isort_mk8_ext.asm compares pointer with `cmp array` = sub mem[20]
+#   (value of A[0], not the address 20) -> outputs unsorted data on all variants
+# mk8   asm/isort_mk8_ext.asm       sort        @tests/sort_input_40.txt
+# WIP (excluded): gsort_mk8.asm is marked 🚧 in benchmark.md - crashes / unknown opcode
+# mk8   asm/gsort_mk8.asm           sort        @tests/sort_input_40.txt
+mk6   asm/fibo_mk6.asm            fibo        15
+mk6   asm/loops3_mk6.asm          loops3      10
+mk9   asm/loops3_mk9.asm          loops3      10
+mk10  asm/fibo_mk10.asm           fibo        15
+mk10  asm/isort_mk10.asm          sort        @tests/sort_input_40.txt
+mk11  asm/loops3_mk11.asm         loops3      10
+mk11  asm/sieve_mk11.asm          sieve       100
+mk11  asm/isort_mk11.asm          sort        @tests/sort_input_40.txt
+mk12  asm/loops3_mk12.asm         loops3      10
+mk12  asm/sieve_mk12.asm          sieve       100
+mk12  asm/sieve_v2_mk12.asm       sieve       100
+mk13  asm/loops3_mk13.asm         loops3      10
+mk13  asm/sieve_mk13.asm          sieve       100
+mk13  asm/isort_mk13.asm          sort        @tests/sort_input_40.txt
+
+# === int16 edge cases (wrap-around must be identical on all variants) =========
+mk8   asm/int16_mk8.asm           int16       32767 1
+mk8   asm/int16_mk8.asm           int16       -32768 1
+mk8   asm/int16_mk8.asm           int16       -7 32000
+
+# === Rosetta Code tasks (mk8) ================================================
+mk8   asm/loops_for_mk8.asm         loops_for         5
+mk8   asm/loops_nested_mk8.asm      loops_nested      3 4  1 7 13 2  9 20 3 11  4 5 6 8
+mk8   asm/loops_nested_mk8.asm      loops_nested      2 3  1 2 3 4 5 6
+mk8   asm/fizzbuzz_mk8.asm          fizzbuzz          100
+mk8   asm/gcd_mk8.asm               gcd               5  48 18  7 5  100 75  1071 1029  32767 1
+mk8   asm/sum_digits_mk8.asm        sum_digits        5  0 1 1234 9999 32767
+mk8   asm/digital_root_mk8.asm      digital_root      5  0 9 627 9875 29999
+mk8   asm/primality_mk8.asm         primality         10  0 1 2 3 4 17 25 97 7919 32749
+mk8   asm/perfect_mk8.asm           perfect           500
+mk8   asm/hailstone_mk8.asm         hailstone         7
+mk8   asm/hailstone_mk8.asm         hailstone         27
+mk8   asm/fibonacci_mk8.asm         fibonacci         22
+mk8   asm/factorial_mk8.asm         factorial         8  0 1 2 3 4 5 6 7
+mk8   asm/hanoi_mk8.asm             hanoi             3
+mk8   asm/hanoi_mk8.asm             hanoi             6
+mk8   asm/doors100_mk8.asm          doors100          100
+mk8   asm/binary_search_mk8.asm     binary_search     10  1 3 5 7 9 11 13 15 17 19  6  1 19 9 10 0 20
+mk8   asm/mutual_recursion_mk8.asm  mutual_recursion  20
+
+# === Rosetta Code tasks (mk13, Nim only) =====================================
+mk13  asm/gcd_mk13.asm              gcd               5  48 18  7 5  100 75  1071 1029  32767 1
+mk13  asm/fizzbuzz_mk13.asm         fizzbuzz          100
+mk13  asm/sum_digits_mk13.asm       sum_digits        5  0 1 1234 9999 32767
+mk13  asm/primality_mk13.asm        primality         10  0 1 2 3 4 17 25 97 7919 32749
+mk13  asm/factorial_mk13.asm        factorial         8  0 1 2 3 4 5 6 7
+mk13  asm/fibonacci_mk13.asm        fibonacci         22
+mk13  asm/hailstone_mk13.asm        hailstone         7
+mk13  asm/hailstone_mk13.asm        hailstone         27
+mk13  asm/doors100_mk13.asm         doors100          100
