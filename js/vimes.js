@@ -36,23 +36,53 @@
 
     // === STDIO ==============================================================
 
-    // integer reader over an input string (like nim/vimes/sio.nim read_int)
+    // stdin model over an input string - same semantics as nim/vimes/sio.nim:
+    // line buffered, read_int skips whitespace (EOF -> -1 and eof=true),
+    // read_chr returns 10 at the end of every line (EOF -> -1 and eof=true).
+    // Differences: a non-numeric char is skipped by readInt (sio.nim would loop forever).
     V.makeInput = function (text = '') {
-        let pos = 0
+        const lines = text.split('\n')
+        if (lines.length > 1 && lines[lines.length - 1] === '') lines.pop() // like readLine: no extra empty line
+        if (text === '') lines.length = 0
+        let li = -1, buf = '', pos = 1
         const io = { eof: false }
+        function nextLine() {
+            li += 1
+            if (li >= lines.length) { io.eof = true; return false }
+            buf = lines[li].replace(/\r$/, ''); pos = 0
+            return true
+        }
         io.readInt = function () {
-            const re = /-?\d+/g
-            re.lastIndex = pos
-            const m = re.exec(text)
-            if (m === null) { io.eof = true; pos = text.length; return -1 }
-            pos = re.lastIndex
-            return parseInt(m[0], 10)
+            while (true) {
+                if (pos >= buf.length) {
+                    if (!nextLine()) return -1
+                }
+                if (buf.length === 0) continue
+                while (pos < buf.length && /\s/.test(buf[pos])) pos++
+                if (pos >= buf.length) continue
+                const m = /^[+-]?\d+/.exec(buf.slice(pos))
+                if (m) { pos += m[0].length; return parseInt(m[0], 10) }
+                pos += 1 // non-numeric char
+            }
         }
         io.readChr = function () {
-            if (pos >= text.length) { io.eof = true; return -1 }
-            return text.charCodeAt(pos++)
+            while (true) {
+                if (pos > buf.length) {
+                    if (!nextLine()) return -1
+                }
+                if (pos === buf.length) { pos += 1; return 10 }
+                return buf.charCodeAt(pos++)
+            }
         }
         return io
+    }
+
+    // runtime error with machine state (clearer than NaN / undefined from typed arrays)
+    V.VMError = class VMError extends Error {}
+    V.fail = function (vm, machine, msg, regs) {
+        vm.regs = regs || vm.regs
+        const where = regs ? ' (' + Object.entries(regs).map(([k, v]) => `${k}=${v}`).join(' ') + ` cc=${vm.cc})` : ''
+        throw new V.VMError(`${machine}: ${msg}${where}`)
     }
 
     // === VM =================================================================
@@ -69,6 +99,13 @@
             trace: opts.trace || null,      // fn(info) called before each instruction
             regs: {},                 // final register values (for debug output)
         }
+    }
+
+    // opcode number -> name (for traces)
+    V.opnamesOf = function (opcodes) {
+        const names = []
+        for (const k in opcodes) if (names[opcodes[k]] === undefined) names[opcodes[k]] = k
+        return names
     }
 
     V.register = function (machine) {
@@ -90,7 +127,12 @@
         return { out: vm.out, cycles: vm.cc, vm: vm, ms: t1 - t0 }
     }
 
-    V.outputText = function (out) { return out.join(' ') }
+    // output tokens: numbers (PUT/OUT/PUTI) one per line, characters (PUTC) as-is
+    V.outputText = function (out) {
+        let s = ''
+        for (const t of out) s += (typeof t === 'number') ? t + '\n' : t
+        return s
+    }
 
     // === MEMORY DUMP (like debug_mem in c/cli.h) ============================
 
@@ -134,11 +176,17 @@
         try { input = fs.readFileSync(0, 'utf8') } catch (e) { input = '' }
         const n = Math.max(bench, 1)
         let res, totalMs = 0, totalCycles = 0
-        for (let i = 0; i < n; i++) {
-            res = V.run(machine.name, b10, input, { variant })
-            totalMs += res.ms; totalCycles += res.cycles
+        try {
+            for (let i = 0; i < n; i++) {
+                res = V.run(machine.name, b10, input, { variant })
+                totalMs += res.ms; totalCycles += res.cycles
+            }
+        } catch (e) {
+            if (!(e instanceof V.VMError)) throw e
+            process.stderr.write(`ERROR: ${e.message}\n`)
+            process.exit(2)
         }
-        process.stdout.write(V.outputText(res.out) + '\n')
+        process.stdout.write(V.outputText(res.out))
         process.stderr.write(`cycles: ${res.cycles}\n`)
         if (bench > 0) {
             process.stderr.write(`runs: ${n}\navg time: ${(totalMs / n).toFixed(3)} ms\n`)
