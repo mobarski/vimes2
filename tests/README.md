@@ -42,7 +42,9 @@ Missing backends are skipped (reported in the summary), so the suite runs on mac
 
 - `asm/isort_mk8_ext.asm`: `cmp array` subtracts `mem[20]` (value of A[0]) instead of the address 20 -> prints unsorted data on all variants.
 - `asm/gsort_mk8.asm`: work in progress (🚧 in benchmark.md), crashes.
-- Nim mk1-mk5 do not compile with the current `debug_mem.nim` (`mem` undeclared) - not part of the suite.
+- Nim mk4/mk5 cannot run programs ending with `HLT` (mk4: unknown opcode, mk5: HLT dispatched as LIT -> crash):
+  `skip=mk4_nim,mk5_nim` on `loops3_mk2` and `gcd_mk2` in `tests/cases.txt` (fix: branch `necron/fix-nim-mk4-5-hlt`).
+- Nim mk3 (bytecode, abandoned) is not part of the suite.
 
 ## JavaScript / browser backends
 
@@ -60,10 +62,9 @@ program output on stdout (numbers one per line, PUTC chars as-is), `cycles: N` o
 runtime errors as `ERROR: ...` on stderr with exit code 2. A machine without `js/mkN.js` is reported as skipped.
 A JS backend path with a suffix (`js/mk2.js:call`) runs a dispatch variant; its cycles must match the other variants.
 
-mk1/mk2 are tested only in JS (against the oracle): `nim/mk1..mk5` do not compile in the repo
-(`debug_mem.nim` uses `mem`, which `base.nim` does not declare). With `var mem, stack: seq[Word]` added to
-`base.nim` (not committed) the Nim builds give the same outputs and cycle counts as JS on every program
-they can run (see docs/web.md).
+p-code machines: Nim mk1, mk2, mk4, mk5 and JS mk1, mk2 (variants switch/call/table) run the same cases and must
+give the same cycle counts. Nim p-code VMs print cycles with `-d` as `cc:N p:.. b:.. t:..` on stderr
+(the other Nim VMs: `pc:.. cc:N` on stdout); `run_tests.py` reads both.
 
 `make test-web` = asm.js parity + headless chrome selftest (`tools/web_smoke.py`, skipped if no chrome/chromium).
 `make test-js` = `test-web` + JS backends in `run_tests.py`.

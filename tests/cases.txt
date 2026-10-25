@@ -1,6 +1,7 @@
 # vimes2 test cases
-# format: machine  asm_file  oracle  input
+# format: machine  asm_file  oracle  input  [skip=backend,...]
 #   input: space separated ints (stdin) or @path to an input file
+#   skip:  backends (names from tools/run_tests.py) that cannot run the program - with a comment why
 #   oracle: function name in tests/oracle.py that computes the expected output
 
 # === existing benchmark programs (regression) ================================
@@ -36,12 +37,14 @@ mk13  asm/loops3_mk13.asm         loops3      10
 mk13  asm/sieve_mk13.asm          sieve       100
 mk13  asm/isort_mk13.asm          sort        @tests/sort_input_40.txt
 
-# === p-code machines (JS only: nim mk1..mk5 do not compile; mk2 runs as switch/call/table = mk2/mk4/mk5)
+# === p-code machines (Nim mk1, mk2, mk4, mk5 + JS; mk4/mk5 = call threading versions of mk2, JS variants call/table)
+# loops3_mk2 and gcd_mk2 end with HLT: nim mk4 has no HLT (unknown opcode) and nim mk5 dispatches HLT as LIT
+# and crashes - fixed on branch necron/fix-nim-mk4-5-hlt; remove the skip= after it is merged
 mk1   asm/fibo_mk1.asm            fibo        15
 mk1   asm/gcd_mk1.asm             gcd         5  48 18  7 5  100 75  1071 1029  32767 1
 mk2   asm/fibo_mk2.asm            fibo        15
-mk2   asm/loops3_mk2.asm          loops3      10
-mk2   asm/gcd_mk2.asm             gcd         5  48 18  7 5  100 75  1071 1029  32767 1
+mk2   asm/loops3_mk2.asm          loops3      10    skip=mk4_nim,mk5_nim
+mk2   asm/gcd_mk2.asm             gcd         5  48 18  7 5  100 75  1071 1029  32767 1    skip=mk4_nim,mk5_nim
 
 # === int16 edge cases (wrap-around must be identical on all variants) =========
 mk8   asm/int16_mk8.asm           int16       32767 1
