@@ -27,7 +27,7 @@ Simple [Rosetta Code](https://rosettacode.org) tasks rewritten for vimes2 machin
 | [Binary search](https://rosettacode.org/wiki/Binary_search) | `10 1 3 5 7 9 11 13 15 17 19 6 1 19 9 ...` | `0 9 4 -1 -1 -1` | [binary_search_mk8.asm](../asm/binary_search_mk8.asm) | 515 | 124 | - | - | - |
 | [Mutual recursion](https://rosettacode.org/wiki/Mutual_recursion) | `20` | `1 1 2 2 3 3 4 5 5 6 ...` | [mutual_recursion_mk8.asm](../asm/mutual_recursion_mk8.asm) | 77.4K | 100 | - | - | - |
 
-`*` = different input than in the example column. Other machines with Rosetta programs: mk10, mk11 (see `tests/cases.txt`).
+`*` = different input than in the example column. Other machines with Rosetta programs: mk1, mk2, mk10, mk11 (see `tests/cases.txt`).
 
 ## Side by side
 

@@ -7,7 +7,7 @@
   body { font-family: sans-serif; margin: 1em; max-width: 1200px; }
   textarea, pre { font-family: monospace; font-size: 13px; }
   textarea { width: 100%; box-sizing: border-box; }
-  pre { background: #f4f4f4; padding: .5em; overflow: auto; max-height: 20em; margin: .3em 0; }
+  pre { white-space: pre-wrap; background: #f4f4f4; padding: .5em; overflow: auto; max-height: 20em; margin: .3em 0; }
   .row { display: flex; gap: 1em; }
   .col { flex: 1; min-width: 0; }
   .err { color: #b00; }
@@ -53,7 +53,16 @@
 <script src="../js/vimes.js"></script>
 <script src="../js/opcodes.js"></script>
 <script src="../js/asm.js"></script>
+<script src="../js/mk1.js"></script>
+<script src="../js/mk2.js"></script>
+<script src="../js/mk6.js"></script>
+<script src="../js/mk7.js"></script>
 <script src="../js/mk8.js"></script>
+<script src="../js/mk9.js"></script>
+<script src="../js/mk10.js"></script>
+<script src="../js/mk11.js"></script>
+<script src="../js/mk12.js"></script>
+<script src="../js/mk13.js"></script>
 <script src="examples.js"></script>
 <script>
 'use strict'
@@ -116,7 +125,10 @@ $('run').onclick = () => { $('tracebox').textContent = ''; runCurrent() }
 $('trace').onclick = () => {
     const lines = []
     runCurrent({ trace: t => {
-        if (lines.length < 200) lines.push(`cc:${t.cc} pc:${t.pc} ${t.opname || t.op} ${t.a}  acc:${t.acc} sp:${t.sp}`)
+        if (lines.length >= 200) return
+        const regs = Object.entries(t).filter(([k]) => !['cc', 'pc', 'op', 'opname', 'a', 'b', 'l'].includes(k))
+        const args = ['l', 'a', 'b'].filter(k => k in t).map(k => t[k]).join(' ')
+        lines.push(`cc:${t.cc} pc:${t.pc} ${t.opname || t.op} ${args}  ` + regs.map(([k, v]) => `${k}:${v}`).join(' '))
     }})
     $('tracebox').textContent = lines.join('\n')
 }
@@ -147,12 +159,25 @@ function selftest() {
             total++
             try {
                 const res = V.run(e.machine, assemble(e.machine, V.sources[e.asm]), e.input, { variant, maxCycles: 50000000 })
-                if (res.out.join(' ') === e.expected.join(' ')) pass++
-                else lines.push(`FAIL ${e.id} [${e.input_label}] ${variant}: got ${res.out.join(' ')} expected ${e.expected.join(' ')}`)
+                const got = res.out.filter(x => typeof x === 'number').join(' ') // PUTC chars are formatting only
+                if (got === e.expected.join(' ')) pass++
+                else lines.push(`FAIL ${e.id} [${e.input_label}] ${variant}: got ${got} expected ${e.expected.join(' ')}`)
             } catch (err) {
                 lines.push(`FAIL ${e.id} [${e.input_label}] ${variant}: ${err.message}`)
             }
         }
+    }
+    // UI smoke: Run and Trace buttons on the first example of every machine
+    for (const name of machineNames()) {
+        $('machine').value = name; selectMachine()
+        $('run').onclick()
+        total++
+        if ($('status').textContent.startsWith('cycles:') && $('out').textContent.trim()) pass++
+        else lines.push(`FAIL ui run ${name}: ${$('status').textContent}`)
+        $('trace').onclick()
+        total++
+        if ($('tracebox').textContent.startsWith('cc:1 pc:0 ')) pass++
+        else lines.push(`FAIL ui trace ${name}: ${$('tracebox').textContent.slice(0, 80)}`)
     }
     const machines = machineNames().join(',')
     lines.unshift(`SELFTEST ${pass === total && total > 0 ? 'PASS' : 'FAIL'} ${pass}/${total} machines:${machines}`)

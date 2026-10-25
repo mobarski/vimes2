@@ -26,6 +26,11 @@
  "asm/loops3_mk13.asm": "# variables\nn=2\ny=3\ni=4\nj=5\nk=6\n\nTHEN=JNZ\nELSE=JZ\n\nLIT 0 0\nLIT 1 1\n\nGET n 0\n\nMOV i n\nloop1:\n    EQ i 0 THEN end1 0\n    SUB i 1\n    MOV j n\n    loop2:\n        EQ j 0 THEN end2 0\n        SUB j 1\n        MOV k n\n        loop3:\n            EQ k 0 THEN end3 0\n            SUB k 1\n            ADD y 1\n        JMP loop3 end3:\n    JMP loop2 end2:\nJMP loop1 end1:\n\nPUT y 0\nHLT 0 0\n",
  "asm/sieve_mk13.asm": "\nn=2\ni=3\nj=4\na=5\na0=19 # so it looks good in the debug output\n\nif=\nthen=jnz\nelse=jz\npeek=ldap\npoke=stap\nload=lda\nto=sta\n\nlit 0 0\nlit 1 1\nlit a a0\n\nget n 0\n\n# fill the array with ones\nlit i 0\nloop1:\n    if eq i n then end1 0\n    load 0 1 poke a i\n    add i 1\n    jmp loop1 0 end1:\n\nlit i 2\nloop2:\n    if eq i n then end2 0\n    peek a i jz not_prime 0\n\n    prime:\n        put i 0\n\n    not_prime:\n        mov j i\n        add j i\n        loop3:\n            if ge j n then end3 0\n            load 0 0 poke a j\n            add j i\n            jmp loop3 0 end3:\n\n    add i 1\n    jmp loop2 0 end2:\n\nhlt 0 0\n",
  "asm/isort_mk13.asm": "# REF: https://rosettacode.org/wiki/Sorting_algorithms/Insertion_sort\n\n# function insertionSort(array A)\n#     for i from 1 to length[A]-1 do\n#         value := A[i] \n#         j := i-1\n#         while j >= 0 and A[j] > value do\n#             A[j+1] := A[j]\n#             j := j-1\n#         done\n#         A[j+1] = value\n#     done\n\nn=3\ni=4\nj=5\na=6\nt=7\nv=8\na0=20\n\nif=\nthen=jnz\nelse=jz\npeek=ldap\npoke=stap\nload=lda\nto=sta\n\nlit 0 0\nlit 1 1\nlit 2 2\nlit a a0\n\nget n 0\ncal load-data 0\ncal sort 0\ncal show 0\nhlt 0 0\n\n\nsort:\n    lit i 1\n    .loop1:\n        if ge i n then .end1 0\n        peek a i to v 0\n        mov j i\n        sub j 1\n        .loop2:\n            if ge j 0 else .end2 0\n            peek a j to t 0\n            if gt t v else .end2 0\n                peek a j\n                add j 1\n                poke a j\n                sub j 2\n            jmp .loop2 0 .end2:\n        add j 1\n        load v 0 poke a j\n        sub j 1\n        add i 1 jmp .loop1 0 .end1:\n    ret 0 0\n\n\nload-data:\n    mov i 0\n    .loop1:\n        if ge i n then .end1 0\n        get t 0 load t 0 poke a i\n        add i 1 jmp .loop1 0 .end1:\n    ret 0 0\n\n\nshow:\n    mov i 0\n    .loop1:\n        if ge i n then .end1 0\n        peek a i to t 0 put t 0\n        add i 1 jmp .loop1 0 .end1:\n    ret 0 0\n",
+ "asm/fibo_mk1.asm": "; def fib(n)\n;   return n if n <= 1\n;   fib(n - 1) + fib(n - 2)\n; end\n\nINT 0 2              ; var 1:n 2:result\nEX1 0 GETI  STO 0 1  ; get n from stdin\n\nCAL 0 fib     ; call fib(n)\nLOD 0 2    \nEX1 0 PUTI    ; print result\nJMP 0 0       ; halt\n\nfib:\n    INT 0 3\n    INT 0 1  LOD 1 1  STO 0 3                ; var 3:nn = n\n    LOD 0 3  LIT 0 1  OPR 0 LE  JPC 0 gt1    ; nn <= 1 ?\n             LOD 0 3  STO 1 2   OPR 0 RET    ; result=n\n    gt1:\n        LOD 0 3  LIT 0 1  OPR 0 SUB  STO 1 1  CAL 1 fib  LOD 1 2 ; fib(n-1)\n        LOD 0 3  LIT 0 2  OPR 0 SUB  STO 1 1  CAL 1 fib  LOD 1 2 ; fib(n-2)\n        ; add, store result and return\n        OPR 0 ADD   STO 1 2\n        OPR 0 RET                         \n",
+ "asm/gcd_mk1.asm": "# REF: https://rosettacode.org/wiki/Greatest_common_divisor\n# Euclid's algorithm with OPR MOD on the mk1 p-code machine (original PL/0 format: i l a)\n#\n# def gcd(a, b):\n#     while b != 0:\n#         a, b = b, a % b\n#     return a\n#\n# in:  k, then k pairs a b (a, b > 0)\n# out: gcd for each pair (PUTI writes no separator, so a newline is written with PUTC)\n# ex:  2 48 18 7 5 -> 6 1\n#\n# NOTE: JPC pops the condition only when it jumps (see nim/mk1.nim)\n# NOTE: mk1 has no HLT - JMP 0 0 halts\n\nINT 0 4                 ; var 1:k 2:a 3:b\nEX1 0 GETI  STO 0 1     ; k = input\nloop:\n    LOD 0 1  JPC 0 end                      ; k == 0 -> end\n    LIT 0 1  OPR 0 SUB  STO 0 1             ; k = k - 1\n    EX1 0 GETI  STO 0 2                     ; a = input\n    EX1 0 GETI  STO 0 3                     ; b = input\n    gcd:\n        LOD 0 3  JPC 0 done                 ; b == 0 -> done\n        LOD 0 2  LOD 0 3  OPR 0 MOD         ; stack: b a%b\n        STO 0 3                             ; b = a % b\n        STO 0 2                             ; a = old b\n        JMP 0 gcd\n    done:\n    LOD 0 2  EX1 0 PUTI                     ; print a\n    LIT 0 10 EX1 0 PUTC                     ; newline\n    JMP 0 loop\nend:\nJMP 0 0\n",
+ "asm/fibo_mk2.asm": "; def fib(n)\n;   return n if n <= 1\n;   fib(n - 1) + fib(n - 2)\n; end\n\nINT 2              ; var 1:n 2:result\nEX1 GETI STO 1 0   ; get n from stdin\n\nCAL fib 0          ; call fib(n)\nLOD 2 0 EX1 PUTI   ; print result\nJMP 0              ; halt\n\nfib:\n    INT 3\n    INT 1 LOD 1 1 STO 3 0           ; var 3:nn = n\n    LOD 3 0 LIT 1 OPR LE JPC gt1    ; nn <= 1 ?\n        LOD 3 0 STO 2 1 OPR RET     ; result=n\n    gt1:\n        LOD 3 0 LIT 1 OPR SUB  STO 1 1 CAL fib 1  LOD 2 1 ; fib(n-1)\n        LOD 3 0 LIT 2 OPR SUB  STO 1 1 CAL fib 1  LOD 2 1 ; fib(n-2)\n        ; add, store result and return\n        OPR ADD STO 2 1\n        OPR RET                         \n",
+ "asm/loops3_mk2.asm": "INT 5 ; var 1:n 2:y 3:i 4:j 5:k\nLIT 99\n\nEX1 GETI STO 1 0 ; n = input\n\nLOD 1 0 STO 3 0 ; i = n\nloop1:\n    LOD 3 0 JPC loop1_end\n    LIT 1 OPR SUB\n    STO 3 0 ; i = i - 1\n\n    LOD 1 0 STO 4 0 ; j = n\n    loop2:\n        LOD 4 0 JPC loop2_end\n        LIT 1 OPR SUB\n        STO 4 0 ; j = j - 1\n\n        LOD 1 0 STO 5 0 ; k = n\n        loop3:\n            LOD 5 0 JPC loop3_end\n            LIT 1 OPR SUB\n            STO 5 0 ; k = k - 1\n            LOD 2 0 LIT 1 OPR ADD STO 2 0 ; y = y + 1\n            JMP loop3\n        loop3_end:\n\n        JMP loop2\n    loop2_end:\n    \n    JMP loop1\nloop1_end:\n\nLOD 2 0 EX1 PUTI\nHLT 0\n",
+ "asm/gcd_mk2.asm": "# REF: https://rosettacode.org/wiki/Greatest_common_divisor\n# Euclid's algorithm with OPR MOD on the mk2 p-code machine (LOD/STO take: addr level)\n#\n# def gcd(a, b):\n#     while b != 0:\n#         a, b = b, a % b\n#     return a\n#\n# in:  k, then k pairs a b (a, b > 0)\n# out: gcd for each pair (PUTI writes no separator, so a newline is written with PUTC)\n# ex:  2 48 18 7 5 -> 6 1\n#\n# NOTE: JPC pops the condition only when it jumps (see nim/mk2.nim)\n\nINT 4               ; var 1:k 2:a 3:b\nEX1 GETI STO 1 0    ; k = input\nloop:\n    LOD 1 0 JPC end             ; k == 0 -> end  (k stays on the stack otherwise)\n    LIT 1 OPR SUB STO 1 0       ; k = k - 1\n    EX1 GETI STO 2 0            ; a = input\n    EX1 GETI STO 3 0            ; b = input\n    gcd:\n        LOD 3 0 JPC done        ; b == 0 -> done (b stays on the stack otherwise)\n        LOD 2 0 LOD 3 0 OPR MOD ; stack: b a%b\n        STO 3 0                 ; b = a % b\n        STO 2 0                 ; a = old b\n        JMP gcd\n    done:\n    LOD 2 0 EX1 PUTI            ; print a\n    LIT 10 EX1 PUTC             ; newline\n    JMP loop\nend:\nHLT 0\n",
  "asm/int16_mk8.asm": "# int16 edge cases: all variants (C switch / token / direct threading, Nim)\n# must wrap around the same way (two's complement)\n#\n# in:  a b\n# out: a+b  a-b  -a  a>>1 (arithmetic)\n# ex:  32767 1 -> -32768 32766 -32767 16383\n\n# aliases\nload=lda\nto=sta\n\n# variable location\na=2\nb=3\nz=4\n\nmain:\n    lit 0 to 0\n    lit 1 to 1\n    in 0 to a\n    in 0 to b\n    load a add b out 0\n    load a sub b out 0\n    lit 0 sub a out 0\n    load a asr 1 out 0\n    hlt 0\n",
  "asm/loops_for_mk8.asm": "# REF: https://rosettacode.org/wiki/Loops/For\n# nested for loops; row i has i items (numbers 1..i instead of stars)\n#\n# for i in 1..n:\n#     for j in 1..i:\n#         print(j)\n#\n# in:  n\n# out: 1  1 2  1 2 3 ...\n# ex:  3 -> 1 1 2 1 2 3\n\n# aliases\nload=lda\nto=sta\n\n# variable location\nn=2\ni=3\nj=4\n\nmain:\n    lit 0 to 0\n    lit 1 to 1\n    in 0 to n\n    lit 1 to i\n    loop_i: load n sub i jn end\n        lit 1 to j\n        loop_j: load i sub j jn next_i\n            load j out 0\n            inc j\n            jmp loop_j\n        next_i:\n        inc i\n        jmp loop_i\n    end:\n    hlt 0\n",
  "asm/loops_nested_mk8.asm": "# REF: https://rosettacode.org/wiki/Loops/Nested\n# print a 2D array row by row, stop both loops after the value 20\n# (the array is read from stdin instead of random numbers)\n#\n# for row in a:\n#     for x in row:\n#         print(x)\n#         if x == 20: goto done\n# done:\n#\n# in:  rows cols, then rows*cols values\n# out: values up to and including the first 20\n# ex:  2 3 1 2 3 20 5 6 -> 1 2 3 20\n\n# aliases\nload=lda\nto=sta\npeek=lpa\npoke=spa\n\n# variable location\nrows=2\ncols=3\ni=4\nj=5\np=6\ntwenty=7\narray=100\n\nmain:\n    lit 0 to 0\n    lit 1 to 1\n    lit 20 to twenty\n    in 0 to rows\n    in 0 to cols\n    # read the array\n    lit array to p\n    load rows to i\n    read_i: load i jz read_end\n        load cols to j\n        read_j: load j jz read_next\n            in 0 poke p inc p\n            dec j\n            jmp read_j\n        read_next: dec i\n        jmp read_i\n    read_end:\n    # print until 20\n    lit array to p\n    load rows to i\n    loop_i: load i jz done\n        load cols to j\n        loop_j: load j jz next_i\n            peek p out 0\n            sub twenty jz done   # break out of both loops\n            inc p dec j\n            jmp loop_j\n        next_i: dec i\n        jmp loop_i\n    done:\n    hlt 0\n",
@@ -752,6 +757,64 @@
    93,
    95,
    99
+  ]
+ },
+ {
+  "id": "fibo_mk1__1",
+  "machine": "mk1",
+  "asm": "asm/fibo_mk1.asm",
+  "input": "15",
+  "input_label": "15",
+  "expected": [
+   610
+  ]
+ },
+ {
+  "id": "gcd_mk1__1",
+  "machine": "mk1",
+  "asm": "asm/gcd_mk1.asm",
+  "input": "5 48 18 7 5 100 75 1071 1029 32767 1",
+  "input_label": "5 48 18 7 5 100 75 1071 1029 32767 1",
+  "expected": [
+   6,
+   1,
+   25,
+   21,
+   1
+  ]
+ },
+ {
+  "id": "fibo_mk2__1",
+  "machine": "mk2",
+  "asm": "asm/fibo_mk2.asm",
+  "input": "15",
+  "input_label": "15",
+  "expected": [
+   610
+  ]
+ },
+ {
+  "id": "loops3_mk2__1",
+  "machine": "mk2",
+  "asm": "asm/loops3_mk2.asm",
+  "input": "10",
+  "input_label": "10",
+  "expected": [
+   1000
+  ]
+ },
+ {
+  "id": "gcd_mk2__1",
+  "machine": "mk2",
+  "asm": "asm/gcd_mk2.asm",
+  "input": "5 48 18 7 5 100 75 1071 1029 32767 1",
+  "input_label": "5 48 18 7 5 100 75 1071 1029 32767 1",
+  "expected": [
+   6,
+   1,
+   25,
+   21,
+   1
   ]
  },
  {
