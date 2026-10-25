@@ -1,0 +1,67 @@
+// mk9 - minimal memory-to-memory machine (mk7 ideas, 3 words per instruction)
+// JavaScript port of nim/mk9.nim
+//
+// Node: node js/mk9.js prog.b10 [-b n] < input
+(function (root) {
+    'use strict'
+
+    const V = (typeof require !== 'undefined' && typeof module !== 'undefined')
+        ? (require('./opcodes.js'), require('./vimes.js'))
+        : root.VIMES
+    const i16 = V.i16
+    const NAME = 'mk9'
+    const OP = V.opcodes.mk9
+    const opnames = V.opnamesOf(OP)
+
+    function runSwitch(vm) {
+        const code = vm.code, mem = vm.mem, stack = vm.stack, input = vm.input, out = vm.out
+        const trace = vm.trace, maxCycles = vm.maxCycles
+        const CODEN = code.length - 3, MEMN = mem.length, STN = stack.length
+        let pc = 0, sp = 0, acc = 0, cc = 0, pc0 = 0
+        const err = msg => { vm.cc = cc; V.fail(vm, NAME, msg, { pc: pc0 }) }
+        const ix = i => { if (i < 0 || i >= MEMN) err(`memory address ${i} out of range 0..${MEMN - 1}`); return i }
+        const nz = x => { if (x === 0) err('division by zero'); return x }
+        while (true) {
+            if (pc < 0 || pc >= CODEN) { pc0 = pc; err('pc out of code range') }
+            pc0 = pc
+            const op = code[pc]
+            const a = code[pc + 1]
+            const b = code[pc + 2]
+            cc += 1
+            if (trace) trace({ cc, pc, op, opname: opnames[op], a, b, va: mem[a], vb: mem[b], pc: pc0 })
+            if (maxCycles && cc > maxCycles) err(`cycle limit ${maxCycles} exceeded`)
+            pc += 3
+            switch (op) {
+                // control flow
+                case OP.JZ:   if (mem[b] === 0) pc = a; break
+                case OP.JN:   if (mem[b] < 0)   pc = a; break
+                case OP.JMP:  pc = a;                   break // b is ignored
+                // memory
+                case OP.LIT:  mem[a] = b;               break
+                case OP.MOV:  mem[a] = mem[b];          break
+                // alu
+                case OP.ADD:  mem[a] = mem[a] + mem[b]; break // Int16Array store wraps like int16
+                case OP.SUB:  mem[a] = mem[a] - mem[b]; break
+                // stdio
+                case OP.OUT:  out.push(mem[a]);         break
+                case OP.IN:   mem[a] = input.readInt(); break
+                // misc
+                case OP.HLT:  pc = 0;                   break
+                default: err(`unknown opcode ${op}`)
+            }
+            if (pc === 0) { vm.cc = cc; vm.regs = { pc, sp }; return } // HLT sets pc=0 (also: jump to 0 halts)
+        }
+    }
+
+    const machine = V.register({
+        name: NAME,
+        description: 'minimal memory-to-memory machine: mem only; 3 words per instruction',
+        opcodes: OP, opnames,
+        variants: { switch: runSwitch },
+    })
+
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = machine
+        if (require.main === module) V.cliMain(machine, process.argv.slice(2))
+    }
+})(typeof window !== 'undefined' ? window : globalThis)

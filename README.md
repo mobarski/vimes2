@@ -56,6 +56,15 @@ Rosetta Code examples: [docs/rosetta.md](docs/rosetta.md), mk8 reference: [docs/
 
 
 
+## Browser
+
+All machines (mk1, mk2 with mk4/mk5 variants, mk6-mk13) are also implemented in JavaScript.
+Open [web/index.html](web/index.html) directly from disk (no server, no build step): pick a machine and an example,
+edit the assembly, then Run / Trace / Benchmark. The same files run in Node (`node js/mk8.js prog.b10 < input`)
+and are tested by `make test` together with the C and Nim versions. Details: [docs/web.md](docs/web.md).
+
+
+
 ## VM versions
 
 - **mk1** - machine from [Wirth](https://en.wikipedia.org/wiki/Niklaus_Wirth)'s 1976 book [Algorithms + Data Structures = Programs](https://en.wikipedia.org/wiki/Algorithms_%2B_Data_Structures_%3D_Programs)

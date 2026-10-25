@@ -51,6 +51,7 @@ Accumulator machine inspired by [Human Resource Machine](https://store.steampowe
 | mk8ci | [c/mk8ci.c](../c/mk8ci.c) | token threading (`goto *labels[op]`, called "indirect" in README) |
 | mk8cd | [c/mk8cd.c](../c/mk8cd.c) | direct threading (code translated to label addresses) |
 | mk8 (Nim) | [nim/mk8.nim](../nim/mk8.nim) | case statement |
+| mk8 (JS) | [js/mk8.js](../js/mk8.js) | switch; also in the browser: [web/index.html](../web/index.html) |
 
 ```
 make bin                                   # builds bin/mk8c bin/mk8ci bin/mk8cd (and bin/mk8_nim if nim is installed)
@@ -63,34 +64,34 @@ echo "1 48 18" | bin/mk8c build/gcd.b10 -b 100    # benchmark: time and VM cycle
 
 | program | example input | output | vm cycles | words | variants |
 |---|---|---|---|---|---|
-| [fibo_mk8.asm](../asm/fibo_mk8.asm) | `15` | `610` | 31.7K | 84 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [ackerman_mk8.asm](../asm/ackerman_mk8.asm) ([Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function)) | `2 3` | `9` | 831 | 116 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [ackerman_mk8_ext.asm](../asm/ackerman_mk8_ext.asm) ([Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function)) | `2 3` | `9` | 654 | 96 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [sudan_mk8.asm](../asm/sudan_mk8.asm) ([Sudan function](https://en.wikipedia.org/wiki/Sudan_function)) | `1 3 3` | `35` | 165 | 124 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [sieve_mk8.asm](../asm/sieve_mk8.asm) | `100` | `2 3 5 7 11 13 17 19 23 29 ...` | 6.6K | 108 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [qsort_mk8.asm](../asm/qsort_mk8.asm) ([Sorting algorithms/Quicksort](https://rosettacode.org/wiki/Sorting_algorithms/Quicksort)) | `@tests/sort_input_10.txt` | `0 11 22 33 44 55 66 77 88 99` | 1.1K | 204 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [qsort_mk8.asm](../asm/qsort_mk8.asm) ([Sorting algorithms/Quicksort](https://rosettacode.org/wiki/Sorting_algorithms/Quicksort)) | `@tests/sort_input_80.txt` | `0 1 2 3 4 5 6 7 11 11 ...` | 11.7K | 204 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [bsort_mk8.asm](../asm/bsort_mk8.asm) | `@tests/sort_input_40.txt` | `0 1 3 5 11 11 13 15 21 22 ...` | 14.3K | 140 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [ssort_mk8.asm](../asm/ssort_mk8.asm) ([Sorting algorithms/Selection sort](https://rosettacode.org/wiki/Sorting_algorithms/Selection_sort#C)) | `@tests/sort_input_40.txt` | `0 1 3 5 11 11 13 15 21 22 ...` | 18.2K | 162 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [ssort_v2_mk8.asm](../asm/ssort_v2_mk8.asm) ([Sorting algorithms/Selection sort](https://rosettacode.org/wiki/Sorting_algorithms/Selection_sort#C)) | `@tests/sort_input_40.txt` | `0 1 3 5 11 11 13 15 21 22 ...` | 11.4K | 142 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [int16_mk8.asm](../asm/int16_mk8.asm) | `32767 1` | `-32768 32766 -32767 16383` | 21 | 42 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [int16_mk8.asm](../asm/int16_mk8.asm) | `-32768 1` | `-32767 32767 -32768 -16384` | 21 | 42 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [int16_mk8.asm](../asm/int16_mk8.asm) | `-7 32000` | `31993 -32007 7 -4` | 21 | 42 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [loops_for_mk8.asm](../asm/loops_for_mk8.asm) ([Loops/For](https://rosettacode.org/wiki/Loops/For)) | `5` | `1 1 2 1 2 3 1 2 3 4 ...` | 167 | 46 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [loops_nested_mk8.asm](../asm/loops_nested_mk8.asm) ([Loops/Nested](https://rosettacode.org/wiki/Loops/Nested)) | `3 4 1 7 13 2 9 20 3 11 4 5 6 8` | `1 7 13 2 9 20` | 192 | 94 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [loops_nested_mk8.asm](../asm/loops_nested_mk8.asm) ([Loops/Nested](https://rosettacode.org/wiki/Loops/Nested)) | `2 3 1 2 3 4 5 6` | `1 2 3 4 5 6` | 151 | 94 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [fizzbuzz_mk8.asm](../asm/fizzbuzz_mk8.asm) ([FizzBuzz](https://rosettacode.org/wiki/FizzBuzz)) | `100` | `1 2 -3 4 -5 -3 7 8 -3 -5 ...` | 1.5K | 86 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [gcd_mk8.asm](../asm/gcd_mk8.asm) ([Greatest common divisor](https://rosettacode.org/wiki/Greatest_common_divisor)) | `5 48 18 7 5 100 75 1071 1029 32767 1` | `6 1 25 21 1` | 197.0K | 58 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [sum_digits_mk8.asm](../asm/sum_digits_mk8.asm) ([Sum digits of an integer](https://rosettacode.org/wiki/Sum_digits_of_an_integer)) | `5 0 1 1234 9999 32767` | `0 1 10 36 25` | 29.5K | 74 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [digital_root_mk8.asm](../asm/digital_root_mk8.asm) ([Digital root](https://rosettacode.org/wiki/Digital_root)) | `5 0 9 627 9875 29999` | `0 0 0 9 2 6 3 2 3 2` | 27.5K | 96 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [primality_mk8.asm](../asm/primality_mk8.asm) ([Primality by trial division](https://rosettacode.org/wiki/Primality_by_trial_division)) | `10 0 1 2 3 4 17 25 97 7919 32749` | `0 0 1 1 0 1 0 1 1 1` | 947.6K | 90 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [perfect_mk8.asm](../asm/perfect_mk8.asm) ([Perfect numbers](https://rosettacode.org/wiki/Perfect_numbers)) | `500` | `6 28 496` | 5.3M | 80 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [hailstone_mk8.asm](../asm/hailstone_mk8.asm) ([Hailstone sequence](https://rosettacode.org/wiki/Hailstone_sequence)) | `7` | `7 22 11 34 17 52 26 13 40 20 ...` | 292 | 70 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [hailstone_mk8.asm](../asm/hailstone_mk8.asm) ([Hailstone sequence](https://rosettacode.org/wiki/Hailstone_sequence)) | `27` | `27 82 41 124 62 31 94 47 142 71 ...` | 2.0K | 70 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [fibonacci_mk8.asm](../asm/fibonacci_mk8.asm) ([Fibonacci sequence](https://rosettacode.org/wiki/Fibonacci_sequence)) | `22` | `0 1 1 2 3 5 8 13 21 34 ...` | 313 | 50 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [factorial_mk8.asm](../asm/factorial_mk8.asm) ([Factorial](https://rosettacode.org/wiki/Factorial)) | `8 0 1 2 3 4 5 6 7` | `1 1 2 6 24 120 720 5040` | 957 | 78 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [hanoi_mk8.asm](../asm/hanoi_mk8.asm) ([Towers of Hanoi](https://rosettacode.org/wiki/Towers_of_Hanoi)) | `3` | `1 3 1 2 3 2 1 3 2 1 ...` | 313 | 110 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [hanoi_mk8.asm](../asm/hanoi_mk8.asm) ([Towers of Hanoi](https://rosettacode.org/wiki/Towers_of_Hanoi)) | `6` | `1 2 1 3 2 3 1 2 3 1 ...` | 2.7K | 110 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [doors100_mk8.asm](../asm/doors100_mk8.asm) ([100 doors](https://rosettacode.org/wiki/100_doors)) | `100` | `1 4 9 16 25 36 49 64 81 100` | 7.7K | 98 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [binary_search_mk8.asm](../asm/binary_search_mk8.asm) ([Binary search](https://rosettacode.org/wiki/Binary_search)) | `10 1 3 5 7 9 11 13 15 17 19 6 1 19 9 ...` | `0 9 4 -1 -1 -1` | 515 | 124 | mk8c, mk8ci, mk8cd, mk8_nim |
-| [mutual_recursion_mk8.asm](../asm/mutual_recursion_mk8.asm) ([Mutual recursion](https://rosettacode.org/wiki/Mutual_recursion)) | `20` | `1 1 2 2 3 3 4 5 5 6 ...` | 77.4K | 100 | mk8c, mk8ci, mk8cd, mk8_nim |
+| [fibo_mk8.asm](../asm/fibo_mk8.asm) | `15` | `610` | 31.7K | 84 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [ackerman_mk8.asm](../asm/ackerman_mk8.asm) ([Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function)) | `2 3` | `9` | 831 | 116 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [ackerman_mk8_ext.asm](../asm/ackerman_mk8_ext.asm) ([Ackermann function](https://en.wikipedia.org/wiki/Ackermann_function)) | `2 3` | `9` | 654 | 96 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [sudan_mk8.asm](../asm/sudan_mk8.asm) ([Sudan function](https://en.wikipedia.org/wiki/Sudan_function)) | `1 3 3` | `35` | 165 | 124 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [sieve_mk8.asm](../asm/sieve_mk8.asm) | `100` | `2 3 5 7 11 13 17 19 23 29 ...` | 6.6K | 108 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [qsort_mk8.asm](../asm/qsort_mk8.asm) ([Sorting algorithms/Quicksort](https://rosettacode.org/wiki/Sorting_algorithms/Quicksort)) | `@tests/sort_input_10.txt` | `0 11 22 33 44 55 66 77 88 99` | 1.1K | 204 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [qsort_mk8.asm](../asm/qsort_mk8.asm) ([Sorting algorithms/Quicksort](https://rosettacode.org/wiki/Sorting_algorithms/Quicksort)) | `@tests/sort_input_80.txt` | `0 1 2 3 4 5 6 7 11 11 ...` | 11.7K | 204 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [bsort_mk8.asm](../asm/bsort_mk8.asm) | `@tests/sort_input_40.txt` | `0 1 3 5 11 11 13 15 21 22 ...` | 14.3K | 140 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [ssort_mk8.asm](../asm/ssort_mk8.asm) ([Sorting algorithms/Selection sort](https://rosettacode.org/wiki/Sorting_algorithms/Selection_sort#C)) | `@tests/sort_input_40.txt` | `0 1 3 5 11 11 13 15 21 22 ...` | 18.2K | 162 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [ssort_v2_mk8.asm](../asm/ssort_v2_mk8.asm) ([Sorting algorithms/Selection sort](https://rosettacode.org/wiki/Sorting_algorithms/Selection_sort#C)) | `@tests/sort_input_40.txt` | `0 1 3 5 11 11 13 15 21 22 ...` | 11.4K | 142 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [int16_mk8.asm](../asm/int16_mk8.asm) | `32767 1` | `-32768 32766 -32767 16383` | 21 | 42 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [int16_mk8.asm](../asm/int16_mk8.asm) | `-32768 1` | `-32767 32767 -32768 -16384` | 21 | 42 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [int16_mk8.asm](../asm/int16_mk8.asm) | `-7 32000` | `31993 -32007 7 -4` | 21 | 42 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [loops_for_mk8.asm](../asm/loops_for_mk8.asm) ([Loops/For](https://rosettacode.org/wiki/Loops/For)) | `5` | `1 1 2 1 2 3 1 2 3 4 ...` | 167 | 46 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [loops_nested_mk8.asm](../asm/loops_nested_mk8.asm) ([Loops/Nested](https://rosettacode.org/wiki/Loops/Nested)) | `3 4 1 7 13 2 9 20 3 11 4 5 6 8` | `1 7 13 2 9 20` | 192 | 94 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [loops_nested_mk8.asm](../asm/loops_nested_mk8.asm) ([Loops/Nested](https://rosettacode.org/wiki/Loops/Nested)) | `2 3 1 2 3 4 5 6` | `1 2 3 4 5 6` | 151 | 94 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [fizzbuzz_mk8.asm](../asm/fizzbuzz_mk8.asm) ([FizzBuzz](https://rosettacode.org/wiki/FizzBuzz)) | `100` | `1 2 -3 4 -5 -3 7 8 -3 -5 ...` | 1.5K | 86 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [gcd_mk8.asm](../asm/gcd_mk8.asm) ([Greatest common divisor](https://rosettacode.org/wiki/Greatest_common_divisor)) | `5 48 18 7 5 100 75 1071 1029 32767 1` | `6 1 25 21 1` | 197.0K | 58 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [sum_digits_mk8.asm](../asm/sum_digits_mk8.asm) ([Sum digits of an integer](https://rosettacode.org/wiki/Sum_digits_of_an_integer)) | `5 0 1 1234 9999 32767` | `0 1 10 36 25` | 29.5K | 74 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [digital_root_mk8.asm](../asm/digital_root_mk8.asm) ([Digital root](https://rosettacode.org/wiki/Digital_root)) | `5 0 9 627 9875 29999` | `0 0 0 9 2 6 3 2 3 2` | 27.5K | 96 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [primality_mk8.asm](../asm/primality_mk8.asm) ([Primality by trial division](https://rosettacode.org/wiki/Primality_by_trial_division)) | `10 0 1 2 3 4 17 25 97 7919 32749` | `0 0 1 1 0 1 0 1 1 1` | 947.6K | 90 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [perfect_mk8.asm](../asm/perfect_mk8.asm) ([Perfect numbers](https://rosettacode.org/wiki/Perfect_numbers)) | `500` | `6 28 496` | 5.3M | 80 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [hailstone_mk8.asm](../asm/hailstone_mk8.asm) ([Hailstone sequence](https://rosettacode.org/wiki/Hailstone_sequence)) | `7` | `7 22 11 34 17 52 26 13 40 20 ...` | 292 | 70 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [hailstone_mk8.asm](../asm/hailstone_mk8.asm) ([Hailstone sequence](https://rosettacode.org/wiki/Hailstone_sequence)) | `27` | `27 82 41 124 62 31 94 47 142 71 ...` | 2.0K | 70 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [fibonacci_mk8.asm](../asm/fibonacci_mk8.asm) ([Fibonacci sequence](https://rosettacode.org/wiki/Fibonacci_sequence)) | `22` | `0 1 1 2 3 5 8 13 21 34 ...` | 313 | 50 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [factorial_mk8.asm](../asm/factorial_mk8.asm) ([Factorial](https://rosettacode.org/wiki/Factorial)) | `8 0 1 2 3 4 5 6 7` | `1 1 2 6 24 120 720 5040` | 957 | 78 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [hanoi_mk8.asm](../asm/hanoi_mk8.asm) ([Towers of Hanoi](https://rosettacode.org/wiki/Towers_of_Hanoi)) | `3` | `1 3 1 2 3 2 1 3 2 1 ...` | 313 | 110 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [hanoi_mk8.asm](../asm/hanoi_mk8.asm) ([Towers of Hanoi](https://rosettacode.org/wiki/Towers_of_Hanoi)) | `6` | `1 2 1 3 2 3 1 2 3 1 ...` | 2.7K | 110 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [doors100_mk8.asm](../asm/doors100_mk8.asm) ([100 doors](https://rosettacode.org/wiki/100_doors)) | `100` | `1 4 9 16 25 36 49 64 81 100` | 7.7K | 98 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [binary_search_mk8.asm](../asm/binary_search_mk8.asm) ([Binary search](https://rosettacode.org/wiki/Binary_search)) | `10 1 3 5 7 9 11 13 15 17 19 6 1 19 9 ...` | `0 9 4 -1 -1 -1` | 515 | 124 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |
+| [mutual_recursion_mk8.asm](../asm/mutual_recursion_mk8.asm) ([Mutual recursion](https://rosettacode.org/wiki/Mutual_recursion)) | `20` | `1 1 2 2 3 3 4 5 5 6 ...` | 77.4K | 100 | mk8c, mk8ci, mk8cd, mk8_nim, mk8_js |

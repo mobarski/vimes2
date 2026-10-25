@@ -3,7 +3,9 @@
 #   make test       build everything available and run all tests
 #   make test-c     only C backends
 #   make test-nim   only Nim backends (needs nim + ../nim-bench)
-#   make test-js    only JS backends (hook for the browser implementation)
+#   make test-js    only JS backends (node js/mkN.js) + asm.js parity + headless browser smoke
+#   make test-web   asm.js parity with asm.py + headless browser selftest of web/index.html
+#   make web        regenerate js/opcodes.js and web/examples.js
 #   make test-asm   assembler unit tests (python/test_asm.py)
 #   make expected   regenerate tests/expected/ from tests/oracle.py
 #   make docs       regenerate docs/rosetta.md and docs/mk8.md
@@ -18,7 +20,7 @@ PYTHON    ?= python3
 C_VMS   = mk7c mk7ci mk7cd mk8c mk8ci mk8cd
 NIM_VMS = mk6 mk7 mk8 mk9 mk10 mk11 mk12 mk13
 
-.PHONY: all bin c-bin nim-bin test test-vm test-c test-nim test-js test-asm expected docs clean
+.PHONY: all bin c-bin nim-bin test test-vm test-c test-nim test-js test-web web test-asm expected docs clean
 
 all: bin
 
@@ -43,7 +45,7 @@ nim-bin:
 		echo "nim or $(NIM_BENCH)/bench.nim not found - Nim backends will be skipped"; \
 	fi
 
-test: bin test-asm test-vm
+test: bin test-asm test-vm test-web
 
 test-vm:
 	$(PYTHON) tools/run_tests.py
@@ -54,8 +56,15 @@ test-c: c-bin
 test-nim: nim-bin
 	$(PYTHON) tools/run_tests.py --backend nim
 
-test-js:
+test-js: test-web
 	$(PYTHON) tools/run_tests.py --backend js
+
+test-web: web
+	$(PYTHON) tools/asm_parity.py
+	$(PYTHON) tools/web_smoke.py
+
+web:
+	$(PYTHON) tools/build_web.py
 
 test-asm:
 	$(PYTHON) tools/test_asm_runner.py
