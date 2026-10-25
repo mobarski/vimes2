@@ -47,7 +47,9 @@ proc do_opr(a: Word, code: openArray[Word]) =
         of GE:  t-=1; s[t] = (s[t] >= s[t+1]).ord.Word
         else: quit("unknown OPR opcode",1)
 
-let op_func = [do_lit, do_lit, do_opr, do_lod, do_sto, do_cal, do_int, do_jmp, do_jpc, ex1c]
+proc do_hlt(a: Word, code: openArray[Word]) = p = 0 # halt: the run loop stops on p == 0
+
+let op_func = [do_hlt, do_lit, do_opr, do_lod, do_sto, do_cal, do_int, do_jmp, do_jpc, ex1c]
 
 proc run() =
     when defined(trace): trace_header()

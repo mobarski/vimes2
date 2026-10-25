@@ -71,6 +71,7 @@ proc run() =
             of EX1: ex1(a,t)
             #of EX2: ex2(a,t)
             #of EX3: ex3(a,t)
+            of HLT: return
             else: quit("unknown opcode " & $i & " at p=" & $(p-2),1)
         if p == 0: break
 
